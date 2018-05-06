@@ -1,0 +1,34 @@
+:root {
+  --global_margin: 0px;
+  --left-margin: 0px;
+  --right-margin: 0px;
+  --line-size: 64px;
+}
+
+body {
+  color:          var(--foreground);
+  font-family:    "Lucida Grande", sans-serif;
+  font-size:      10px;
+  font-smoothing: antialiasing;
+
+}
+
+.bar {
+  width:          100%;
+  height:         var(--line-size);
+  display:        flex;
+
+  background-color: var(--background);
+}
+
+.container {
+  flex-grow:      1;
+  display:        flex;
+}
+
+.widg {
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+}
