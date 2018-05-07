@@ -11,11 +11,11 @@ function createWindow() {
 
   let win = new BrowserWindow({
     width:      width+8,
-    height:     height,
+    height:     64,
     frame:      false,
     transparent:true,
     resizable:  false,
-    type:       'desktop',
+    //type:       'desktop',
 
   });
 

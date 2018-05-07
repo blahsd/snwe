@@ -1,0 +1,7 @@
+:root {
+  --global_margin    : 8px;
+  --left-margin      : 420px;
+  --right-margin     : 420px;
+  --line-size        : 42px;
+  --overflow-correct : 4px;
+}

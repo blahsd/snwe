@@ -14,7 +14,7 @@ function updateTimeDate() {
 
   document.getElementById("date-output").innerHTML = dateFormat(now, "ddd d mmm");
 
-  document.getElementById("time-output").innerHTML = dateFormat(now, "HH:MM:ss");
+  document.getElementById("time-output").innerHTML = dateFormat(now, "HH:MM");
 }
 
 function updateVolume() {
@@ -99,7 +99,7 @@ mpc.on('changed-player', () => {
     });
 });
 
-// Activated by icons
+// Button Press
 
 function playpause() {
   mpc.status.status().then(status => {

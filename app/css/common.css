@@ -1,20 +1,15 @@
-:root {
-  --global_margin    : 0px;
-  --left-margin      : 0px;
-  --right-margin     : 0px;
-  --line-size        : 16px;
-  --overflow-correct : 4px;
-}
-
 body {
   margin         : 0;
-  margin-right   : var(--right-margin) + var(--overflow-correct);
-  margin-left    : var(--left-margin) + var(--overflow-correct);
+  margin-top     : var(--global_margin);
+  margin-right   : calc( var(--right-margin) + var(--overflow-correct) );
+  margin-left    : calc( var(--left-margin) + var(--overflow-correct) );
   color          : var(--foreground);
+  box-shadow     : 2px;
   font-family    : "Lucida Grande",
                    sans-serif;
   font-size      : 10px;
   font-smoothing : antialiasing;
+  line-height    : var(--line-size);
 }
 
 div {
@@ -22,23 +17,19 @@ div {
 }
 
 i {
-  padding-right : 8px;
-  padding-left  : 8px;
+  width : var(--line-size);
 }
 
 .bar {
   display          : flex;
   width            : 100%;
-  height           : auto;
   background-color : var(--background);
-}
-
-.widg {
-  padding : 16px;
+  white-space      : nowrap;
 }
 
 .container {
   width     : 33%;
+  height    : var(--line-size);
   flex-grow : 1;
 }
 
@@ -54,9 +45,23 @@ i {
   text-align : right;
 }
 
+.widg {
+  min-width  : var(--line-size);
+  text-align : center;
+}
+
+.output:only-child {
+  padding-right : 16px;
+  padding-left  : 16px;
+}
+
+.output:last-child {
+  padding-right : 16px;
+}
+
 /* BEHAVIOR */
 
-.clickable:hover {
+.button:hover {
   color            : var(--background);
   background-color : var(--foreground);
 }
