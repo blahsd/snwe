@@ -4,10 +4,11 @@
     <meta charset="UTF-8">
     <title>snwe</title>
     <link rel="stylesheet" type="text/css" href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" />
-    <link rel="stylesheet" type="text/css" href="./css/colors.css" />
+    <link rel="stylesheet" type="text/css" href="./css/colors-wal.css" />
     <link rel="stylesheet" type="text/css" href="./css/common.css" />
-    <link rel="stylesheet" type="text/css" href="./css/prime.css" />
+
     <script type="text/javascript" src="./js/index.js"></script>
+    <script type="text/javascript" src="./js/animations.js"></script>
   </head>
   <body>
     <div class="bar" id="top-bar">
@@ -19,8 +20,14 @@
         </div>
 
         <div class="widg" id="player">
-          <i class="fas fa-play" id="play-button"></i>
-          <i class="fas fa-step-forward" id="next-button"></i>
+          <div class="button" onclick="" id="play-button">
+            <i class="fas fa-play" onclick="playpause();" id="play-icon"></i>
+          </div>
+
+          <div class="button" onclick="next();" id="next-button">
+            <i class="fas fa-step-forward" id="next-icon"></i>
+          </div>
+
           <span class="output" id="player-output"> Playing </span>
         </div>
 

@@ -6,7 +6,16 @@
     "start": "electron ."
   },
   "devDependencies": {
+    "battery-level": "^3.0.0",
+    "browser-battery": "^2.0.0",
     "dateformat": "^3.0.3",
-    "electron-prebuilt": "^1.4.13"
-  }
+    "electron-debug": "^1.5.0",
+    "electron-prebuilt": "^1.4.13",
+    "is-charging": "^1.2.0",
+    "loudness": "^0.2.2",
+    "mpc-js": "^1.2.1",
+    "node-mpd": "0.0.2",
+    "node-wifi": "^2.0.4"
+  },
+  "dependencies": {}
 }

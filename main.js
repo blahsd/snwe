@@ -2,28 +2,27 @@
 
 const electron = require('electron')
 const {app, BrowserWindow} = electron
+require('electron-debug')({showDevTools: false});
 
 var win = null;
 
-
-//let win //makes the windows permanent with respect to the console process
-
-
 function createWindow() {
-  const {width, height} = electron.screen.getPrimaryDisplay().workAreaSize
+  var {width, height} = electron.screen.getPrimaryDisplay().workAreaSize
 
-  win = new BrowserWindow({
-    width:      width,
+  let win = new BrowserWindow({
+    width:      width+8,
     height:     height,
     frame:      false,
     transparent:true,
-    resizable:  true,
+    resizable:  false,
     type:       'desktop',
+
   });
 
   win.loadURL('file://' + __dirname + '/app/index.html');
   win.setVisibleOnAllWorkspaces(true);
-  win.setPosition(0,0)
+//  win.webContents.openDevTools();
+  win.setPosition(-4,0);
 }
 
 app.on('ready', createWindow)

@@ -1,18 +1,20 @@
 :root {
-  --global_margin : 8px;
-  --left-margin   : 128px;
-  --right-margin  : 128px;
-  --line-size     : 16px;
+  --global_margin    : 0px;
+  --left-margin      : 0px;
+  --right-margin     : 0px;
+  --line-size        : 16px;
+  --overflow-correct : 4px;
 }
 
 body {
+  margin         : 0;
+  margin-right   : var(--right-margin) + var(--overflow-correct);
+  margin-left    : var(--left-margin) + var(--overflow-correct);
   color          : var(--foreground);
   font-family    : "Lucida Grande",
                    sans-serif;
   font-size      : 10px;
   font-smoothing : antialiasing;
-  margin-left: var(--left-margin);
-  margin-right: var(--right-margin);
 }
 
 div {
@@ -20,14 +22,13 @@ div {
 }
 
 i {
-  margin-right : 8px;
-  margin-left  : 8px;
+  padding-right : 8px;
+  padding-left  : 8px;
 }
 
 .bar {
   display          : flex;
-
-  width: 100%;
+  width            : 100%;
   height           : auto;
   background-color : var(--background);
 }
@@ -53,14 +54,14 @@ i {
   text-align : right;
 }
 
-/* * BEHAVIOR */
+/* BEHAVIOR */
 
-.widg:hover {
+.clickable:hover {
   color            : var(--background);
   background-color : var(--foreground);
 }
 
-/* * APPLY COLORS */
+/* APPLY COLORS */
 
 .red {
   color : var(--color1);
