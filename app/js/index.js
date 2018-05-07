@@ -1,9 +1,14 @@
+/*
+*   IT DOESNT GET IF ITS CHARGING OR NOT. IT ALWAYS RETURNS FALSE.
+*/
+
 const loudness = require('loudness');
 const dateFormat = require('dateformat');
 const batteryLevel = require('battery-level');
 const isCharging = require('is-charging');
 const wifi = require('node-wifi');
 const exec = require('child_process').exec;
+const osxBattery = require('osx-battery');
 
 var MPC = require('mpc-js').MPC;
 var mpc = new MPC();
@@ -21,23 +26,67 @@ function updateVolume() {
   loudness.getMuted(function (err, mute) {
     if (mute) {
       document.getElementById("volume-output").innerHTML = "Muted";
+      document.getElementById("volume-icon").removeAttribute("class");
+      document.getElementById("volume-icon").classList.add("fa");
+      document.getElementById("volume-icon").classList.add("fa-volume-off");
+      document.getElementById("volume-icon").classList.add("red");
     } else {
       loudness.getVolume(function (err, vol) {
         document.getElementById("volume-output").innerHTML = vol;
+        if (vol > 50) {
+          document.getElementById("volume-icon").removeAttribute("class");
+          document.getElementById("volume-icon").classList.add("fa");
+          document.getElementById("volume-icon").classList.add("fa-volume-up");
+        } else {
+          document.getElementById("volume-icon").removeAttribute("class");
+          document.getElementById("volume-icon").classList.add("fa");
+          document.getElementById("volume-icon").classList.add("fa-volume-down");
+        }
       });
     }
   });
 }
 
 function updateBattery() {
-  batteryLevel().then(level => {
-    level = Math.round(100*level);
-  	document.getElementById("battery-output").innerHTML = level;
-  });
 
   isCharging().then(result => {
-  	console.log(result);
-  	//=> true
+    batteryLevel().then(level => {
+      level = Math.round(100*level);
+
+    	document.getElementById("battery-output").innerHTML = level;
+      document.getElementById("battery-icon").removeAttribute("class");
+
+      if (result == true) {
+        document.getElementById("battery-icon").classList.add("fas");
+        color = "yellow"
+        icon = "fa-bolt";
+      } else {
+        document.getElementById("battery-icon").classList.add("fa");
+        color = "green";
+        switch(true) {
+          case (level <= 10):
+            icon = "fa-battery-empty";
+            color = "red";
+            break;
+          case (level <= 25):
+            icon = "fa-battery-quarter";
+            color = "yellow";
+            break;
+          case (level <= 50):
+            icon = "fa-battery-half";
+            break;
+          case (level <= 75):
+            icon = "fa-battery-three-quarters";
+            break;
+          case (level <= 100):
+            icon = "fa-battery-full";
+            break;
+        }
+      }
+
+      document.getElementById("battery-icon").classList.add(icon);
+      document.getElementById("battery").classList.add(color);
+    });
   });
 }
 
@@ -50,25 +99,22 @@ function updateWifi() {
     if (err) {
         document.getElementById("wifi-output").innerHTML = err;
     } else {
-      document.getElementById("wifi-output").innerHTML = currentConnections[0].ssid;
+
+      try {
+        document.getElementById("wifi-icon").classList.remove("blinking");
+        document.getElementById("wifi").classList.remove("red");
+        document.getElementById("wifi-output").innerHTML = currentConnections[0].ssid;
+      } catch(err) {
+        document.getElementById("wifi-output").innerHTML = "No Connection"
+        document.getElementById("wifi-icon").classList.remove("blinking");
+        document.getElementById("wifi").classList.add("red");
+      }
+
+      if (currentConnections[0].ssid.length <= 1) {
+        document.getElementById("wifi-output").innerHTML = "Connecting..."
+        document.getElementById("wifi-icon").classList.add("blinking");
+      }
     }
-    /*
-    // you may have several connections
-    [
-        {
-            iface: '...', // network interface used for the connection, not available on macOS
-            ssid: '...',
-            bssid: '...',
-            mac: '...', // equals to bssid (for retrocompatibility)
-            channel: <number>,
-            frequency: <number>, // in MHz
-            signal_level: <number>, // in dB
-            security: '...' //
-            security_flags: '...' // encryption protocols (format currently depending of the OS)
-            mode: '...' // network mode like Infra (format currently depending of the OS)
-        }
-    ]
-    */
   });
 }
 
@@ -78,7 +124,6 @@ function updateDesktop() {
     // should have err.code here?
   }
   document.getElementById("desktop-output").innerHTML = stdout;
-  console.log(stdout);
 });
 }
 
