@@ -17,14 +17,13 @@ function createWindow() {
     height:     height,
     frame:      false,
     transparent:true,
-    resizable:  false,
-    x:          0,
-    y:          0,
+    resizable:  true,
     type:       'desktop',
   });
 
   win.loadURL('file://' + __dirname + '/app/index.html');
   win.setVisibleOnAllWorkspaces(true);
+  win.setPosition(0,0)
 }
 
 app.on('ready', createWindow)

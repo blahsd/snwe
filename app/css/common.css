@@ -1,34 +1,129 @@
 :root {
-  --global_margin: 0px;
-  --left-margin: 0px;
-  --right-margin: 0px;
-  --line-size: 64px;
+  --global_margin : 8px;
+  --left-margin   : 128px;
+  --right-margin  : 128px;
+  --line-size     : 16px;
 }
 
 body {
-  color:          var(--foreground);
-  font-family:    "Lucida Grande", sans-serif;
-  font-size:      10px;
-  font-smoothing: antialiasing;
+  color          : var(--foreground);
+  font-family    : "Lucida Grande",
+                   sans-serif;
+  font-size      : 10px;
+  font-smoothing : antialiasing;
+  margin-left: var(--left-margin);
+  margin-right: var(--right-margin);
+}
 
+div {
+  display : inline-block;
+}
+
+i {
+  margin-right : 8px;
+  margin-left  : 8px;
 }
 
 .bar {
-  width:          100%;
-  height:         var(--line-size);
-  display:        flex;
+  display          : flex;
 
-  background-color: var(--background);
-}
-
-.container {
-  flex-grow:      1;
-  display:        flex;
+  width: 100%;
+  height           : auto;
+  background-color : var(--background);
 }
 
 .widg {
-    padding: 15px 32px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
+  padding : 16px;
+}
+
+.container {
+  width     : 33%;
+  flex-grow : 1;
+}
+
+#left {
+  text-align : left;
+}
+
+#middle {
+  text-align : center;
+}
+
+#right {
+  text-align : right;
+}
+
+/* * BEHAVIOR */
+
+.widg:hover {
+  color            : var(--background);
+  background-color : var(--foreground);
+}
+
+/* * APPLY COLORS */
+
+.red {
+  color : var(--color1);
+}
+
+.green {
+  color : var(--color2);
+}
+
+.yellow {
+  color : var(--color3);
+}
+
+.blue {
+  color : var(--color4);
+}
+
+.cyan {
+  color : var(--color5);
+}
+
+.magenta {
+  color : var(--color6);
+}
+
+.white {
+  color : var(--foreground);
+}
+
+.black {
+  color : var(--background);
+}
+
+.output {
+  color : var(--foreground);
+}
+
+.pinned.red {
+  color            : var(--background);
+  background-color : var(--color1);
+}
+
+.pinned.green {
+  color            : var(--background);
+  background-color : var(--color2);
+}
+
+.pinned.yellow {
+  color            : var(--background);
+  background-color : var(--color3);
+}
+
+.pinned.blue {
+  color            : var(--background);
+  background-color : var(--color4);
+}
+
+.pinned.cyan {
+  color            : var(--background);
+  background-color : var(--color5);
+}
+
+.pinned.magenta {
+  color            : var(--background);
+  background-color : var(--color6);
 }
