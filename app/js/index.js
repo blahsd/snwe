@@ -10,7 +10,7 @@ var MPC = require('mpc-js').MPC;
 
 const store = new Store();
 
-var options = ["theme", "colorscheme"];
+var options = ["theme", "colorscheme","player"];
 
 var mpc = new MPC();
 mpc.connectTCP('localhost', 6600);
@@ -35,8 +35,9 @@ function loadjscssfile(filename) {
 
 function initializePreferences() {
   console.log("Initialising preferences...");
-  store.set("theme", "center.css");
+  store.set("theme", "mono.css");
   store.set("colorscheme", "colors.css");
+  store.set("player","mpd")
 }
 
 function loadPreferences() {
@@ -73,6 +74,7 @@ function updateVolume() {
     } else {
       loudness.getVolume(function(err, vol) {
         document.getElementById("volume-output").innerHTML = vol;
+        document.getElementById("volume").classList.remove("dark");
         if (vol > 50) {
           document.getElementById("volume-icon").removeAttribute("class");
           document.getElementById("volume-icon").classList.add("fa");

@@ -16,7 +16,7 @@ function getRadioVal(form, name) {
     return val; // return value of checked radio or undefined if none checked
 }
 
-var options = ["theme", "colorscheme"]
+var options = ["theme", "colorscheme","player"]
 
 function setSetting(option) {
   document.getElementById(store.get(option)).checked = true;
@@ -29,16 +29,28 @@ function saveSetting(option) {
 window.onload=function() {
   console.log("Setting up preference Panes...");
   for (var i = 0; i < options.length; i++) {
-    setSetting(options[i]);
+    var o = options[i]
+    var oform = o + "-form";
+
+    console.log("Setting up preference for: ")
+    console.log(o)
+    console.log(oform)
+
+    setSetting(o);
   }
 
   document.getElementById("theme-form").addEventListener("click", function(e) {
-    saveSetting('theme');
+    saveSetting("theme");
     require('electron').remote.getCurrentWebContents().emit("changeTheme");
   });
 
   document.getElementById("colorscheme-form").addEventListener("click", function(e) {
-    saveSetting('colorscheme');
+    saveSetting("colorscheme");
     require('electron').remote.getCurrentWebContents().emit("changeTheme");
-  });
+  })
+
+  document.getElementById("player-form").addEventListener("click", function(e) {
+    saveSetting("player");
+    require('electron').remote.getCurrentWebContents().emit("changeTheme");
+  })
 }

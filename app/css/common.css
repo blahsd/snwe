@@ -64,6 +64,12 @@ i {
   padding-right : 16px;
 }
 
+.filepath {
+  font-size: 10px;
+  color: var(--foreground);
+  opacity: 0.6;
+}
+
 /* ANIMATION */
 
 .blinking {
