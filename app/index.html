@@ -4,12 +4,11 @@
     <meta charset="UTF-8">
     <title>snwe</title>
     <link rel="stylesheet" type="text/css" href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" />
-    <link rel="stylesheet" type="text/css" href="./css/colors-wal.css" />
-    <link rel="stylesheet" type="text/css" href="./css/center.css" />
+    <link rel="stylesheet" type="text/css" href="./css/colors.css" />
     <link rel="stylesheet" type="text/css" href="./css/common.css" />
 
     <script type="text/javascript" src="./js/index.js"></script>
-    <script type="text/javascript" src="./js/animations.js"></script>
+    <script type="text/javascript" src="./js/windowManager.js"></script>
   </head>
   <body>
     <div class="bar" id="top-bar">
@@ -29,7 +28,7 @@
             <i class="fas fa-step-forward" id="next-icon"></i>
           </div>
 
-          <span class="output" id="player-output"> Playing </span>
+          <span class="output" id="player-output"></span>
         </div>
 
       </div>
@@ -59,10 +58,16 @@
         </div>
 
         <div class="widg" id="battery">
-          <div class="button" id="volume-button">
+          <div class="button" id="battery-button">
             <i class="fas fa-battery-full" id="battery-icon"></i>
           </div>
           <span class="output" id="battery-output"> ... </span>
+        </div>
+
+        <div class="widg" id="settings">
+          <div class="button" id="settings-button" onclick="openPopWindow('settings.html');">
+            <i class="fas fa-cog" id="settings-icon"></i>
+          </div>
         </div>
 
         <div class="widg pinned red" id="time">
@@ -73,6 +78,9 @@
 
     </div>
 
+    <script>
+    window.onload=loadjscssfile();
+    </script>
   </body>
 </html>
 
