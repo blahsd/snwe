@@ -9,26 +9,24 @@ function fileExists(path) {
 
 function initialisePywalLink(fileref) {
   exec("ln -s $HOME/.cache/wal/colors.css ./app/css/colors-wal.css", function(err, stdout, stderr) {
-  if (err) {
-    // should have err.code here?
-  }
-  console.log(stdout);
-
   document.getElementsByTagName("head")[0].appendChild(fileref);
-});
-
+  });
 }
 
-function loadjscssfile(filename) {
-  filename = "./css/" + filename;
-  filetype = "css";
-
-  console.log("Loading file "+filename)
-
-  var fileref = document.createElement("link")
-  fileref.setAttribute("rel", "stylesheet")
-  fileref.setAttribute("type", "text/css")
-  fileref.setAttribute("href", filename)
+function loadjscssfile(filename, filetype) {
+  if (filetype=="js"){ //if filename is a external JavaScript file
+    filename = "./js/" + filename;
+    var fileref=document.createElement('script')
+    fileref.setAttribute("type","text/javascript")
+    fileref.setAttribute("src", filename)
+  }
+  else if (filetype=="css"){ //if filename is an external CSS file
+    filename = "./css/" + filename;
+    var fileref=document.createElement("link")
+    fileref.setAttribute("rel", "stylesheet")
+    fileref.setAttribute("type", "text/css")
+    fileref.setAttribute("href", filename)
+  }
 
   if (typeof fileref != "undefined") {
     var fs = require("fs");
@@ -37,6 +35,7 @@ function loadjscssfile(filename) {
           console.log('File exists' + fileref);
       } else if(err.code == 'ENOENT') {
           // file does not exist
+          // WE'RE ASSUMING THAT THE ONLY FILE THAT CAN GO MISSING IS THE LINK TO .CACHE/WAL/COLORS.CSS – THIS IS VERY VERY FUCKING WRONG
           initialisePywalLink(fileref);
       } else {
           console.log('Some other error: ', err.code);
@@ -65,6 +64,7 @@ function loadSettings() {
   }
 
   console.log("Loading preferences on file "+document.title)
-  loadjscssfile(store.get('theme'));
-  loadjscssfile(store.get('colorscheme'));
+  loadjscssfile(store.get('theme'),'css');
+  loadjscssfile(store.get('colorscheme'),'css');
+  loadjscssfile(store.get('player'),'js');
 }

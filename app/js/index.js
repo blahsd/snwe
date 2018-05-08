@@ -6,14 +6,9 @@ const wifi = require('node-wifi');
 const exec = require('child_process').exec;
 const osxBattery = require('osx-battery');
 const Store = require('electron-store');
-var MPC = require('mpc-js').MPC;
 const store = new Store();
 
-var mpc = new MPC();
-mpc.connectTCP('localhost', 6600);
-
 // Update Functions
-
 function updateTimeDate() {
   var now = new Date();
 
@@ -125,40 +120,6 @@ function updateDesktop() {
     }
     document.getElementById("desktop-output").innerHTML = stdout;
   });
-}
-
-// Event Listeners
-
-mpc.on('changed-player', () => {
-  mpc.status.status().then(status => {
-    if (status.state == 'play') {
-      mpc.status.currentSong().then(song => document.getElementById("player-output").innerHTML = song.artist + ' - ' + song.title);
-
-      document.getElementById("play-icon").classList.remove("fa-play");
-      document.getElementById("play-icon").classList.add("fa-pause");
-    } else {
-      mpc.status.currentSong().then(song => document.getElementById("player-output").innerHTML = "Paused");
-      document.getElementById("play-icon").classList.remove("fa-pause");
-      document.getElementById("play-icon").classList.add("fa-play");
-    }
-  });
-});
-
-// Button Press
-
-function playpause() {
-  mpc.status.status().then(status => {
-    if (status.state == 'play') {
-      mpc.playback.pause();
-    } else {
-      mpc.playback.play();
-    }
-  })
-}
-
-
-function next() {
-  mpc.playback.next();
 }
 
 // Update function
