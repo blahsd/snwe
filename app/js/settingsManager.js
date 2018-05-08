@@ -1,4 +1,24 @@
 
+function fileExists(path) {
+  var fs = require('fs');
+  if (fs.existsSync(path)) {
+    return(true);
+  }
+  return(false);
+}
+
+function initialisePywalLink(fileref) {
+  exec("ln -s $HOME/.cache/wal/colors.css ./app/css/colors-wal.css", function(err, stdout, stderr) {
+  if (err) {
+    // should have err.code here?
+  }
+  console.log(stdout);
+
+  document.getElementsByTagName("head")[0].appendChild(fileref);
+});
+
+}
+
 function loadjscssfile(filename) {
   filename = "./css/" + filename;
   filetype = "css";
@@ -11,7 +31,19 @@ function loadjscssfile(filename) {
   fileref.setAttribute("href", filename)
 
   if (typeof fileref != "undefined") {
-    document.getElementsByTagName("head")[0].appendChild(fileref)
+    var fs = require("fs");
+    fs.stat(filename, function(err, stat) {
+      if(err == null) {
+          console.log('File exists' + fileref);
+      } else if(err.code == 'ENOENT') {
+          // file does not exist
+          initialisePywalLink(fileref);
+      } else {
+          console.log('Some other error: ', err.code);
+      }
+    });
+
+    document.getElementsByTagName("head")[0].appendChild(fileref);
   }
 }
 
