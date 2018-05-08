@@ -27,6 +27,8 @@ function saveSetting(option) {
 }
 
 window.onload=function() {
+  loadSettings();
+
   console.log("Setting up preference Panes...");
   for (var i = 0; i < options.length; i++) {
     var o = options[i]
@@ -42,15 +44,20 @@ window.onload=function() {
   document.getElementById("theme-form").addEventListener("click", function(e) {
     saveSetting("theme");
     require('electron').remote.getCurrentWebContents().emit("changeTheme");
+    console.log(document.title + " emitted a changeTheme event!")
+    loadSettings();
   });
 
   document.getElementById("colorscheme-form").addEventListener("click", function(e) {
     saveSetting("colorscheme");
     require('electron').remote.getCurrentWebContents().emit("changeTheme");
+    console.log(document.title + " emitted a changeTheme event!")
+    loadSettings();
   })
 
   document.getElementById("player-form").addEventListener("click", function(e) {
     saveSetting("player");
     require('electron').remote.getCurrentWebContents().emit("changeTheme");
+    console.log(document.title + " emitted a changeTheme event!")
   })
 }

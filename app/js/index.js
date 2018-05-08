@@ -7,51 +7,10 @@ const exec = require('child_process').exec;
 const osxBattery = require('osx-battery');
 const Store = require('electron-store');
 var MPC = require('mpc-js').MPC;
-
 const store = new Store();
-
-var options = ["theme", "colorscheme","player"];
 
 var mpc = new MPC();
 mpc.connectTCP('localhost', 6600);
-
-//  Useful Functions
-
-function loadjscssfile(filename) {
-  filename = "./css/" + filename;
-  filetype = "css";
-
-  console.log("Loading file "+filename)
-
-  var fileref = document.createElement("link")
-  fileref.setAttribute("rel", "stylesheet")
-  fileref.setAttribute("type", "text/css")
-  fileref.setAttribute("href", filename)
-
-  if (typeof fileref != "undefined") {
-    document.getElementsByTagName("head")[0].appendChild(fileref)
-  }
-}
-
-function initializePreferences() {
-  console.log("Initialising preferences...");
-  store.set("theme", "mono.css");
-  store.set("colorscheme", "colors.css");
-  store.set("player","mpd")
-}
-
-function loadPreferences() {
-  console.log("Checking for initialisation of preferences...");
-  for (var i = 0; i < options.length; i++) {
-    if (store.get(options[i]) == undefined) {
-      initializePreferences();
-    }
-  }
-
-  console.log("Loading preferences...")
-  loadjscssfile(store.get('theme'));
-  loadjscssfile(store.get('colorscheme'));
-}
 
 // Update Functions
 
@@ -212,4 +171,7 @@ function update() {
   updateDesktop();
 }
 
-setInterval(update, 1000);
+window.onload=function() {
+  loadSettings();
+  setInterval(update, 1000);
+}
