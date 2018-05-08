@@ -14,6 +14,6 @@ function openPopWindow( windowpath ) {
 
   popWindow.webContents.on("changeTheme", function(e) {
     console.log("C-c-c-change!")
-    loadjscssfile();
+    loadPreferences();
   })
 }

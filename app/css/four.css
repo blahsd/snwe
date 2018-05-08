@@ -1,7 +1,7 @@
 :root {
-  --global_margin    : 0px;
+  --global_margin    : 8px;
   --left-margin      : 0px;
   --right-margin     : 0px;
-  --line-size        : 24px;
+  --line-size        : 32px;
   --overflow-correct : 4px;
 }

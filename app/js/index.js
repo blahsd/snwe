@@ -10,12 +10,18 @@ var MPC = require('mpc-js').MPC;
 
 const store = new Store();
 
+var options = ["theme", "colorscheme"];
+
 var mpc = new MPC();
 mpc.connectTCP('localhost', 6600);
 
-function loadjscssfile() {
-  filename = "./css/" + store.get('theme');
+//  Useful Functions
+
+function loadjscssfile(filename) {
+  filename = "./css/" + filename;
   filetype = "css";
+
+  console.log("Loading file "+filename)
 
   var fileref = document.createElement("link")
   fileref.setAttribute("rel", "stylesheet")
@@ -25,6 +31,25 @@ function loadjscssfile() {
   if (typeof fileref != "undefined") {
     document.getElementsByTagName("head")[0].appendChild(fileref)
   }
+}
+
+function initializePreferences() {
+  console.log("Initialising preferences...");
+  store.set("theme", "center.css");
+  store.set("colorscheme", "colors.css");
+}
+
+function loadPreferences() {
+  console.log("Checking for initialisation of preferences...");
+  for (var i = 0; i < options.length; i++) {
+    if (store.get(options[i]) == undefined) {
+      initializePreferences();
+    }
+  }
+
+  console.log("Loading preferences...")
+  loadjscssfile(store.get('theme'));
+  loadjscssfile(store.get('colorscheme'));
 }
 
 // Update Functions

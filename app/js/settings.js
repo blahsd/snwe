@@ -16,19 +16,29 @@ function getRadioVal(form, name) {
     return val; // return value of checked radio or undefined if none checked
 }
 
-function setSettings() {
-  document.getElementById(store.get('theme')).checked = true;
+var options = ["theme", "colorscheme"]
+
+function setSetting(option) {
+  document.getElementById(store.get(option)).checked = true;
 }
 
-function saveSettings() {
-  store.set('theme',getRadioVal(document.getElementById("theme-form")));
+function saveSetting(option) {
+  store.set(option,getRadioVal(document.getElementById(option+"-form")));
 }
 
 window.onload=function() {
-  setSettings();
+  console.log("Setting up preference Panes...");
+  for (var i = 0; i < options.length; i++) {
+    setSetting(options[i]);
+  }
 
   document.getElementById("theme-form").addEventListener("click", function(e) {
-    saveSettings();
+    saveSetting('theme');
+    require('electron').remote.getCurrentWebContents().emit("changeTheme");
+  });
+
+  document.getElementById("colorscheme-form").addEventListener("click", function(e) {
+    saveSetting('colorscheme');
     require('electron').remote.getCurrentWebContents().emit("changeTheme");
   });
 }
