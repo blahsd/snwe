@@ -36,7 +36,7 @@ function updateVolume() {
 function updateBattery() {
   isCharging().then(result => {
     batteryLevel().then(level => {
-      level = Math.round(100 * level);
+      level = Math.ceil(100 * (level + 0.01 ));
 
       document.getElementById("battery-output").innerHTML = level;
       document.getElementById("battery-icon").removeAttribute("class");
@@ -128,6 +128,9 @@ function update() {
   updateWifi();
   updateDesktop();
 }
+
+
+
 
 window.onload=function() {
   loadSettings();

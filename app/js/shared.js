@@ -1,3 +1,4 @@
+// npm modules
 const batteryLevel = require('battery-level');
 const dateFormat = require('dateformat');
 const electron = require('electron');
@@ -11,5 +12,32 @@ const Store = require('electron-store');
   const store = new Store();
 const wifi = require('node-wifi');
 
+
+// extra functions
+
+function removeFromArray(array, element) {
+    const index = array.indexOf(element);
+
+    if (index !== -1) {
+        array.splice(index, 1);
+    }
+}
+
+function isInArray(array, element) {
+  const index = array.indexOf(element);
+  if (index !== -1) {
+    return true;
+  } else {
+    return false;
+  }
+}
+
+function fileExists(path) {
+  var fs = require('fs');
+  if (fs.existsSync(path)) {
+    return(true);
+  }
+  return(false);
+}
 
 //const remove = require('electron').remote;

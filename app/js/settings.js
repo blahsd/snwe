@@ -10,10 +10,8 @@ function getRadioVal(form, name) {
             break; // and break out of for loop
         }
     }
-    return val; // return value of checked radio or undefined if none checked
+    return val;
 }
-
-var options = ["theme", "colorscheme","player"]
 
 function setSetting(option) {
   console.log("Setting: "+option+" to: "+store.get(option))
@@ -37,22 +35,22 @@ window.onload=function() {
 
   document.getElementById("theme-form").addEventListener("click", function(e) {
     saveSetting("theme");
-    require('electron').remote.getCurrentWebContents().emit("changeTheme");
-    console.log(document.title + " emitted a changeTheme event!")
+    require('electron').remote.getCurrentWebContents().emit("changeSettingEvent");
+    console.log(document.title + " emitted a changeSettingEvent event!")
     loadSettings();
   });
 
   document.getElementById("colorscheme-form").addEventListener("click", function(e) {
     saveSetting("colorscheme");
-    require('electron').remote.getCurrentWebContents().emit("changeTheme");
-    console.log(document.title + " emitted a changeTheme event!")
+    require('electron').remote.getCurrentWebContents().emit("changeSettingEvent");
+    console.log(document.title + " emitted a changeSettingEvent event!")
     loadSettings();
   })
 
   document.getElementById("player-form").addEventListener("click", function(e) {
     saveSetting("player");
-    require('electron').remote.getCurrentWebContents().emit("changeTheme");
-    console.log(document.title + " emitted a changeTheme event!");
+    require('electron').remote.getCurrentWebContents().emit("changeSettingEvent");
+    console.log(document.title + " emitted a changeSettingEvent event!");
     loadSettings();
   })
 }

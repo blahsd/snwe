@@ -10,6 +10,7 @@
     <script type="text/javascript" src="./js/settingsManager.js"></script>
     <script type="text/javascript" src="./js/windowManager.js"></script>
   </head>
+
   <body>
     <div class="bar" id="top-bar">
 
@@ -65,7 +66,7 @@
         </div>
 
         <div class="widg" id="settings">
-          <div class="button" id="settings-button" onclick="openPopWindow('settings.html');">
+          <div class="button" id="settings-button" onclick="createChildWindow('settings.html',this);">
             <i class="fas fa-cog" id="settings-icon"></i>
           </div>
         </div>
