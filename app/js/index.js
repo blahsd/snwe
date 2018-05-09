@@ -80,7 +80,7 @@ function updateBattery() {
       }
 
       document.getElementById("battery-icon").classList.add(icon);
-      document.getElementById("battery").classList.add(color);
+      document.getElementById("battery-icon").classList.add(color);
     });
   });
 }
