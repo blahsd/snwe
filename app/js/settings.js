@@ -1,6 +1,3 @@
-const Store = require('electron-store');
-const store = new Store();
-
 function getRadioVal(form, name) {
     var val;
     // get list of radio buttons with specified name

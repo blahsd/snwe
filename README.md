@@ -13,4 +13,7 @@ Then navigate to wherever you cloned the repo and:
 `npm start`
 
 # Known limitations
-- iTunes interface is macOS only. 
+- Full functionality macOS only.
+
+# credits
+i got some icons made by [freepik](http://www.freepik.com) through [flaticon](https://www.flaticon.com/) and they want me to tell you that they are  licensed under [CC 3.0 BY](http://creativecommons.org/licenses/by/3.0/), so, huh, there's that

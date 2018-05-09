@@ -14,7 +14,7 @@ function initialisePywalLink(fileref) {
 }
 
 function loadjscssfile(filename, filetype) {
-  console.log("Loading preference files from "+ filename);
+  console.log("Loading preference file "+ filename);
   if (filetype=="js"){ //if filename is a external JavaScript file
     filename = "./js/" + filename;
     var fileref=document.createElement('script')
@@ -63,8 +63,7 @@ function loadSettings() {
       initializePreferences();
     }
   }
-
-  console.log("Loading preferences on file "+document.title)
+  
   loadjscssfile(store.get('theme'),'css');
   loadjscssfile(store.get('colorscheme'),'css');
   loadjscssfile(store.get('player'),'js');

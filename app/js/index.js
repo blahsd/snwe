@@ -1,13 +1,3 @@
-const loudness = require('loudness');
-const dateFormat = require('dateformat');
-const batteryLevel = require('battery-level');
-const isCharging = require('is-charging');
-const wifi = require('node-wifi');
-const exec = require('child_process').exec;
-const osxBattery = require('osx-battery');
-const Store = require('electron-store');
-const store = new Store();
-
 // Update Functions
 function updateTimeDate() {
   var now = new Date();
@@ -115,10 +105,17 @@ function updateWifi() {
 
 function updateDesktop() {
   dir = exec("echo $(/usr/local/bin/chunkc tiling::query -d id)", function(err, stdout, stderr) {
-    if (err) {
-      // should have err.code here?
+    document.getElementById("desktop-output").classList.remove("fab");
+    document.getElementById("desktop-output").classList.remove("fa-apple");
+
+    if (stderr) {
+      document.getElementById("desktop-output").classList.add("fab");
+      document.getElementById("desktop-output").classList.add("fa-apple");
+      document.getElementById("desktop-output").innerHTML = "";
+    } else {
+      document.getElementById("desktop-output").innerHTML = stdout;
     }
-    document.getElementById("desktop-output").innerHTML = stdout;
+
   });
 }
 

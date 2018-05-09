@@ -1,6 +1,3 @@
-const electron = require('electron');
-const BrowserWindow = electron.remote.BrowserWindow;
-const remove = require('electron').remote;
 var openWindows = {};
 
 function removeFromArray(array, element) {
@@ -21,9 +18,6 @@ function isInArray(array, element) {
 }
 
 function openPopWindow(windowpath) {
-  console.log(openWindows);
-  console.log(openWindows[windowpath]);
-
   if (openWindows[windowpath] != null) {
     openWindows[windowpath].close();
     return;
