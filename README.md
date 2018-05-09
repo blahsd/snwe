@@ -11,3 +11,6 @@ To install:
 Then navigate to wherever you cloned the repo and:
 
 `npm start`
+
+# Known limitations
+- iTunes interface is macOS only. 

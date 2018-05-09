@@ -20,6 +20,10 @@ i {
   padding: 0px 8px;
 }
 
+i:first-child {
+  padding-left: 16px;
+}
+
 .bar {
   display          : flex;
   width            : 100%;
