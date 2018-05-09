@@ -14,6 +14,7 @@ function initialisePywalLink(fileref) {
 }
 
 function loadjscssfile(filename, filetype) {
+  console.log("Loading preference files from "+ filename);
   if (filetype=="js"){ //if filename is a external JavaScript file
     filename = "./js/" + filename;
     var fileref=document.createElement('script')
@@ -50,7 +51,7 @@ function initializePreferences() {
   console.log("Initialising preferences...");
   store.set("theme", "mono.css");
   store.set("colorscheme", "colors.css");
-  store.set("player","mpd")
+  store.set("player", "itunes.js");
 }
 
 function loadSettings() {

@@ -19,6 +19,7 @@ function getRadioVal(form, name) {
 var options = ["theme", "colorscheme","player"]
 
 function setSetting(option) {
+  console.log("Setting: "+option+" to: "+store.get(option))
   document.getElementById(store.get(option)).checked = true;
 }
 
@@ -33,10 +34,6 @@ window.onload=function() {
   for (var i = 0; i < options.length; i++) {
     var o = options[i]
     var oform = o + "-form";
-
-    console.log("Setting up preference for: ")
-    console.log(o)
-    console.log(oform)
 
     setSetting(o);
   }
@@ -58,6 +55,7 @@ window.onload=function() {
   document.getElementById("player-form").addEventListener("click", function(e) {
     saveSetting("player");
     require('electron').remote.getCurrentWebContents().emit("changeTheme");
-    console.log(document.title + " emitted a changeTheme event!")
+    console.log(document.title + " emitted a changeTheme event!");
+    loadSettings();
   })
 }

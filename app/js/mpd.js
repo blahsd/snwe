@@ -2,7 +2,6 @@ var MPC = require('mpc-js').MPC;
 var mpc = new MPC();
 mpc.connectTCP('localhost', 6600);
 
-alert("mpc loaded ");
 
 mpc.on('changed-player', () => {
   mpc.status.status().then(status => {
@@ -29,7 +28,10 @@ function playpause() {
   })
 }
 
-
 function next() {
   mpc.playback.next();
+}
+
+function update() {
+  //nothing.
 }
