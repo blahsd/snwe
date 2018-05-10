@@ -1,106 +1,8 @@
-// Update Functions
-function updateTimeDate() {
+// Update Builtin Functions
+
+function updateTime() {
   var now = new Date();
-
-  document.getElementById("date-output").innerHTML = dateFormat(now, "ddd d mmm");
-
   document.getElementById("time-output").innerHTML = dateFormat(now, "HH:MM");
-}
-
-function updateVolume() {
-  loudness.getMuted(function(err, mute) {
-    if (mute) {
-      document.getElementById("volume-output").innerHTML = "Muted";
-      document.getElementById("volume-icon").removeAttribute("class");
-      document.getElementById("volume-icon").classList.add("fa");
-      document.getElementById("volume-icon").classList.add("fa-volume-off");
-      document.getElementById("volume").classList.add("dark");
-    } else {
-      loudness.getVolume(function(err, vol) {
-        document.getElementById("volume-output").innerHTML = vol;
-        document.getElementById("volume").classList.remove("dark");
-        if (vol > 50) {
-          document.getElementById("volume-icon").removeAttribute("class");
-          document.getElementById("volume-icon").classList.add("fa");
-          document.getElementById("volume-icon").classList.add("fa-volume-up");
-        } else {
-          document.getElementById("volume-icon").removeAttribute("class");
-          document.getElementById("volume-icon").classList.add("fa");
-          document.getElementById("volume-icon").classList.add("fa-volume-down");
-        }
-      });
-    }
-  });
-}
-
-function updateBattery() {
-  isCharging().then(result => {
-    batteryLevel().then(level => {
-      level = Math.ceil(100 * (level + 0.01 ));
-
-      document.getElementById("battery-output").innerHTML = level;
-      document.getElementById("battery-icon").removeAttribute("class");
-
-      if (result == true) {
-        document.getElementById("battery-icon").classList.add("fas");
-        color = "yellow"
-        icon = "fa-bolt";
-      } else {
-        document.getElementById("battery-icon").classList.add("fa");
-        color = "green";
-        switch (true) {
-          case (level <= 10):
-            icon = "fa-battery-empty";
-            color = "red";
-            break;
-          case (level <= 25):
-            icon = "fa-battery-quarter";
-            color = "yellow";
-            break;
-          case (level <= 50):
-            icon = "fa-battery-half";
-            break;
-          case (level <= 75):
-            icon = "fa-battery-three-quarters";
-            break;
-          case (level <= 100):
-            icon = "fa-battery-full";
-            break;
-        }
-      }
-
-      document.getElementById("battery-icon").classList.add(icon);
-      document.getElementById("battery-icon").classList.add(color);
-    });
-  });
-}
-
-function updateWifi() {
-  wifi.init({
-    iface: null // network interface, choose a random wifi interface if set to null
-  });
-
-  wifi.getCurrentConnections(function(err, currentConnections) {
-    if (err) {
-      document.getElementById("wifi-output").innerHTML = err;
-    } else {
-
-      try {
-        document.getElementById("wifi-icon").classList.remove("blinking");
-        document.getElementById("wifi").classList.remove("dark");
-        document.getElementById("wifi-output").innerHTML = currentConnections[0].ssid;
-      } catch (err) {
-        document.getElementById("wifi-output").innerHTML = "WiFi Off"
-        document.getElementById("wifi-icon").classList.remove("blinking");
-        document.getElementById("wifi").classList.add("dark");
-      }
-
-      if (currentConnections[0].ssid.length <= 1) {
-        document.getElementById("wifi-output").innerHTML = "Connecting..."
-        document.getElementById("wifi-icon").classList.add("blinking");
-      }
-    }
-  });
 }
 
 function updateDesktop() {
@@ -119,20 +21,47 @@ function updateDesktop() {
   });
 }
 
-// Update function
+function injecthtmlmodule (module, container) {
+  moduleName = module.substring(module.indexOf('.')+1,module.length);
+  console.log("... loaded. Injecting module: "+moduleName);
+  moduleItem = `<div class="widg" id="${moduleName}">
+      <div class="button" id="${moduleName}-button">
+        <i id="${moduleName}-icon"></i>
+      </div>
+      <span class="output" id="${moduleName}-output"> ... </span>
+    </div>`
+
+  document.getElementById(container).insertAdjacentHTML("afterbegin", moduleItem);
+}
+
+function loadModules() {
+  const fs = require('fs');
+  const modulePath = "./app/modules/";
+  const moduleRelativePath = "../modules/";
+  const moduleContainers = ["left","middle","right"];
+
+  moduleContainers.forEach(container => {
+    var thisModulePath = modulePath+container+'/';
+    var thisModuleRelativePath = moduleRelativePath+container+'/';
+
+    fs.readdir(thisModulePath, (err, files) => {
+      files.forEach(filename => {
+        loadjscssfile(thisModuleRelativePath+filename);
+        injecthtmlmodule(filename.substring(0, filename.lastIndexOf('.')), container)
+      });
+    })
+  });
+}
+
 
 function update() {
-  updateTimeDate();
-  updateVolume();
-  updateBattery();
-  updateWifi();
+  updateTime();
   updateDesktop();
 }
 
 
-
-
 window.onload=function() {
   loadSettings();
+  loadModules();
   setInterval(update, 1000);
 }

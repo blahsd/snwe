@@ -19,5 +19,7 @@
     "node-mpd": "0.0.2",
     "node-wifi": "^2.0.4"
   },
-  "dependencies": {}
+  "dependencies": {
+    "npm": "^6.0.1"
+  }
 }
