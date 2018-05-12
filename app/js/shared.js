@@ -12,11 +12,6 @@ const Store = require('electron-store');
   const store = new Store();
 const wifi = require('node-wifi');
 
-function hover(element) {
-  element.classList.add("pinned");
-  console.log("hovering");
-}
-
 // extra functions
 
 function removeFromArray(array, element) {

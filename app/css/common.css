@@ -79,7 +79,8 @@ i:last-child {
 
 .popup {
     display: none;
-    position: absolute;
+
+    line-height: calc( var(--line-size) / 2) ;
     z-index: 1;
     width: 128px;
     height: auto;
@@ -97,13 +98,13 @@ i:last-child {
 
 .popup li {
     width: 100%;
-    display: block;
+    display: inline;
     text-decoration: none;
     border: 1px solid rgba(0,0,0,.4);
 }
 
 .popup.open {
-  display:block;
+  display:inline-block;
 }
 
 /* ANIMATION */

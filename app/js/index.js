@@ -17,10 +17,15 @@ function updateDesktop() {
     } else {
       document.getElementById("desktop-output").innerHTML = stdout;
     }
-
   });
 }
 
+function switchToDesktop (caller) {
+  console.log(caller.value);
+  // yeah but how do I switch desktop?
+}
+
+// General Functions
 function injecthtmlmodule (module, container) {
   moduleName = module.substring(module.indexOf('.')+1,module.length);
   console.log("... loaded. Injecting module: "+moduleName);

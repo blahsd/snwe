@@ -2,18 +2,9 @@ var availableNetworks = [];
 var isscancomplete = false;
 iswifion = false;
 
-var WiFiControl = require('wifi-control');
-
-//  Initialize wifi-control package with verbose output
-WiFiControl.init({
-  debug: true
-});
-
 wifi.init({
   iface: null // network interface, choose a random wifi interface if set to null
 });
-
-
 
 function updateWifi() {
 
@@ -102,7 +93,6 @@ function setPopupContent() {
 
   content = `<ul class="optlist" id="wifi-optlist">
         <li class="button" id="wifi-toggle-button" onclick="toggleWifi()"></li>
-        <hr>
       </ul>`
   document.getElementById("wifi-popup").insertAdjacentHTML("afterbegin", content);
 
@@ -112,6 +102,7 @@ function setPopupContent() {
 document.getElementById("wifi-button").onclick = function() {
   toggleClass(document.getElementById("wifi-popup"), "open");
 }
+
 setInterval(updateWifi, 1000);
 setPopupContent();
 setWifiOnOffButton();
