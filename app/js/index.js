@@ -60,12 +60,10 @@ function loadModules() {
   });
 }
 
-
 function update() {
   updateTime();
   updateDesktop();
 }
-
 
 window.onload=function() {
   loadSettings();

@@ -90,13 +90,14 @@ i:last-child {
 }
 
 
-.popup ul {
+ul {
   width: 100%;
   padding:0;
   margin:0;
+  display:inline;
 }
 
-.popup li {
+li {
     width: 100%;
     display: inline;
     text-decoration: none;
