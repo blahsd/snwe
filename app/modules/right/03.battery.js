@@ -1,7 +1,7 @@
 function updateBattery() {
   isCharging().then(result => {
     batteryLevel().then(level => {
-      level = Math.ceil(100 * (level + 0.01));
+      level = Math.ceil(100 * level);
 
       document.getElementById("battery-output").innerHTML = level;
       document.getElementById("battery-icon").removeAttribute("class");
