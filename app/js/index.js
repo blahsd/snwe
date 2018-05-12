@@ -29,8 +29,10 @@ function injecthtmlmodule (module, container) {
         <i id="${moduleName}-icon"></i>
       </div>
       <span class="output" id="${moduleName}-output"> ... </span>
-    </div>`
-
+      <div class="popup" id="${moduleName}-popup">
+      </div>
+    </div>
+    `
   document.getElementById(container).insertAdjacentHTML("afterbegin", moduleItem);
 }
 

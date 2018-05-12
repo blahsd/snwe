@@ -4,7 +4,7 @@ body {
   margin-right   : calc( var(--right-margin) + var(--overflow-correct) );
   margin-left    : calc( var(--left-margin) + var(--overflow-correct) );
   color          : var(--foreground);
-  box-shadow     : 2px;
+
   font-family    : "Lucida Grande",
                    sans-serif;
   font-size      : 10px;
@@ -70,6 +70,40 @@ i:last-child {
 
 .output:last-child {
   padding-right : 16px;
+}
+
+.output {
+    position: relative;
+    display: inline-block;
+}
+
+.popup {
+    display: none;
+    position: absolute;
+    z-index: 1;
+    width: 128px;
+    height: auto;
+    opacity: 1 !important;
+    background-color: var(--background);
+    color: var(--foreground)
+}
+
+
+.popup ul {
+  width: 100%;
+  padding:0;
+  margin:0;
+}
+
+.popup li {
+    width: 100%;
+    display: block;
+    text-decoration: none;
+    border: 1px solid rgba(0,0,0,.4);
+}
+
+.popup.open {
+  display:block;
 }
 
 /* ANIMATION */

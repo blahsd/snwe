@@ -1,12 +1,15 @@
 var openWindows = {};
 
 function createChildWindow(windowpath, parent) {
+  this.parent = parent;
+
   if (openWindows[windowpath] != null) {
     openWindows[windowpath].close();
     return;
   }
 
   // TO DO: Figure out the position of parent and get the window to spawn right below it.
+
 
   childWindow = new BrowserWindow({
      frame: false,
@@ -26,4 +29,6 @@ function createChildWindow(windowpath, parent) {
     console.log("C-c-c-closing!");
     openWindows[windowpath] = null;
   })
+
+  return childWindow;
 }
