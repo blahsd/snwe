@@ -1,0 +1,25 @@
+{
+  "name": "snwe",
+  "version": "0.1.0",
+  "main": "./main.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "devDependencies": {
+    "battery-level": "^3.0.0",
+    "browser-battery": "^2.0.0",
+    "dateformat": "^3.0.3",
+    "electron-builder": "^20.13.3",
+    "electron-json-config": "^1.5.1",
+    "electron-prebuilt": "^1.4.13",
+    "electron-store": "^1.3.0",
+    "is-charging": "^1.2.0",
+    "loudness": "^0.2.2",
+    "mpc-js": "^1.2.1",
+    "node-mpd": "0.0.2",
+    "node-wifi": "^2.0.4"
+  },
+  "dependencies": {
+    "npm": "^6.0.1"
+  }
+}

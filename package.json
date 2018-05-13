@@ -1,17 +1,48 @@
 {
-  "name": "snwe",
-  "version": "0.1.0",
+  "name": "Lighthouse",
+  "version": "0.0.1",
+  "license": "MIT",
+  "description": "Cool system monitor",
+  "author": "blahsd <blahsd101@gmail.com>",
   "main": "./main.js",
   "scripts": {
-    "start": "electron ."
+    "postinstall": "install-app-deps",
+    "start": "electron .",
+    "pack": "build --dir",
+    "dist": "build"
   },
-  "devDependencies": {
+  "build": {
+    "appId": "snwe",
+    "dmg": {
+      "contents": [
+        {
+          "x": 110,
+          "y": 150
+        },
+        {
+          "x": 240,
+          "y": 150,
+          "type": "link",
+          "path": "/Applications"
+        }
+      ]
+    },
+    "linux": {
+      "target": [
+        "AppImage",
+        "deb"
+      ]
+    },
+    "win": {
+      "target": "squirrel",
+      "icon": "build/icon.ico"
+    }
+  },
+  "dependencies": {
     "battery-level": "^3.0.0",
     "browser-battery": "^2.0.0",
     "dateformat": "^3.0.3",
-    "electron-debug": "^1.5.0",
     "electron-json-config": "^1.5.1",
-    "electron-prebuilt": "^1.4.13",
     "electron-store": "^1.3.0",
     "is-charging": "^1.2.0",
     "loudness": "^0.2.2",
@@ -19,7 +50,9 @@
     "node-mpd": "0.0.2",
     "node-wifi": "^2.0.4"
   },
-  "dependencies": {
-    "npm": "^6.0.1"
+  "devDependencies": {
+    "electron": "latest",
+    "electron-builder": "latest",
+    "electron-prebuilt": "^1.4.13"
   }
 }

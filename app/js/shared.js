@@ -1,3 +1,5 @@
+'use strict';
+
 // npm modules
 const batteryLevel = require('battery-level');
 const dateFormat = require('dateformat');
@@ -5,7 +7,7 @@ const electron = require('electron');
   const BrowserWindow = electron.remote.BrowserWindow;
 const exec = require('child_process').exec;
 const execSync = require('child_process').execSync;
-const console = require('electron').remote.getGlobal('console')
+const console = require('electron').remote.getGlobal('console');
 const isCharging = require('is-charging');
 const loudness = require('loudness');
 const osxBattery = require('osx-battery');
@@ -14,6 +16,9 @@ const Store = require('electron-store');
 const wifi = require('node-wifi');
 
 // extra functions
+function isDev() {
+  return process.mainModule.filename.indexOf('app.asar') === -1;
+}
 
 function removeFromArray(array, element) {
     const index = array.indexOf(element);

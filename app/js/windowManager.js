@@ -1,7 +1,7 @@
+'use strict';
 var openWindows = {};
 
 function createChildWindow(windowpath, parent) {
-  this.parent = parent;
 
   if (openWindows[windowpath] != null) {
     openWindows[windowpath].close();
@@ -11,7 +11,7 @@ function createChildWindow(windowpath, parent) {
   // TO DO: Figure out the position of parent and get the window to spawn right below it.
 
 
-  childWindow = new BrowserWindow({
+  let childWindow = new BrowserWindow({
      frame: false,
      transparent: true,
   });

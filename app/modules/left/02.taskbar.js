@@ -1,3 +1,4 @@
+'use strict';
 
 const taskMonitor = require('./js/require/taskMonitor.js').taskMonitor;
 const tm = new taskMonitor(1000);

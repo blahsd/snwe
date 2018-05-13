@@ -1,7 +1,11 @@
+'use strict';
+
 function updateBattery() {
   isCharging().then(result => {
     batteryLevel().then(level => {
       level = Math.ceil(100 * level);
+      var color;
+      var icon;
 
       document.getElementById("battery-output").innerHTML = level;
       document.getElementById("battery-icon").removeAttribute("class");

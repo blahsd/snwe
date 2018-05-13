@@ -1,3 +1,5 @@
+'use strict';
+
 var MPC = require('mpc-js').MPC;
 var mpc = new MPC();
 mpc.connectTCP('localhost', 6600);

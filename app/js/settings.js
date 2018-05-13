@@ -1,3 +1,5 @@
+'use strict';
+
 function getRadioVal(form, name) {
     var val;
     // get list of radio buttons with specified name

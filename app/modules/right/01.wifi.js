@@ -1,6 +1,8 @@
+'use strict';
+
 var availableNetworks = [];
 var isscancomplete = false;
-iswifion = false;
+var iswifion = false;
 
 wifi.init({
   iface: null // network interface, choose a random wifi interface if set to null
@@ -39,7 +41,7 @@ function updateWifi() {
 }
 
 function scanWifi() {
-  availableNetworks = [];
+  var availableNetworks = [];
   wifi.scan(function(err, networks) {
       if (err) {
           console.log(err);
@@ -91,7 +93,7 @@ function toggleWifi() {
 function setPopupContent() {
   document.getElementById("wifi-popup").innerHTML = "";
 
-  content = `<ul class="optlist" id="wifi-optlist">
+  var content = `<ul class="optlist" id="wifi-optlist">
         <li class="button" id="wifi-toggle-button" onclick="toggleWifi()"></li>
       </ul>`
   document.getElementById("wifi-popup").insertAdjacentHTML("afterbegin", content);

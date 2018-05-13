@@ -1,3 +1,4 @@
+'use strict';
 // Update Builtin Functions
 
 function updateTime() {
@@ -6,7 +7,7 @@ function updateTime() {
 }
 
 function updateDesktop() {
-  dir = exec("echo $(/usr/local/bin/chunkc tiling::query -d id)", function(err, stdout, stderr) {
+  var dir = exec("echo $(/usr/local/bin/chunkc tiling::query -d id)", function(err, stdout, stderr) {
     document.getElementById("desktop-output").classList.remove("fab");
     document.getElementById("desktop-output").classList.remove("fa-apple");
 
@@ -27,9 +28,9 @@ function switchToDesktop (caller) {
 
 // General Functions
 function injecthtmlmodule (module, container) {
-  moduleName = module.substring(module.indexOf('.')+1,module.length);
+  var moduleName = module.substring(module.indexOf('.')+1,module.length);
   console.log("... loaded. Injecting module: "+moduleName);
-  moduleItem = `<div class="widg" id="${moduleName}">
+  var moduleItem = `<div class="widg" id="${moduleName}">
       <div class="button" id="${moduleName}-button">
         <i id="${moduleName}-icon"></i>
       </div>
@@ -43,6 +44,9 @@ function injecthtmlmodule (module, container) {
 
 function loadModules() {
   const fs = require('fs');
+
+
+
   const modulePath = "./app/modules/";
   const moduleRelativePath = "../modules/";
   const moduleContainers = ["left","middle","right"];
@@ -52,6 +56,9 @@ function loadModules() {
     var thisModuleRelativePath = moduleRelativePath+container+'/';
 
     fs.readdir(thisModulePath, (err, files) => {
+      // ISSUE: WHEN BUILDING, YOU CAN'T FIND THE MODULES IN .APP/MODULES. YOU NEED TO
+      // LOOK INTO APPLICATION SUPPORT/SNWE. BUT HOW.
+      if (files == null) return;
       files.forEach(filename => {
         loadjscssfile(thisModuleRelativePath+filename);
         injecthtmlmodule(filename.substring(0, filename.lastIndexOf('.')), container)

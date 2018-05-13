@@ -1,8 +1,11 @@
+'use strict';
+
 var options = ["theme","colorscheme","player"];
+var filename = '';
 
 function loadjscssfile(filename) {
   console.log("Loading file "+ filename);
-  filetype = filename.split('.').pop();
+  var filetype = filename.split('.').pop();
 
   if (filetype=="js"){ //if filename is a external JavaScript file
     filename = "./js/" + filename;

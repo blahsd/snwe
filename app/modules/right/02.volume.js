@@ -1,3 +1,5 @@
+'use strict';
+
 function updateVolume() {
   loudness.getMuted(function(err, mute) {
     if (mute) {
