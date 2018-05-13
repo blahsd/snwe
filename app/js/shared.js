@@ -4,6 +4,7 @@ const dateFormat = require('dateformat');
 const electron = require('electron');
   const BrowserWindow = electron.remote.BrowserWindow;
 const exec = require('child_process').exec;
+const execSync = require('child_process').execSync;
 const console = require('electron').remote.getGlobal('console')
 const isCharging = require('is-charging');
 const loudness = require('loudness');
@@ -47,4 +48,8 @@ function toggleClass(element, tclass) {
   }
 }
 
-//const remove = require('electron').remote;
+class snweModule {
+  update() {
+    //
+  }
+}
