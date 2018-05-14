@@ -20,7 +20,7 @@ function createWindow() {
 
   win.loadURL('file://' + __dirname + '/app/index.html');
   win.setVisibleOnAllWorkspaces(true);
- win.webContents.openDevTools();
+ //win.webContents.openDevTools();
   win.setPosition(-4,0);
 }
 
