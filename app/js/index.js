@@ -1,6 +1,8 @@
 'use strict';
 // Update Builtin Functions
 
+const externalModule = require('./js/require/externalModule.js').externalModule;
+
 function updateTime() {
   var now = new Date();
   document.getElementById("time-output").innerHTML = dateFormat(now, "HH:MM");
@@ -27,10 +29,9 @@ function switchToDesktop (caller) {
 }
 
 // General Functions
-function injecthtmlmodule (module, container) {
-  var moduleName = module.substring(module.indexOf('.')+1,module.length);
-  console.log("... loaded. Injecting module: "+moduleName);
-  var moduleItem = `<div class="widg" id="${moduleName}">
+function injecthtmlmodule (moduleName, containerId) {
+
+  var moduleHTML = `<div class="widg" id="${moduleName}">
       <div class="button" id="${moduleName}-button">
         <i id="${moduleName}-icon"></i>
       </div>
@@ -39,28 +40,29 @@ function injecthtmlmodule (module, container) {
       </div>
     </div>
     `
-  document.getElementById(container).insertAdjacentHTML("afterbegin", moduleItem);
 }
 
 function loadModules() {
   const fs = require('fs');
 
-  const modulePath = "./app/modules/";
-  const moduleRelativePath = "../modules/";
-  const moduleContainers = ["left","middle","right"];
+  //const modulePath = "./app/modules/";
+  //const moduleRelativePath = "../modules/";
 
-  moduleContainers.forEach(container => {
-    var thisModulePath = modulePath+container+'/';
-    var thisModuleRelativePath = moduleRelativePath+container+'/';
+  const moduleContainers = ["modules/left/","modules/middle/","modules/right/"];
+
+  moduleContainers.forEach(containerPath => {
+
+    var thisModulePath = path.join(__dirname, containerPath);
+    var thisContainerName = containerPath.substring(containerPath.indexOf('/')+1, containerPath.length-1);
 
     fs.readdir(thisModulePath, (err, files) => {
-      // ISSUE: WHEN BUILDING, YOU CAN'T FIND THE MODULES IN .APP/MODULES. YOU NEED TO
-      // LOOK INTO APPLICATION SUPPORT/SNWE. BUT HOW.
-      // so what happens here is that it finds no files and returns immediately.
       if (files == null) return;
       files.forEach(filename => {
-        loadjscssfile(thisModuleRelativePath+filename);
-        injecthtmlmodule(filename.substring(0, filename.lastIndexOf('.')), container)
+        var filepath = thisModulePath + filename;
+        let eM = new externalModule(filepath);
+
+        eM.loadIn(document);
+        eM.injectHTMLIn(document, thisContainerName);
       });
     })
   });

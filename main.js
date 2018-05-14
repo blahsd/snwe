@@ -14,14 +14,15 @@ function createWindow() {
     frame:      false,
     transparent:true,
     resizable:  false,
-   type:       'desktop',
+    type:       'desktop',
 
   });
 
   win.loadURL('file://' + __dirname + '/app/index.html');
   win.setVisibleOnAllWorkspaces(true);
- win.webContents.openDevTools();
-  win.setPosition(-4,0);
+  win.webContents.openDevTools();
+  win.setPosition(-8,0);
 }
 
+app.dock.hide();
 app.on('ready', createWindow)

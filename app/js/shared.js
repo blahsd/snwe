@@ -11,9 +11,11 @@ const console = require('electron').remote.getGlobal('console');
 const isCharging = require('is-charging');
 const loudness = require('loudness');
 const osxBattery = require('osx-battery');
+const path = require('path');
 const Store = require('electron-store');
   const store = new Store();
 const wifi = require('node-wifi');
+
 
 // extra functions
 function isDev() {
