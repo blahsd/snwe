@@ -17,10 +17,10 @@ const Store = require('electron-store');
 const wifi = require('node-wifi');
 
 
+
+const externalModule = require('./js/require/externalModule.js').externalModule;
+
 // extra functions
-function isDev() {
-  return process.mainModule.filename.indexOf('app.asar') === -1;
-}
 
 function removeFromArray(array, element) {
     const index = array.indexOf(element);

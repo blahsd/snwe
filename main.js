@@ -21,7 +21,7 @@ function createWindow() {
   win.loadURL('file://' + __dirname + '/app/index.html');
   win.setVisibleOnAllWorkspaces(true);
   win.webContents.openDevTools();
-  win.setPosition(-8,0);
+  win.setPosition(-4,0);
 }
 
 app.dock.hide();

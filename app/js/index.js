@@ -1,7 +1,7 @@
 'use strict';
-// Update Builtin Functions
 
-const externalModule = require('./js/require/externalModule.js').externalModule;
+const mainDocument = document;
+// Update Builtin Functions
 
 function updateTime() {
   var now = new Date();
@@ -23,30 +23,8 @@ function updateDesktop() {
   });
 }
 
-function switchToDesktop (caller) {
-  console.log(caller.value);
-  // yeah but how do I switch desktop?
-}
-
-// General Functions
-function injecthtmlmodule (moduleName, containerId) {
-
-  var moduleHTML = `<div class="widg" id="${moduleName}">
-      <div class="button" id="${moduleName}-button">
-        <i id="${moduleName}-icon"></i>
-      </div>
-      <span class="output" id="${moduleName}-output"> ... </span>
-      <div class="popup" id="${moduleName}-popup">
-      </div>
-    </div>
-    `
-}
-
 function loadModules() {
   const fs = require('fs');
-
-  //const modulePath = "./app/modules/";
-  //const moduleRelativePath = "../modules/";
 
   const moduleContainers = ["modules/left/","modules/middle/","modules/right/"];
 
@@ -55,10 +33,19 @@ function loadModules() {
     var thisModulePath = path.join(__dirname, containerPath);
     var thisContainerName = containerPath.substring(containerPath.indexOf('/')+1, containerPath.length-1);
 
+    console.log(thisModulePath)
+    console.log(thisContainerName)
+    console.log(containerPath)
+
     fs.readdir(thisModulePath, (err, files) => {
+
+      // This is making something ending in /README.md. HOW?=????
+      // IT MEANS THISMODULEPATH IS WRONG AND ITS READING LIKE ./
+
       if (files == null) return;
       files.forEach(filename => {
         var filepath = thisModulePath + filename;
+        
         let eM = new externalModule(filepath);
 
         eM.loadIn(document);
@@ -74,7 +61,7 @@ function update() {
 }
 
 window.onload=function() {
-  loadSettings();
+  loadSettings(["theme", "colorscheme", "player"]);
   loadModules();
   setInterval(update, 1000);
 }

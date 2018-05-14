@@ -21,12 +21,10 @@ function createChildWindow(windowpath, parent) {
   //childWindow.webContents.openDevTools();
 
   childWindow.webContents.on("changeSettingEvent", function(e) {
-    console.log("C-c-c-change!");
     loadSettings();
   })
 
   childWindow.webContents.on("close", function(e) {
-    console.log("C-c-c-closing!");
     openWindows[windowpath] = null;
   })
 

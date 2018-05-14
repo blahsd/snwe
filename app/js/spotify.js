@@ -32,8 +32,6 @@ function update() {
 
   document.getElementById("player-output").innerHTML = track;
 
-  console.log(isplaying);
-
   if (isplaying) {
     document.getElementById("play-icon").classList.remove("fa-play");
     document.getElementById("play-icon").classList.add("fa-pause");
