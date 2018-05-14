@@ -54,7 +54,7 @@ class taskMonitor extends EventEmitter {
         return (app.name == prevApp.name);
       })
 
-      //  Check for new apps
+      //  Check for closed apps
       if (runningAppsMatch.includes(true)) {
         isStillRunning = true;
       } else {
