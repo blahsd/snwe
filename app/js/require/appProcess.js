@@ -79,12 +79,7 @@ class appProcess {
     return icon;
   }
 
-  openApp() {
-    command = "open -a " + this.name;
-    exec(command, function(err, stdout, stderr) {
-      //
-    });
-  }
+
 }
 
 exports.appProcess = appProcess;

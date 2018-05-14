@@ -7,6 +7,11 @@ document.getElementById("taskbar-button").style.display = "none";
 document.getElementById("taskbar-output").innerHTML = ""
 var appname;
 
+function openApp(appName) {
+  var command = "open -a " + appName;
+  execSync (command);
+}
+
 tm.on('appEvent', (app, openStatus) => {
   if (openStatus == true) {
     document.getElementById("taskbar-output").insertAdjacentHTML("afterbegin", app.html);
