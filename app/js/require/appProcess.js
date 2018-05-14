@@ -1,3 +1,4 @@
+'use strict';
 
 class appProcess {
   constructor(name) {
@@ -15,7 +16,7 @@ class appProcess {
   }
 
   getIcon() {
-    icon = "far fa-window-restore";
+    var icon = "far fa-window-restore";
     switch (true) {
       case (this.name == "Finder"):
         icon = "far fa-window-restore";

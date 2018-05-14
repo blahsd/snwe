@@ -45,8 +45,6 @@ function injecthtmlmodule (module, container) {
 function loadModules() {
   const fs = require('fs');
 
-
-
   const modulePath = "./app/modules/";
   const moduleRelativePath = "../modules/";
   const moduleContainers = ["left","middle","right"];
@@ -58,6 +56,7 @@ function loadModules() {
     fs.readdir(thisModulePath, (err, files) => {
       // ISSUE: WHEN BUILDING, YOU CAN'T FIND THE MODULES IN .APP/MODULES. YOU NEED TO
       // LOOK INTO APPLICATION SUPPORT/SNWE. BUT HOW.
+      // so what happens here is that it finds no files and returns immediately.
       if (files == null) return;
       files.forEach(filename => {
         loadjscssfile(thisModuleRelativePath+filename);
