@@ -20,6 +20,7 @@ const wifi = require('node-wifi');
 
 const externalModule = require('./js/require/externalModule.js').externalModule;
 
+
 // extra functions
 
 function removeFromArray(array, element) {

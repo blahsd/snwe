@@ -25,34 +25,20 @@ function updateDesktop() {
 
 function loadModules() {
   const fs = require('fs');
+  const moduleFolderRelativePath = '/modules';
+  const moduleFolderAbsolutePath = path.join(__dirname, moduleFolderRelativePath);
+  var modulesFilename = fs.readdirSync(moduleFolderAbsolutePath);
+  var modulesRelativePath = modulesFilename.map(x => '/modules/'+x)
+  var modulesAbsolutePath = modulesRelativePath.map(x => path.join(__dirname, x))
 
-  const moduleContainers = ["modules/left/","modules/middle/","modules/right/"];
+  modulesAbsolutePath.forEach(moduleAbsolutePath => {
+    var module = require(moduleAbsolutePath).module;
+    var m = new module(moduleAbsolutePath,document);
+    m.loadIn();
+    m.injectHTMLIn();
+    m.start();
+  })
 
-  moduleContainers.forEach(containerPath => {
-
-    var thisModulePath = path.join(__dirname, containerPath);
-    var thisContainerName = containerPath.substring(containerPath.indexOf('/')+1, containerPath.length-1);
-
-    console.log(thisModulePath)
-    console.log(thisContainerName)
-    console.log(containerPath)
-
-    fs.readdir(thisModulePath, (err, files) => {
-
-      // This is making something ending in /README.md. HOW?=????
-      // IT MEANS THISMODULEPATH IS WRONG AND ITS READING LIKE ./
-
-      if (files == null) return;
-      files.forEach(filename => {
-        var filepath = thisModulePath + filename;
-        
-        let eM = new externalModule(filepath);
-
-        eM.loadIn(document);
-        eM.injectHTMLIn(document, thisContainerName);
-      });
-    })
-  });
 }
 
 function update() {
@@ -64,4 +50,5 @@ window.onload=function() {
   loadSettings(["theme", "colorscheme", "player"]);
   loadModules();
   setInterval(update, 1000);
+
 }

@@ -1,8 +1,13 @@
 'use strict';
 
-class externalModule {
+const EventEmitter = require('events').EventEmitter;
+
+class externalModule extends EventEmitter {
   constructor(filePath) {
+    super();
     this.filePath = filePath;
+    this.document = document;
+    this.container = 'right';
   }
 
   get fileName() {
@@ -32,7 +37,7 @@ class externalModule {
       fileRef.setAttribute("rel", "stylesheet");
       fileRef.setAttribute("type", "text/css");
       fileRef.setAttribute("href", this.filePath);
-    } 
+    }
 
     return fileRef;
   }
@@ -49,14 +54,31 @@ class externalModule {
       </div>`
   }
 
-  loadIn(document) {
+  loadIn() {
     // Load the resource
-    document.head.appendChild(this.fileRef);
+    this.document.head.appendChild(this.fileRef);
     }
 
-  injectHTMLIn(document, containerId) {
+  injectHTMLIn() {
     //  Inject the HTML
-      document.getElementById(containerId).insertAdjacentHTML("afterbegin", this.HTMLContent);
+    var position;
+    if (this.container == 'left') {
+      position = 'beforeend';
+    } else if (this.container == 'right') {
+      position = 'afterbegin';
+    } else {
+      position = 'afterbegin';
+    }
+
+    this.document.getElementById(this.container).insertAdjacentHTML(position, this.HTMLContent);
+  }
+
+  update() {
+    //  This must be overwritten by extensors
+  }
+
+  start() {
+    setInterval(this.update(), 1000);
   }
 
 }

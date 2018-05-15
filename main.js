@@ -9,13 +9,14 @@ function createWindow() {
   var {width, height} = electron.screen.getPrimaryDisplay().workAreaSize
 
   let win = new BrowserWindow({
-    width:      width+8,
-    height:     height,
+    width:      width+16,
+    height:     48,
     frame:      false,
     transparent:true,
     resizable:  false,
-    type:       'desktop',
-
+    focusable:  false,
+  //  type:       'desktop',
+    hasShadow: false,
   });
 
   win.loadURL('file://' + __dirname + '/app/index.html');
@@ -24,5 +25,5 @@ function createWindow() {
   win.setPosition(-4,0);
 }
 
-app.dock.hide();
 app.on('ready', createWindow)
+//app.dock.hide();
