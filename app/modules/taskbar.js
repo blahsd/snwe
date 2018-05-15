@@ -1,17 +1,36 @@
 'use strict';
 
-class dateModule extends externalModule {
+class taskbarModule extends externalModule {
   constructor(filePath,document) {
     super(filePath,document);
-    this.container = 'middle';
+    this.container = 'left';
+
+    this.tm = new taskMonitor(1000);
   }
 
-  update() {
-    var now = new Date();
+  get HTMLContent() { 
+    var moduleName = this.fileName;
+    return  `<div class="widg" id="${moduleName}">
+        <span class="output" id="${moduleName}-output"></span>
+        </div>
+      </div>`
+  }
 
-    this.document.getElementById("date-output").innerHTML = dateFormat(now, "ddd d mmm");
+  start() {
+    this.tm.start();
+
+    this.tm.on('appEvent', (app, openStatus) => {
+      if (openStatus == true) {
+        document.getElementById("taskbar-output").insertAdjacentHTML("afterbegin", app.html);
+      } else {
+        var e = document.getElementById(`taskbar-${app.name}-button`);
+        e.parentNode.removeChild(e);
+      }
+    });
+
+
   }
 
 }
 
-exports.module = dateModule;
+exports.module = taskbarModule;

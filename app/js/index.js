@@ -47,7 +47,7 @@ function update() {
 }
 
 window.onload=function() {
-  loadSettings(["theme", "colorscheme", "player"]);
+  loadSettings(["theme", "colorscheme"]);
   loadModules();
   setInterval(update, 1000);
 

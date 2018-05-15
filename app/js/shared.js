@@ -19,9 +19,17 @@ const wifi = require('node-wifi');
 
 
 const externalModule = require('./js/require/externalModule.js').externalModule;
+const taskMonitor = require('./js/require/taskMonitor.js').taskMonitor;
+const musicPlayerInterface = require('./js/require/iTunesMusicPlayerInterface.js').musicPlayerInterface;
 
 
 // extra functions
+
+function openApp(appName) {
+  var command = "open -a " + appName;
+  execSync (command);
+}
+
 
 function removeFromArray(array, element) {
     const index = array.indexOf(element);

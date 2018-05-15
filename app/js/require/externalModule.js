@@ -8,6 +8,7 @@ class externalModule extends EventEmitter {
     this.filePath = filePath;
     this.document = document;
     this.container = 'right';
+    this.refreshRate = 1000;
   }
 
   get fileName() {
@@ -78,10 +79,10 @@ class externalModule extends EventEmitter {
   }
 
   start() {
-    setInterval(this.update(), 1000);
+    var _this = this;
+    setInterval(() => { _this.update()}, 1000)
   }
 
 }
-
 
 exports.externalModule = externalModule;

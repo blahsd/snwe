@@ -2,7 +2,7 @@
 
 class appProcess {
   constructor(name) {
-    this.name = name.trim();
+    this.name = name.trim().replace(/ /g,'');
   }
 
   get icon() {

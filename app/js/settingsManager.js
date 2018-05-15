@@ -13,7 +13,7 @@ function initializeSettings() {
   store.set("player", new externalModule(path.join(__dirname, "js/itunes.js")));
 }
 
-function loadSettings(settings = ["theme","colorscheme","player"]) {
+function loadSettings(settings = ["theme","colorscheme"]) {
   console.log("Loading preferences...");
 
   for (var i = 0; i < settings.length; i++) {
@@ -40,7 +40,7 @@ function getRadioVal(form, name) {
 }
 
 function setSettingButtonValue(option) {
-  var settings = ["theme","colorscheme","player"];
+  var settings = ["theme","colorscheme"];
 
   console.log("Loading preferences...");
 

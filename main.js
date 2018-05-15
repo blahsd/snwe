@@ -17,6 +17,7 @@ function createWindow() {
     focusable:  false,
   //  type:       'desktop',
     hasShadow: false,
+    skipTaskbar: true,
   });
 
   win.loadURL('file://' + __dirname + '/app/index.html');
