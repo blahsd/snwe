@@ -1,6 +1,6 @@
 {
   "name": "snwe",
-  "version": "0.0.1",
+  "version": "1.0.0-rc.1",
   "license": "MIT",
   "description": "Cool system monitor",
   "author": "blahsd <blahsd101@gmail.com>",
@@ -8,8 +8,7 @@
   "scripts": {
     "postinstall": "install-app-deps",
     "start": "electron .",
-    "pack": "build --dir",
-    "dist": "build"
+    "dist": "electron-packager . --derefSymlinks=false --overwrite --out='./dist'"
   },
   "build": {
     "appId": "snwe",
