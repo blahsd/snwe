@@ -16,7 +16,7 @@ class appProcess {
   }
 
   getIcon() {
-    var icon = "far fa-window-restore";
+    var icon = "far fa-window-maximize";
     switch (true) {
       case (this.name == "Finder"):
         icon = "far fa-window-restore";

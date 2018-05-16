@@ -1,9 +1,13 @@
 'use strict';
 
 function initializePywalLink(fileref) {
-  exec("ln -s $HOME/.cache/wal/colors.css ./app/css/colors-wal.css", function(err, stdout, stderr) {
-  document.getElementsByTagName("head")[0].appendChild(fileref);
-  });
+  var filepath = path.join(__dirname, "css/colors-wal.css");
+
+  try {
+    execSync("ln -s $HOME/.cache/wal/colors.css "+filepath);
+  } catch (e) {
+    // file exists.
+  }
 }
 
 function initializeSettings() {
@@ -15,7 +19,7 @@ function initializeSettings() {
 
 function loadSettings(settings = ["theme","colorscheme","player"]) {
   console.log("Loading preferences...");
-
+  initializePywalLink();
 
   for (var i = 0; i < settings.length; i++) {
     var node = document.getElementById(settings[i]);
