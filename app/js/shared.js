@@ -5,6 +5,7 @@ const batteryLevel = require('battery-level');
 const dateFormat = require('dateformat');
 const electron = require('electron');
   const BrowserWindow = electron.remote.BrowserWindow;
+const EventEmitter = require('events').EventEmitter;
 const exec = require('child_process').exec;
 const execSync = require('child_process').execSync;
 const console = require('electron').remote.getGlobal('console');
@@ -20,7 +21,6 @@ const wifi = require('node-wifi');
 
 const externalModule = require('./js/require/externalModule.js').externalModule;
 const taskMonitor = require('./js/require/taskMonitor.js').taskMonitor;
-const musicPlayerInterface = require('./js/require/iTunesMusicPlayerInterface.js').musicPlayerInterface;
 
 
 // extra functions

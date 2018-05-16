@@ -9,8 +9,8 @@ function createWindow() {
   var {width, height} = electron.screen.getPrimaryDisplay().workAreaSize
 
   let win = new BrowserWindow({
-    width:      width+16,
-    height:     48,
+    width:      width+8,
+    height:     height,
     frame:      false,
     transparent:true,
     resizable:  false,
@@ -22,7 +22,7 @@ function createWindow() {
 
   win.loadURL('file://' + __dirname + '/app/index.html');
   win.setVisibleOnAllWorkspaces(true);
-  win.webContents.openDevTools();
+  //win.webContents.openDevTools();
   win.setPosition(-4,0);
 }
 

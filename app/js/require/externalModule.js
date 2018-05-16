@@ -3,12 +3,13 @@
 const EventEmitter = require('events').EventEmitter;
 
 class externalModule extends EventEmitter {
-  constructor(filePath) {
+  constructor(filePath,unID=false) {
     super();
     this.filePath = filePath;
     this.document = document;
     this.container = 'right';
     this.refreshRate = 1000;
+    this.unID = unID;
   }
 
   get fileName() {
@@ -39,6 +40,7 @@ class externalModule extends EventEmitter {
       fileRef.setAttribute("type", "text/css");
       fileRef.setAttribute("href", this.filePath);
     }
+    fileRef.setAttribute("id",this.unID)
 
     return fileRef;
   }

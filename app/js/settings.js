@@ -1,7 +1,7 @@
 
 
 window.onload=function() {
-  
+
   loadSettings(["theme","colorscheme"]);
   setSettingButtonValue();
 

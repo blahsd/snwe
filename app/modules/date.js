@@ -8,17 +8,13 @@ class dateModule extends externalModule {
 
   update() {
     var now = new Date();
-    this.document.getElementById("date-output").innerHTML = dateFormat(now, "ddd d mmm");
+    document.getElementById("date-output").innerHTML = dateFormat(now, "ddd d mmm");
   }
 
   get HTMLContent() {
     var moduleName = this.fileName;
-    return  `<div class="widg" onmouseover="alert('hasd')" id="${moduleName}">
-        <div class="button" id="${moduleName}-button">
-          <i id="${moduleName}-icon"></i>
-        </div>
+    return  `<div class="widg" id="${moduleName}">
         <span class="output" id="${moduleName}-output"> ... </span>
-        <div class="popup" id="${moduleName}-popup">
         </div>
       </div>`
   }

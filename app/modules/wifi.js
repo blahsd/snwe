@@ -9,6 +9,8 @@ class wifiModule extends externalModule {
     this.isscancomplete = false;
     this.iswifion = false;
 
+    this.__THIS = this;
+
     wifi.init({
       iface: null // network interface, choose a random wifi interface if set to null
     });
@@ -23,6 +25,7 @@ class wifiModule extends externalModule {
         </div>
         <span class="output" id="${moduleName}-output"> ... </span>
         <div class="popup" id="${moduleName}-popup">
+          <div class="button" id="wifi-toggle-button"></div>
         </div>
       </div>`
   }
@@ -58,7 +61,7 @@ class wifiModule extends externalModule {
       this.document.getElementById("wifi-toggle-button").innerHTML = "Turn WiFi On";
     } else {
       this.document.getElementById("wifi-toggle-button").innerHTML = "Turn WiFi Off";
-  }
+    }
   }
 
   toggleWifiPopup() {
@@ -66,30 +69,18 @@ class wifiModule extends externalModule {
   }
 
   toggleWifi() {
+    console.log(this.iswifion);
     if (this.iswifion == true) {
-      console.log("Turning Wifi On..");
+      console.log("Turning Wifi Off..");
       this.turnWifiOff();
     } else {
-      console.log("Turning Wifi Off..");
+      console.log("Turning Wifi On..");
       this.turnWifiOn();
     }
+
     this.setWifiOnOffButton();
     this.toggleWifiPopup();
   }
-
-  setPopupContent() {
-    // This is broken. Breaks everything. wtf. idk. bruh.
-    this.document.getElementById("wifi-popup").innerHTML = "";
-    this.success = true;
-
-    var content = `<ul class="optlist" id="wifi-optlist">
-          <li class="button" id="wifi-toggle-button" onclick="toggleWifi()"></li>
-        </ul>`
-    this.document.getElementById("wifi-popup").insertAdjacentHTML("afterbegin", content);
-
-    //scanWifi();
-  }
-
 
   update() {
     wifi.getCurrentConnections((err, currentConnections) => {
@@ -122,7 +113,16 @@ class wifiModule extends externalModule {
     });
 
     //    this.setPopupContent();
-    //    this.setWifiOnOffButton();
+        this.setWifiOnOffButton();
+  }
+
+  start() {
+
+
+    document.getElementById("wifi-toggle-button").addEventListener("click", (e) => this.toggleWifi());
+
+    var _this = this;
+    setInterval(() => { _this.update()}, 1000)
   }
 }
 

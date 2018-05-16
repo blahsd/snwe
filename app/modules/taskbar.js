@@ -8,7 +8,7 @@ class taskbarModule extends externalModule {
     this.tm = new taskMonitor(1000);
   }
 
-  get HTMLContent() { 
+  get HTMLContent() {
     var moduleName = this.fileName;
     return  `<div class="widg" id="${moduleName}">
         <span class="output" id="${moduleName}-output"></span>
@@ -17,7 +17,7 @@ class taskbarModule extends externalModule {
   }
 
   start() {
-    this.tm.start();
+    this.tm.start(1000);
 
     this.tm.on('appEvent', (app, openStatus) => {
       if (openStatus == true) {
@@ -27,10 +27,7 @@ class taskbarModule extends externalModule {
         e.parentNode.removeChild(e);
       }
     });
-
-
   }
-
 }
 
 exports.module = taskbarModule;

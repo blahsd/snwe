@@ -1,5 +1,5 @@
 {
-  "name": "Lighthouse",
+  "name": "snwe",
   "version": "0.0.1",
   "license": "MIT",
   "description": "Cool system monitor",
@@ -48,7 +48,8 @@
     "loudness": "^0.2.2",
     "mpc-js": "^1.2.1",
     "node-mpd": "0.0.2",
-    "node-wifi": "^2.0.4"
+    "node-wifi": "^2.0.4",
+    "npm": "^6.0.1"
   },
   "devDependencies": {
     "electron": "latest",

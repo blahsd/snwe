@@ -8,18 +8,30 @@ function initializePywalLink(fileref) {
 
 function initializeSettings() {
   console.log("Initialising preferences...");
-  store.set("theme", new externalModule(path.join(__dirname, "css/mono.css")));
-  store.set("colorscheme", new externalModule(path.join(__dirname, "css/colors.css")));
-  store.set("player", new externalModule(path.join(__dirname, "js/itunes.js")));
+  store.set("theme", path.join(__dirname, "css/mono.css"));
+  store.set("colorscheme", path.join(__dirname, "css/colors.css"));
+  store.set("player", path.join(__dirname, "js/require/itunes.js"));
 }
 
-function loadSettings(settings = ["theme","colorscheme"]) {
+function loadSettings(settings = ["theme","colorscheme","player"]) {
   console.log("Loading preferences...");
 
+
   for (var i = 0; i < settings.length; i++) {
-    let settingEM = new externalModule(store.get(settings[i])['filePath']);
-    let settingName = settingEM.fileName;
-    settingEM.loadIn(document);
+    var node = document.getElementById(settings[i]);
+    if (node) {
+      node.parentNode.removeChild(node);
+    }
+
+    try {
+      let settingEM = new externalModule(store.get(settings[i]), settings[i]);
+      let settingName = settingEM.fileName;
+      settingEM.loadIn(document);
+    } catch (e) {
+    // Settings have not been initialised
+    initializeSettings();
+    loadSettings();
+    }
   }
 
 }
@@ -40,15 +52,12 @@ function getRadioVal(form, name) {
 }
 
 function setSettingButtonValue(option) {
-  var settings = ["theme","colorscheme"];
+  var settings = ["theme","colorscheme","player"];
 
-  console.log("Loading preferences...");
 
   // Create array of externalModule objects
   for (var i = 0; i < settings.length; i++) {
-    let settingEM = new externalModule(store.get(settings[i])['filePath']);
-
-    console.log(settingEM.fileNameAndExtension);
+    let settingEM = new externalModule(store.get(settings[i]));
     document.getElementById(settingEM.fileNameAndExtension).checked = true;
   }
 
@@ -58,7 +67,6 @@ function saveSettingButtonValue(option) {
   var fileName = getRadioVal(document.getElementById(option+"-form"));
   var filePath = path.join(__dirname, fileName);
 
-  var eM = new externalModule(filePath);
+  store.set(option, filePath);
 
-  store.set(option, eM);
 }

@@ -1,5 +1,5 @@
 'use strict';
-const EventEmitter = require('events').EventEmitter;
+
 
 class iTunesMusicPlayerInterface extends EventEmitter {
   constructor () {
