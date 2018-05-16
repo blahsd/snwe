@@ -1,56 +1,26 @@
-'use strict';
 
-function getRadioVal(form, name) {
-    var val;
-    // get list of radio buttons with specified name
-    var radios = form.elements;
-
-    // loop through list of radio buttons
-    for (var i=0, len=radios.length; i<len; i++) {
-        if ( radios[i].checked ) { // radio checked?
-            val = radios[i].value; // if so, hold its value in val
-            break; // and break out of for loop
-        }
-    }
-    return val;
-}
-
-function setSetting(option) {
-  console.log("Setting: "+option+" to: "+store.get(option))
-  document.getElementById(store.get(option)).checked = true;
-}
-
-function saveSetting(option) {
-  store.set(option,getRadioVal(document.getElementById(option+"-form")));
-}
 
 window.onload=function() {
-  loadSettings();
 
-  console.log("Setting up preference Panes...");
-  for (var i = 0; i < options.length; i++) {
-    var o = options[i]
-    var oform = o + "-form";
-
-    setSetting(o);
-  }
+  loadSettings(["theme","colorscheme"]);
+  setSettingButtonValue();
 
   document.getElementById("theme-form").addEventListener("click", function(e) {
-    saveSetting("theme");
+    saveSettingButtonValue("theme");
     require('electron').remote.getCurrentWebContents().emit("changeSettingEvent");
     console.log(document.title + " emitted a changeSettingEvent event!")
     loadSettings();
   });
 
   document.getElementById("colorscheme-form").addEventListener("click", function(e) {
-    saveSetting("colorscheme");
+    saveSettingButtonValue("colorscheme");
     require('electron').remote.getCurrentWebContents().emit("changeSettingEvent");
     console.log(document.title + " emitted a changeSettingEvent event!")
     loadSettings();
   })
 
   document.getElementById("player-form").addEventListener("click", function(e) {
-    saveSetting("player");
+    saveSettingButtonValue("player");
     require('electron').remote.getCurrentWebContents().emit("changeSettingEvent");
     console.log(document.title + " emitted a changeSettingEvent event!");
     loadSettings();

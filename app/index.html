@@ -5,6 +5,7 @@
     <title>snwe</title>
     <link rel="stylesheet" type="text/css" href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" />
     <link rel="stylesheet" type="text/css" href="./css/common.css" />
+    <script> var exports = {}; </script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js" onload="window.$ = window.jQuery = module.exports;"></script>
     <script type="text/javascript" src="./js/shared.js"></script>
     <script type="text/javascript" src="./js/index.js"></script>
@@ -19,30 +20,6 @@
 
         <div class="widg pinned green" id="desktop">
           <span class="output" id="desktop-output"> </span>
-          <div class="popup" id="desktop-popup">
-            <ul>
-              <li class="button" id="desktop-switch-button" onclick="switchToDesktop(this)" value=1>1</li>
-
-              <li class="button" id="desktop-switch-button" onclick="switchToDesktop(this)" value=2>2</li>
-
-              <li class="button" id="desktop-switch-button" onclick="switchToDesktop(this)" value=3>3</li>
-
-              <li class="button" id="desktop-switch-button" onclick="switchToDesktop(this)" value=4>4</li>
-
-            </ul>
-          </div>
-        </div>
-
-        <div class="widg" id="player">
-          <div class="button" onclick="playpause()" id="play-button">
-            <i class="fas fa-play" id="play-icon"></i>
-          </div>
-
-          <div class="button" onclick="next();" id="next-button">
-            <i class="fas fa-step-forward" id="next-icon"></i>
-          </div>
-
-          <span class="output" id="player-output"></span>
         </div>
 
       </div>
@@ -54,7 +31,7 @@
       <div class="container" id="right">
 
         <div class="widg" id="settings">
-          <div class="button" id="settings-button" onclick="createChildWindow('settings.html',this);">
+          <div class="button" id="settings-button" onclick="createSettingsWindow();">
             <i class="fas fa-cog" id="settings-icon"></i>
           </div>
         </div>

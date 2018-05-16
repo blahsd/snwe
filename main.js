@@ -10,18 +10,22 @@ function createWindow() {
 
   let win = new BrowserWindow({
     width:      width+8,
-    height:     height,
+    height:     50,
     frame:      false,
     transparent:true,
     resizable:  false,
-   type:       'desktop',
-
+    focusable:  false,
+  //  type:       'desktop',
+    hasShadow: false,
+    skipTaskbar: true,
   });
 
   win.loadURL('file://' + __dirname + '/app/index.html');
+  //win.setAlwaysOnTop(true, 'torn-off-menu');
   win.setVisibleOnAllWorkspaces(true);
- //win.webContents.openDevTools();
+  //win.webContents.openDevTools();
   win.setPosition(-4,0);
 }
 
 app.on('ready', createWindow)
+//app.dock.hide();

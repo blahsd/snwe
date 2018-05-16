@@ -2,7 +2,7 @@
 
 class appProcess {
   constructor(name) {
-    this.name = name.trim();
+    this.name = name.trim().replace(/ /g,'');
   }
 
   get icon() {
@@ -16,7 +16,7 @@ class appProcess {
   }
 
   getIcon() {
-    var icon = "far fa-window-restore";
+    var icon = "far fa-window-maximize";
     switch (true) {
       case (this.name == "Finder"):
         icon = "far fa-window-restore";

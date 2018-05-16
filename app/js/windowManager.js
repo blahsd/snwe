@@ -1,19 +1,20 @@
 'use strict';
 var openWindows = {};
 
-function createChildWindow(windowpath, parent) {
+function createSettingsWindow() {
+  var windowpath = 'settings.html';
+  const remote = require('electron').remote;
+  var windowparent = remote.getCurrentWindow();
 
   if (openWindows[windowpath] != null) {
     openWindows[windowpath].close();
     return;
   }
 
-  // TO DO: Figure out the position of parent and get the window to spawn right below it.
-
-
   let childWindow = new BrowserWindow({
      frame: false,
      transparent: true,
+     parent: windowparent,
   });
 
   childWindow.loadURL('file://' + __dirname + '/' + windowpath);
@@ -21,12 +22,10 @@ function createChildWindow(windowpath, parent) {
   //childWindow.webContents.openDevTools();
 
   childWindow.webContents.on("changeSettingEvent", function(e) {
-    console.log("C-c-c-change!");
     loadSettings();
   })
 
   childWindow.webContents.on("close", function(e) {
-    console.log("C-c-c-closing!");
     openWindows[windowpath] = null;
   })
 

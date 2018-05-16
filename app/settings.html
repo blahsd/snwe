@@ -7,8 +7,8 @@
   <link rel="stylesheet" type="text/css" href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" />
   <link rel="stylesheet" type="text/css" href="./css/settings.css" />
   <script type="text/javascript" src="./js/shared.js"></script>
-  <script type="text/javascript" src="./js/settings.js"></script>
   <script type="text/javascript" src="./js/settingsManager.js"></script>
+  <script type="text/javascript" src="./js/settings.js"></script>
 </head>
 
 <body>
@@ -16,19 +16,19 @@
     <h1>Theme</h1>
     <form id="theme-form">
       <label class="container">Center
-        <input type="radio" value="center.css" id="center.css"  name="radio">
+        <input type="radio" value="/css/center.css" id="center.css"  name="radio">
         <span class="checkmark"></span>
       </label>
       <label class="container">Flat
-        <input type="radio" value="flat.css" id="flat.css" name="radio">
+        <input type="radio" value="/css/flat.css" id="flat.css" name="radio">
         <span class="checkmark"></span>
       </label>
       <label class="container">Mono
-        <input type="radio" value="mono.css" id="mono.css" name="radio">
+        <input type="radio" value="/css/mono.css" id="mono.css" name="radio">
         <span class="checkmark"></span>
       </label>
       <label class="container">Four
-        <input type="radio" value="four.css" id="four.css" name="radio">
+        <input type="radio" value="/css/four.css" id="four.css" name="radio">
         <span class="checkmark"></span>
       </label>
     </form>
@@ -36,27 +36,27 @@
     <h1>Colorscheme</h1>
     <form id="colorscheme-form">
       <label class="container">Default <span class="filepath">../css/colors.css</span>
-        <input type="radio" value="colors.css" id="colors.css" name="radio">
+        <input type="radio" value="/css/colors.css" id="colors.css" name="radio">
         <span class="checkmark"></span>
       </label>
       <label class="container">pywal <span class="filepath"> ../css/colors-wal.css </span>
-        <input type="radio" value="colors-wal.css" id="colors-wal.css" name="radio">
+        <input type="radio" value="/css/colors-wal.css" id="colors-wal.css" name="radio">
         <span class="checkmark"></span>
       </label>
     </form>
-    
-    <h1>Music Player</h1>
+
+    <h1>Music Player</h1> <span class="filepath"> Requires restart! </span>
     <form id="player-form">
       <label class="container">iTunes
-        <input type="radio" value="itunes.js" id="itunes.js" name="radio">
+        <input type="radio" value="/js/require/itunes.js" id="itunes.js" name="radio">
         <span class="checkmark"></span>
       </label>
       <label class="container">Spotify
-        <input type="radio" value="spotify.js" id="spotify.js" name="radio">
+        <input type="radio" value="/js/require/spotify.js" id="spotify.js" name="radio">
         <span class="checkmark"></span>
       </label>
       <label class="container">mpd/mpc
-        <input type="radio" value="mpd.js" id="mpd.js" name="radio">
+        <input type="radio" value="/js/require/mpd.js" id="mpd.js" name="radio">
         <span class="checkmark"></span>
       </label>
     </form>

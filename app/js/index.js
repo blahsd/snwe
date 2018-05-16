@@ -1,4 +1,6 @@
 'use strict';
+
+const mainDocument = document;
 // Update Builtin Functions
 
 function updateTime() {
@@ -21,49 +23,22 @@ function updateDesktop() {
   });
 }
 
-function switchToDesktop (caller) {
-  console.log(caller.value);
-  // yeah but how do I switch desktop?
-}
-
-// General Functions
-function injecthtmlmodule (module, container) {
-  var moduleName = module.substring(module.indexOf('.')+1,module.length);
-  console.log("... loaded. Injecting module: "+moduleName);
-  var moduleItem = `<div class="widg" id="${moduleName}">
-      <div class="button" id="${moduleName}-button">
-        <i id="${moduleName}-icon"></i>
-      </div>
-      <span class="output" id="${moduleName}-output"> ... </span>
-      <div class="popup" id="${moduleName}-popup">
-      </div>
-    </div>
-    `
-  document.getElementById(container).insertAdjacentHTML("afterbegin", moduleItem);
-}
-
 function loadModules() {
   const fs = require('fs');
+  const moduleFolderRelativePath = '/modules';
+  const moduleFolderAbsolutePath = path.join(__dirname, moduleFolderRelativePath);
+  var modulesFilename = fs.readdirSync(moduleFolderAbsolutePath);
+  var modulesRelativePath = modulesFilename.map(x => '/modules/'+x)
+  var modulesAbsolutePath = modulesRelativePath.map(x => path.join(__dirname, x))
 
-  const modulePath = "./app/modules/";
-  const moduleRelativePath = "../modules/";
-  const moduleContainers = ["left","middle","right"];
+  modulesAbsolutePath.forEach(moduleAbsolutePath => {
+    var module = require(moduleAbsolutePath).module;
+    var m = new module(moduleAbsolutePath,document);
+    m.loadIn();
+    m.injectHTMLIn();
+    m.start();
+  })
 
-  moduleContainers.forEach(container => {
-    var thisModulePath = modulePath+container+'/';
-    var thisModuleRelativePath = moduleRelativePath+container+'/';
-
-    fs.readdir(thisModulePath, (err, files) => {
-      // ISSUE: WHEN BUILDING, YOU CAN'T FIND THE MODULES IN .APP/MODULES. YOU NEED TO
-      // LOOK INTO APPLICATION SUPPORT/SNWE. BUT HOW.
-      // so what happens here is that it finds no files and returns immediately.
-      if (files == null) return;
-      files.forEach(filename => {
-        loadjscssfile(thisModuleRelativePath+filename);
-        injecthtmlmodule(filename.substring(0, filename.lastIndexOf('.')), container)
-      });
-    })
-  });
 }
 
 function update() {
@@ -72,7 +47,7 @@ function update() {
 }
 
 window.onload=function() {
-  loadSettings();
+  loadSettings(["theme", "colorscheme","player"]);
   loadModules();
   setInterval(update, 1000);
 }

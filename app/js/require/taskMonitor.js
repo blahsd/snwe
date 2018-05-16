@@ -67,10 +67,6 @@ class taskMonitor extends EventEmitter {
 
   start() {
     var _this = this;
-    // call this.changeTask() using our new created variable.
-    // this has to be done as this would normally call something
-    // inside this function, so we have to pass it as own
-    // variable over
     setInterval(function() {
       _this.scanRunningApps();
     }, this.refreshRate);

@@ -5,20 +5,31 @@ const batteryLevel = require('battery-level');
 const dateFormat = require('dateformat');
 const electron = require('electron');
   const BrowserWindow = electron.remote.BrowserWindow;
+const EventEmitter = require('events').EventEmitter;
 const exec = require('child_process').exec;
 const execSync = require('child_process').execSync;
 const console = require('electron').remote.getGlobal('console');
 const isCharging = require('is-charging');
 const loudness = require('loudness');
 const osxBattery = require('osx-battery');
+const path = require('path');
 const Store = require('electron-store');
   const store = new Store();
 const wifi = require('node-wifi');
 
+
+
+const externalModule = require('./js/require/externalModule.js').externalModule;
+const taskMonitor = require('./js/require/taskMonitor.js').taskMonitor;
+
+
 // extra functions
-function isDev() {
-  return process.mainModule.filename.indexOf('app.asar') === -1;
+
+function openApp(appName) {
+  var command = "open -a " + appName;
+  execSync (command);
 }
+
 
 function removeFromArray(array, element) {
     const index = array.indexOf(element);
