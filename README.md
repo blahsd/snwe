@@ -10,6 +10,8 @@ To install:
 
 Then navigate to wherever you cloned the repo and:
 
+`npm install`
+
 `npm start`
 
 # Known limitations
