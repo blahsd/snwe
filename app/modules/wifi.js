@@ -58,9 +58,9 @@ class wifiModule extends externalModule {
 
   setWifiOnOffButton() {
     if (this.iswifion == true) {
-      this.document.getElementById("wifi-toggle-button").innerHTML = "Turn WiFi On";
-    } else {
       this.document.getElementById("wifi-toggle-button").innerHTML = "Turn WiFi Off";
+    } else {
+      this.document.getElementById("wifi-toggle-button").innerHTML = "Turn WiFi On";
     }
   }
 
