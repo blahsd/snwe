@@ -28,4 +28,4 @@ function createWindow() {
 }
 
 app.on('ready', createWindow)
-//app.dock.hide();
+app.dock.hide();
