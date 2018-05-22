@@ -18,4 +18,6 @@ Then navigate to wherever you cloned the repo and:
 - Full functionality macOS only.
 
 # credits
-i got some icons made by [freepik](http://www.freepik.com) through [flaticon](https://www.flaticon.com/) and they want me to tell you that they are  licensed under [CC 3.0 BY](http://creativecommons.org/licenses/by/3.0/), so, huh, there's that
+- paanvaannd is helping me a metric ton by testing, debugging, and contributing to development. Thanks bro.
+
+- we might include icons from [freepik](http://www.freepik.com) through [flaticon](https://www.flaticon.com/) and they want me to tell you that they are  licensed under [CC 3.0 BY](http://creativecommons.org/licenses/by/3.0/), so, huh, there's that
