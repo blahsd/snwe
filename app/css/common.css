@@ -10,6 +10,7 @@ body {
   font-size      : 10px;
   font-smoothing : antialiasing;
   line-height    : var(--line-size);
+
 }
 
 div {
@@ -33,11 +34,12 @@ i:last-child {
   width            : 100%;
   background-color : var(--background);
   white-space      : nowrap;
+  box-shadow       : 0px 2px 5px 0px rgba(0,0,0,0.2);
 }
 
 .container {
   width     : 33%;
-  
+
   height    : var(--line-size);
   flex-grow : 1;
 }

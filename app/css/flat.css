@@ -5,3 +5,18 @@
   --line-size        : 24px;
   --overflow-correct : 4px;
 }
+
+body {
+  margin         : 0;
+  margin-top     : var(--global_margin);
+  margin-right   : calc( var(--right-margin) + var(--overflow-correct) );
+  margin-left    : calc( var(--left-margin) + var(--overflow-correct) );
+  color          : var(--foreground);
+
+  font-family    : "Menlo",
+                   sans-serif;
+  font-size      : 8 px;
+  font-smoothing : antialiasing;
+  line-height    : var(--line-size);
+
+}
