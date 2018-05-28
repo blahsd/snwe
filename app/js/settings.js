@@ -5,8 +5,17 @@ window.onload=function() {
   loadSettings(["theme","colorscheme"]);
   setSettingButtonValue();
 
+  const buttons = ["player", "theme", "colorscheme"];
 
+  buttons.forEach( button => {
+    document.getElementById(`${button}-form`).addEventListener("click", function(e) {
+      saveSettingButtonValue(`${button}`);
+      require('electron').remote.getCurrentWebContents().emit("changeSettingEvent");
+      loadSettings();
+    })
+  })
 
+  /*
   document.getElementById("theme-form").addEventListener("click", function(e) {
     saveSettingButtonValue("theme");
     require('electron').remote.getCurrentWebContents().emit("changeSettingEvent");
@@ -27,4 +36,5 @@ window.onload=function() {
     console.log(document.title + " emitted a changeSettingEvent event!");
     loadSettings();
   })
+  */
 }
