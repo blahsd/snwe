@@ -41,7 +41,6 @@ function loadModules() {
 
     modulesList.push(m);
   })
-
 }
 
 function update() {
