@@ -1,5 +1,6 @@
 'use strict';
 
+var modulesList = [];
 const mainDocument = document;
 // Update Builtin Functions
 
@@ -37,6 +38,8 @@ function loadModules() {
     m.loadIn();
     m.injectHTMLIn();
     m.start();
+
+    modulesList.push(m);
   })
 
 }

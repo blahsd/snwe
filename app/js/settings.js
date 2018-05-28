@@ -5,6 +5,8 @@ window.onload=function() {
   loadSettings(["theme","colorscheme"]);
   setSettingButtonValue();
 
+
+
   document.getElementById("theme-form").addEventListener("click", function(e) {
     saveSettingButtonValue("theme");
     require('electron').remote.getCurrentWebContents().emit("changeSettingEvent");
