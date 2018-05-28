@@ -48,7 +48,7 @@
     "mpc-js": "^1.2.1",
     "node-mpd": "0.0.2",
     "node-wifi": "^2.0.4",
-    "npm": "^6.0.1"
+    "npm": "^6.1.0"
   },
   "devDependencies": {
     "electron": "latest",
