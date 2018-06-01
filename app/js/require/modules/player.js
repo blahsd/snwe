@@ -10,7 +10,7 @@ class playerModule extends externalModule {
     } catch (e) {
       // Missing preference
       initializeSettings();
-      var musicPlayerInterface = require(store.get('player')).musicPlayerInterface;
+      var musicPlayerInterface = require(store.get('player')).musicPlayerInterface; 
     }
     this.mpi = new musicPlayerInterface();
 

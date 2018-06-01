@@ -23,11 +23,59 @@ function setSettingButtonValue(option) {
   }
 }
 
+function capitalizeString(string) {
+  return string.charAt(0).toUpperCase() + string.slice(1);
+}
+
+function setModuleButtons() {
+  store.get("modules").forEach(module => {
+    var filename = module["filename"];
+    var moduleButtonHTML = `
+    <label class="container"> ${capitalizeString(filename)}
+      <input type="checkbox" checked="checked" id="${filename}"><span class="checkmark"></span>
+    </label>`;
+
+    this.document.getElementById("widget-panel").insertAdjacentHTML("beforeend", moduleButtonHTML);
+  })
+}
+
+function setModuleButtonsValue() {
+  store.get("modules").forEach(module => {
+    document.getElementById(module["filename"]).checked = module["enabled"];
+  })
+}
+
 function saveSettingButtonValue(option) {
   var fileName = getRadioVal(document.getElementById(option+"-form"));
   var filePath = path.join(__dirname, fileName);
 
   store.set(option, filePath);
+}
+
+function saveModuleButtonValue(button) {
+  buttonName = button.getAttribute("id");
+  buttonValue = button.checked;
+
+  moduleSettingValue = store.get("modules");
+
+  moduleSettingValue.forEach(module => {
+    if (module["filename"] == buttonName) {
+      module["enabled"] = buttonValue;
+    }
+  })
+
+  console.log(moduleSettingValue);
+  store.set("modules", moduleSettingValue);
+}
+
+function setModuleButtonsListener() {
+  store.get("modules").forEach(module => {
+    var button = document.getElementById(module["filename"]);
+
+    button.addEventListener("click", function(e) {
+      saveModuleButtonValue(button);
+    })
+  })
 }
 
 function setSettingButtonListener() {
@@ -42,32 +90,33 @@ function setSettingButtonListener() {
   })
 }
 
-window.onload=function() {
+function displayPanel(evt, panel) {
+    // Declare all variables
+    var i, tabcontent, tablinks;
 
+    tabcontent = document.getElementsByClassName("panel");
+    for (i = 0; i < tabcontent.length; i++) {
+        tabcontent[i].style.display = "none";
+    }
+
+    tablinks = document.getElementsByClassName("panellink");
+    for (i = 0; i < tablinks.length; i++) {
+        tablinks[i].className = tablinks[i].className.replace(" active", "");
+    }
+
+    document.getElementById(panel).style.display = "block";
+    try {
+      evt.currentTarget.className += " active";
+    } catch (e) {
+      //
+    }
+}
+
+window.onload=function() {
   loadSettings(["theme","colorscheme"]);
+  setModuleButtons();
+  setModuleButtonsValue();
+  setModuleButtonsListener();
   setSettingButtonValue();
   setSettingButtonListener();
-
-  /*
-  document.getElementById("theme-form").addEventListener("click", function(e) {
-    saveSettingButtonValue("theme");
-    require('electron').remote.getCurrentWebContents().emit("changeSettingEvent");
-    console.log(document.title + " emitted a changeSettingEvent event!")
-    loadSettings();
-  });
-
-  document.getElementById("colorscheme-form").addEventListener("click", function(e) {
-    saveSettingButtonValue("colorscheme");
-    require('electron').remote.getCurrentWebContents().emit("changeSettingEvent");
-    console.log(document.title + " emitted a changeSettingEvent event!")
-    loadSettings();
-  })
-
-  document.getElementById("player-form").addEventListener("click", function(e) {
-    saveSettingButtonValue("player");
-    require('electron').remote.getCurrentWebContents().emit("changeSettingEvent");
-    console.log(document.title + " emitted a changeSettingEvent event!");
-    loadSettings();
-  })
-  */
 }

@@ -60,6 +60,7 @@ class externalModule extends EventEmitter {
   loadIn() {
     // Load the resource
     this.document.head.appendChild(this.fileRef);
+
     }
 
   injectHTMLIn() {

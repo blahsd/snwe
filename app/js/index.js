@@ -1,8 +1,6 @@
 'use strict';
 
 var modulesList = [];
-const mainDocument = document;
-// Update Builtin Functions
 
 function updateTime() {
   var now = new Date();
@@ -24,32 +22,18 @@ function updateDesktop() {
   });
 }
 
-function loadModules() {
-  const fs = require('fs');
-  const moduleFolderRelativePath = '/modules';
-  const moduleFolderAbsolutePath = path.join(__dirname, moduleFolderRelativePath);
-  var modulesFilename = fs.readdirSync(moduleFolderAbsolutePath);
-  var modulesRelativePath = modulesFilename.map(x => '/modules/'+x)
-  var modulesAbsolutePath = modulesRelativePath.map(x => path.join(__dirname, x))
-
-  modulesAbsolutePath.forEach(moduleAbsolutePath => {
-    var module = require(moduleAbsolutePath).module;
-    var m = new module(moduleAbsolutePath,document);
-    m.loadIn();
-    m.injectHTMLIn();
-    m.start();
-
-    modulesList.push(m);
-  })
-}
 
 function update() {
   updateTime();
   updateDesktop();
 }
 
+var mM = new moduleManager();
+
+
 window.onload=function() {
   loadSettings(["theme", "colorscheme","player"]);
   loadModules();
+
   setInterval(update, 1000);
 }

@@ -7,16 +7,22 @@
   <link rel="stylesheet" type="text/css" href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" />
   <link rel="stylesheet" type="text/css" href="./css/settings.css" />
   <script type="text/javascript" src="./js/shared.js"></script>
-  <script type="text/javascript" src="./js/settingsManager.js"></script>
   <script type="text/javascript" src="./js/settings.js"></script>
 </head>
 
+
+
+
 <body>
+  <div class="tab">
+    <button class="panellink" onclick="displayPanel(event, 'widget-panel')">Widgets</button>
+    <button class="panellink" onclick="displayPanel(event, 'theme-panel')">Appearance</button>
+    <button class="panellink" onclick="displayPanel(event, 'advanced-panel')">Advanced</button>
+  </div>
+
   <div class="panel" id="widget-panel">
     <h1>Widgets</h1>
-    <label class="container">Date
-      <input type="checkbox"><span class="checkmark"></span>
-    </label>
+
   </div>
 
   <div class="panel" id="theme-panel">
@@ -69,4 +75,5 @@
     </form>
   </div>
 </body>
+<script type="text/javascript">displayPanel(false, 'widget-panel')</script>
 </html>
