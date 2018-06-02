@@ -150,7 +150,7 @@ function createSettingsWindow() {
 
   childWindow.loadURL('file://' + __dirname + '/' + windowpath);
   openWindows[windowpath] = childWindow;
-  childWindow.webContents.openDevTools();
+  //childWindow.webContents.openDevTools();
 
   childWindow.webContents.on("changeSettingEvent", function(e) {
     loadSettings();
@@ -165,7 +165,7 @@ function createSettingsWindow() {
 
 function loadSettings(settings = ["theme","colorscheme","player"]) {
   console.log("Loading preferences...");
-initializeSettings();
+
 
   for (var i = 0; i < settings.length; i++) {
     var node = document.getElementById(settings[i]);
