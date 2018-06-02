@@ -64,8 +64,9 @@ function saveModuleButtonValue(button) {
     }
   })
 
-  console.log(moduleSettingValue);
   store.set("modules", moduleSettingValue);
+
+  mM.updateChangedModule(buttonName, buttonValue);
 }
 
 function setModuleButtonsListener() {

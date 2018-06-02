@@ -10,6 +10,9 @@ class externalModule extends EventEmitter {
     this.container = 'right';
     this.refreshRate = 1000;
     this.unID = unID;
+    this.isLoaded = false;
+    this.node = document.createElement("div");
+    this.node.innerHTML = this.HTMLContent;
   }
 
   get fileName() {
@@ -58,23 +61,12 @@ class externalModule extends EventEmitter {
   }
 
   loadIn() {
-    // Load the resource
-    this.document.head.appendChild(this.fileRef);
-
-    }
+    document.head.appendChild(this.fileRef);
+    this.isLoaded = true;
+  }
 
   injectHTMLIn() {
-    //  Inject the HTML
-    var position;
-    if (this.container == 'left') {
-      position = 'beforeend';
-    } else if (this.container == 'right') {
-      position = 'afterbegin';
-    } else {
-      position = 'afterbegin';
-    }
-
-    this.document.getElementById(this.container).insertAdjacentHTML(position, this.HTMLContent);
+    document.getElementById(this.container).appendChild(this.node);
   }
 
   update() {
@@ -83,7 +75,17 @@ class externalModule extends EventEmitter {
 
   start() {
     var _this = this;
-    setInterval(() => { _this.update()}, 1000)
+    this.intervalID = setInterval(() => { _this.update()}, 1000);
+  }
+
+  stop() {
+    clearInterval(this.intervalID);
+  }
+
+  unload() {
+    this.stop();
+    this.node.remove();
+    this.isLoaded = false;
   }
 
 }

@@ -54,6 +54,20 @@ class moduleManager {
     return modulesFilename;
   }
 
+  updateChangedModule(moduleName, enabled) {
+    // Loads or unloads a module at runtime
+    this.initializedModulesList.forEach(module => {
+      if (module.fileName == moduleName) {
+        if (enabled) {
+          module.loadIn();
+          module.injectHTMLIn();
+        } else {
+          module.unload();
+        }
+      }
+    })
+  }
+
 }
 
 exports.moduleManager = moduleManager;

@@ -24,6 +24,9 @@ const taskMonitor = require('./js/require/taskMonitor.js').taskMonitor;
 
 const moduleManager = require('./js/require/moduleManager.js').moduleManager;
 
+var mM = new moduleManager();
+
+
 // extra functions
 
 function openApp(appName) {
@@ -92,6 +95,10 @@ function initializeSettings() {
   store.set("modules",
   [
     {
+      "filename": "desktop",
+      "enabled": true
+    },
+    {
       "filename": "battery",
       "enabled": true
     },
@@ -113,6 +120,10 @@ function initializeSettings() {
     },
     {
       "filename": "wifi",
+      "enabled": true
+    },
+    {
+      "filename": "time",
       "enabled": true
     },
   ])
@@ -154,7 +165,7 @@ function createSettingsWindow() {
 
 function loadSettings(settings = ["theme","colorscheme","player"]) {
   console.log("Loading preferences...");
-  
+initializeSettings();
 
   for (var i = 0; i < settings.length; i++) {
     var node = document.getElementById(settings[i]);
