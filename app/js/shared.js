@@ -1,5 +1,7 @@
 'use strict';
 
+const VERSION = 'v0.1.0-rc.2'
+
 // npm modules
 const batteryLevel = require('battery-level');
 const dateFormat = require('dateformat');
@@ -16,7 +18,6 @@ const path = require('path');
 const Store = require('electron-store');
   const store = new Store();
 const wifi = require('node-wifi');
-
 
 
 const externalModule = require('./js/require/externalModule.js').externalModule;
@@ -88,6 +89,8 @@ function initializeSettings() {
   console.log("Initialising preferences...");
   initializePywalLink();
 
+  store.set("version", VERSION);
+
   store.set("theme", path.join(__dirname, "css/mono.css"));
   store.set("colorscheme", path.join(__dirname, "css/colors.css"));
   store.set("player", path.join(__dirname, "js/require/itunes.js"));
@@ -120,6 +123,10 @@ function initializeSettings() {
     },
     {
       "filename": "wifi",
+      "enabled": true
+    },
+    {
+      "filename": "settings",
       "enabled": true
     },
     {
@@ -166,6 +173,11 @@ function createSettingsWindow() {
 function loadSettings(settings = ["theme","colorscheme","player"]) {
   console.log("Loading preferences...");
 
+  // Check if settings have been updated since last version
+  if (store.get("version") != VERSION) {
+    console.log("*** WARNING: Updating settings to new version. This will delete your preferences. I feel bad, but it's the only way to make sure that you don't miss out on the new features.");
+    initializeSettings();
+  }
 
   for (var i = 0; i < settings.length; i++) {
     var node = document.getElementById(settings[i]);
