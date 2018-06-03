@@ -1,7 +1,23 @@
-An extensible, customisable menubar replacement for macOS.
-Built with Electron.
+<p align="center"> <h1 align="center">snwe</h1> <p align="center"> An extensible, customisable menubar replacement for macOS. </p>
+ </p>
+<hr/>
+ ![demo](./demo/full.png)
 
-This widget puts everything you might want to know at a glance in one place. From system monitoring, to currently playing music, the bar gives you an overview of what you need to know. Thanks to the program's scalable modular structure, it's trivial to extend it with new indicators or graphic themes, respectively self contained each in a single .js or .css file.
+
+This widget puts everything you might want to know at a glance in one place. From system monitoring, to currently playing music, the bar gives you an overview of what you need to know.
+
+
+Thanks to the program's modular structure, it's trivial to extend it with new indicators or graphic themes. The wal-responsive adaptive colorscheme makes it always look at home.
+
+![demo](./demo/theme1.png)
+![demo](./demo/theme4.png)
+![demo](./demo/theme2.png)
+
+And the widget selection allows you to tailor it to your needs
+
+![demo](./demo/widg5.png)
+![demo](./demo/widg2.png)
+![demo](./demo/widg1.png)
 
 ## Yes but what does it do
 The bar is undergoing *very* active development. I'm adding, modifying, and moving around functions on a weekly basis. The list of displays that follows is indicative and relative only to the default configuration which can be very easily switched up with any of the other configuration files that are included in the download.
