@@ -138,7 +138,6 @@ function initializeSettings() {
   ])
 }
 
-
 var openWindows = {};
 
 function createSettingsWindow() {

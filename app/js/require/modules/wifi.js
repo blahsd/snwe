@@ -117,12 +117,10 @@ class wifiModule extends externalModule {
   }
 
   start() {
-
-
     document.getElementById("wifi-toggle-button").addEventListener("click", (e) => this.toggleWifi());
 
     var _this = this;
-    setInterval(() => { _this.update()}, 1000)
+    setInterval(() => { _this.update()}, 10000)
   }
 }
 

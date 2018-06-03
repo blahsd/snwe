@@ -4,6 +4,7 @@ class dateModule extends externalModule {
   constructor(filePath,document) {
     super(filePath,document);
     this.container = 'middle';
+    this.refreshRate = 60000;
   }
 
   update() {

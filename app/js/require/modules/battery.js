@@ -4,6 +4,7 @@ class batteryModule extends externalModule {
   constructor(filePath,document) {
     super(filePath,document);
     this.container = 'right';
+    this.refreshRate = 6000;
   }
 
   update() {
@@ -12,6 +13,11 @@ class batteryModule extends externalModule {
         level = Math.ceil(100 * level);
         var color;
         var icon;
+
+        // this breaks the chargin icon. Testing purposes only.
+        if (document.getElementById("battery-output").innerHTML == level) {
+          return;
+        }
 
         document.getElementById("battery-output").innerHTML = level;
         document.getElementById("battery-icon").removeAttribute("class");

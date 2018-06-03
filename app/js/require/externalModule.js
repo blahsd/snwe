@@ -15,6 +15,12 @@ class externalModule extends EventEmitter {
     this.node.innerHTML = this.HTMLContent;
   }
 
+  updateContent(elementId, content) {
+    if (document.getElementById(elementId).innerHTML != content) {
+      document.getElementById(elementId).innerHTML = content;
+    }
+  }
+
   get fileName() {
     return this.filePath.substring(
       this.filePath.lastIndexOf('/') + 1, this.filePath.lastIndexOf('.')
@@ -75,7 +81,8 @@ class externalModule extends EventEmitter {
 
   start() {
     var _this = this;
-    this.intervalID = setInterval(() => { _this.update()}, 1000);
+    this.update();
+    this.intervalID = setInterval(() => { _this.update()}, this.refreshRate);
   }
 
   stop() {

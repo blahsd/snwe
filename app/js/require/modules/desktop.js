@@ -16,6 +16,10 @@ class desktopModule extends externalModule {
         document.getElementById("desktop-output").classList.add("fa-apple");
         document.getElementById("desktop-output").innerHTML = "";
       } else {
+        if (document.getElementById("desktop-output").innerHTML == stdout) {
+          return;
+        }
+        
         document.getElementById("desktop-output").innerHTML = stdout;
       }
     });
