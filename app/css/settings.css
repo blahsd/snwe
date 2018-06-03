@@ -92,8 +92,8 @@
 
 .tab {
     overflow: hidden;
-    border: 1px solid #ccc;
-    background-color: #f1f1f1;
+    border: 1px solid var;
+    background-color: var(--foreground);
 }
 
 /* Style the buttons that are used to open the tab content */
@@ -121,6 +121,4 @@
 .panel {
     display: none;
     padding: 6px 12px;
-    border: 1px solid #ccc;
-    border-top: none;
 }

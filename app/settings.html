@@ -10,9 +10,6 @@
   <script type="text/javascript" src="./js/settings.js"></script>
 </head>
 
-
-
-
 <body>
   <div class="tab">
     <button class="panellink" onclick="displayPanel(event, 'widget-panel')">Widgets</button>
@@ -42,6 +39,10 @@
       </label>
       <label class="container">Four
         <input type="radio" value="/css/four.css" id="four.css" name="radio">
+        <span class="checkmark"></span>
+      </label>
+      <label class="container">Float
+        <input type="radio" value="/css/float.css" id="float.css" name="radio">
         <span class="checkmark"></span>
       </label>
     </form>
@@ -74,6 +75,23 @@
       </label>
     </form>
   </div>
+
+  <div class="panel" id="advanced-panel">
+    <h1>Taskbar Icon</h1> <span class="filepath"> Requires restart! </span>
+    <form id="hideIcon-form">
+      <label class="container">Hide
+        <input type="radio" value="hideIcon" id="hideIcon" name="radio">
+        <span class="checkmark"></span>
+      </label>
+      <label class="container">Show
+        <input type="radio" value="showIcon" id="showIcon" name="radio">
+        <span class="checkmark"></span>
+      </label>
+    </form>
+
+    This option hides the application from the taskbar. However, it also hides it from the window switcher, and prevents from being able to create custom rules for this app on window managers such as chunkwm. Unfortunately this is a restriction of macOS which can't be worked around.
+  </div>
+
 </body>
 <script type="text/javascript">displayPanel(false, 'widget-panel')</script>
 </html>

@@ -2,19 +2,19 @@
 
 const electron = require('electron')
 const {app, BrowserWindow} = electron
+const Store = require('electron-store');
+  const store = new Store();
 
 var win = null;
 
 function createWindow() {
-  var {width, height} = electron.screen.getPrimaryDisplay().workAreaSize
+
 
   let win = new BrowserWindow({
-    width:      width+8,
-    height:     54,
+
     frame:      false,
     transparent:true,
-    resizable:  false,
-	  focusable:  false,
+//	focusable:  false,
 //  type:       'desktop',
     hasShadow: false,
   });
@@ -24,12 +24,18 @@ function createWindow() {
   win.setVisibleOnAllWorkspaces(true);
   //win.webContents.openDevTools();
 
-
   return win;
 }
 
 app.on('ready', function() {
+  var {width, height} = electron.screen.getPrimaryDisplay().workAreaSize
   win = createWindow();
-  app.dock.hide();
+
+  if (store.get("hideIcon") == "hideIcon") {
+    //Yeah I know, I could have used a boolean, right? But now, I use strings. Why? Just compatibility with the settings panel. If you can figure out a way to makes this pretty, lemme know.
+
+    app.dock.hide();
+  }
   win.setPosition(-4,0);
+  win.setSize(width+8,64,true);
 })

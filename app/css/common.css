@@ -40,7 +40,6 @@ i:last-child {
 
 .container {
   width     : 33%;
-
   height    : var(--line-size);
   flex-grow : 1;
 }

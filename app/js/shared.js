@@ -1,6 +1,6 @@
 'use strict';
 
-const VERSION = 'v0.1.0-rc.2'
+const VERSION = 'v0.1.0-rc.2.0.2'
 
 // npm modules
 const batteryLevel = require('battery-level');
@@ -90,6 +90,8 @@ function initializeSettings() {
   initializePywalLink();
 
   store.set("version", VERSION);
+
+  store.set("hideIcon", "showIcon");
 
   store.set("theme", path.join(__dirname, "css/mono.css"));
   store.set("colorscheme", path.join(__dirname, "css/colors.css"));

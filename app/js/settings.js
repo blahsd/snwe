@@ -14,7 +14,7 @@ function getRadioVal(form, name) {
 }
 
 function setSettingButtonValue(option) {
-  const settings = ["theme","colorscheme","player"];
+  const settings = ["theme","colorscheme","player","hideIcon"];
 
   // Create array of externalModule objects
   for (var i = 0; i < settings.length; i++) {
@@ -45,11 +45,26 @@ function setModuleButtonsValue() {
   })
 }
 
-function saveSettingButtonValue(option) {
-  var fileName = getRadioVal(document.getElementById(option+"-form"));
-  var filePath = path.join(__dirname, fileName);
+function getPathOfButtonSetting(option) {
+  // Check if the selected value is a simple value or points to an external file. In the latter case, instead of passing to the database the simple value, it passes the full path of the external file.
 
-  store.set(option, filePath);
+  var fileName = getRadioVal(document.getElementById(option+"-form"));
+
+  if (fileName.includes('.')) {
+    var filePath = path.join(__dirname, fileName);
+  } else {
+    var filePath = fileName;
+  }
+
+  return filePath;
+}
+
+function saveSettingsButtonValue(option) {
+  console.log("Saving settings...");
+
+  var value = getPathOfButtonSetting(option);
+
+  store.set(option, value);
 }
 
 function saveModuleButtonValue(button) {
@@ -80,11 +95,11 @@ function setModuleButtonsListener() {
 }
 
 function setSettingButtonListener() {
-  const buttons = ["player", "theme", "colorscheme"];
+  const buttons = ["player", "theme", "colorscheme","hideIcon"];
 
   buttons.forEach( button => {
     document.getElementById(`${button}-form`).addEventListener("click", function(e) {
-      saveSettingButtonValue(`${button}`);
+      saveSettingsButtonValue(`${button}`);
       require('electron').remote.getCurrentWebContents().emit("changeSettingEvent");
       loadSettings();
     })

@@ -1,0 +1,29 @@
+:root {
+  --global_margin    : 16px;
+  --left-margin      : 16px;
+  --right-margin     : 16px;
+  --line-size        : 38px;
+  --overflow-correct : 4px;
+}
+
+.bar {
+  background : none;
+  box-shadow: none;
+}
+
+.container {
+  background: none;
+}
+
+.widg {
+  min-width  : var(--line-size);
+  text-align : center;
+  background-color: var(--background);
+  box-shadow       : 0px 4px 5px -5px black;
+  border-radius: 2px;
+}
+
+.widg.pinned {
+  margin-left: 16px;
+  margin-right: 16px;
+}
