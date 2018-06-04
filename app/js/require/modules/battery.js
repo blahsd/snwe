@@ -3,35 +3,42 @@
 class batteryModule extends externalModule {
   constructor(filePath,document) {
     super(filePath,document);
-    this.container = 'left';
+    this.container = 'right';
     this.refreshRate = 4000;
   }
 
   getIcon() {
+    // Get correct icon based on charging status and current charge level
     if (this.isCharging) {
       return "fa-bolt";
     } else {
-      switch (true) {
-        case (this.level <= 10):
-          return "fa-battery-empty";
-          break;
-        case (this.level <= 25):
-          return "fa-battery-quarter";
-          break;
-        case (this.level <= 50):
-          return "fa-battery-half";
-          break;
-        case (this.level <= 75):
-          return "fa-battery-three-quarters";
-          break;
-        case (this.level <= 100):
-          return "fa-battery-full";
-          break;
+      if (this.level <= 10) {
+        return "fa-battery-empty";
+      } else if (this.level <= 25) {
+        return "fa-battery-quarter";
+      } else if (this.level <= 50) {
+        return "fa-battery-half";
+      } else if (this.level <= 75) {
+        return "fa-battery-three-quarters";
+      } else {
+        return "fa-battery-full";
       }
     }
   }
 
   getColor() {
+    // Get correct color based on charging status and current charge level
+    if (this.isCharging) {
+      return "yellow";
+    } else {
+      if (this.level <= 10) {
+        return "red";
+      } else if (this.level <= 30) {
+        return "yellow";
+      } else {
+        return "green";
+      }
+    }
     if (this.isCharging) {
       return "yellow";
     } else {
@@ -79,27 +86,28 @@ class batteryModule extends externalModule {
   updateOutput() {
     var level = this.level
 
+    // Check if the level has changed (and therefore needs a redraw)
     if ($("#battery-output").html() != level) {
       $("#battery-output").html(level)
     }
   }
 
-  updateStatus(isCharging) {
+  updateStatus() {
     this.updateIcon()
     this.updateColor()
-    this.isCharging = execSync("sh ./app/sh/ischarging.sh").includes("true");
+    this.isCharging = execSync("sh ./app/sh/ischarging.sh").includes("true")
   }
 
-  updateLevel(level) {
+  updateLevel() {
     this.updateIcon()
     this.updateColor()
     this.updateOutput()
-    this.level = Math.ceil(100*level)
+    this.level = execSync("sh ./app/sh/getcharge.sh").toString();
   }
 
   update() {
     this.updateStatus();
-    batteryLevel().then(level => this.updateLevel(level));
+    this.updateLevel();
   }
 
 }
