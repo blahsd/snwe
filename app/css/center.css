@@ -5,3 +5,8 @@
   --line-size        : 42px;
   --overflow-correct : 4px;
 }
+
+.bar {
+  overflow: hidden;
+  border-radius: 1px;
+}

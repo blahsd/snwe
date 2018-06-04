@@ -53,6 +53,7 @@
   "devDependencies": {
     "electron": "latest",
     "electron-builder": "latest",
-    "electron-prebuilt": "^1.4.13"
+    "electron-prebuilt": "^1.4.13",
+    "jquery": "^3.3.1"
   }
 }
