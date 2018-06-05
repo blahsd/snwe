@@ -2,16 +2,16 @@
 
 class timeModule extends externalModule {
   constructor(filePath,document) {
-    super(filePath,document);
-    this.container = 'right';
-    this.refreshRate = 60000;
+    super(filePath,document)
+    this.container = 'right'
+    this.refreshRate = 60000
   }
 
   update() {
-    var now = new Date();
-    var date = dateFormat(now, "HH:MM");
+    var now = new Date()
+    var date = dateFormat(now, "HH:MM")
 
-    this.updateContent("time-output", date);
+    this.updateContent($("#time-output"), date)
   }
 
   get HTMLContent() {

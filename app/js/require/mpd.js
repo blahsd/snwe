@@ -3,6 +3,21 @@
 class mpdMusicPlayerInterface extends EventEmitter {
   constructor () {
     super();
+
+    this.isPlaying = false
+    this.trackInfo = 'asddad'
+  }
+
+  update() {
+    try {
+      this.isPlaying = execSync("mpc status | grep playing").includes('playing')
+      this.trackInfo = execSync("mpc status | sed -n 1p").toString()
+    } catch (e) {
+      this.isPlaying = false
+      this.trackInfo = ''
+    }
+
+
   }
 
   playpause() {
@@ -11,21 +26,6 @@ class mpdMusicPlayerInterface extends EventEmitter {
 
   next() {
     execSync('mpc next');
-  }
-
-  get track() {
-    return execSync("mpc status | sed -n 1p");
-  }
-
-  get playStatus() {
-    var status;
-    try {
-      execSync("mpc status | grep playing");
-      status = true;
-    } catch (e) {
-      status = false
-    }
-    return status;
   }
 
 }

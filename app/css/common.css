@@ -22,11 +22,11 @@ i {
   padding: 0px 8px;
 }
 
-i:first-child {
+.button:first-child {
   padding-left: 16px;
 }
 
-i:last-child {
+.button:last-child {
   padding-right: 16px;
 }
 
@@ -78,6 +78,10 @@ i:last-child {
 .output {
     position: relative;
     display: inline-block;
+    color: var(--foreground) !important;
+}
+.pinned .output  {
+  color: var(--background) !important;
 }
 
 .popup {
@@ -114,10 +118,10 @@ li {
 /* ANIMATION */
 
 .blinking {
-  animation: blinker 1s linear infinite;
+  animation: blink 1s linear infinite;
 }
 
-@keyframes blinker {
+@keyframes blink {
   50% {
     opacity: 0;
   }
@@ -169,31 +173,25 @@ li {
 }
 
 .pinned.red {
-  color            : var(--background);
   background-color : var(--color1);
 }
 
 .pinned.green {
-  color            : var(--background);
   background-color : var(--color2);
 }
 
 .pinned.yellow {
-  color            : var(--background);
   background-color : var(--color3);
 }
 
 .pinned.blue {
-  color            : var(--background);
   background-color : var(--color4);
 }
 
 .pinned.cyan {
-  color            : var(--background);
   background-color : var(--color5);
 }
 
 .pinned.magenta {
-  color            : var(--background);
   background-color : var(--color6);
 }

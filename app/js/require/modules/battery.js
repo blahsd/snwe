@@ -5,28 +5,32 @@ class batteryModule extends externalModule {
     super(filePath,document);
     this.container = 'right';
     this.refreshRate = 4000;
+    this.scriptGetCharge = path.join(__dirname, "../../../sh/getcharge.sh");
+    this.scriptIsCharging = path.join(__dirname, "../../../sh/ischarging.sh");
   }
 
-  getIcon() {
+  get icon() {
     // Get correct icon based on charging status and current charge level
+    var fa
     if (this.isCharging) {
-      return "fa-bolt";
+      fa = "fa fa-bolt";
     } else {
       if (this.level <= 10) {
-        return "fa-battery-empty";
+        fa = "fa fa-battery-empty";
       } else if (this.level <= 25) {
-        return "fa-battery-quarter";
+        fa = "fa fa-battery-quarter";
       } else if (this.level <= 50) {
-        return "fa-battery-half";
+        fa = "fa fa-battery-half";
       } else if (this.level <= 75) {
-        return "fa-battery-three-quarters";
+        fa = "fa fa-battery-three-quarters";
       } else {
-        return "fa-battery-full";
+        fa = "fa fa-battery-full";
       }
     }
+    return `<i class="${ fa }"></i>`
   }
 
-  getColor() {
+  get color() {
     // Get correct color based on charging status and current charge level
     if (this.isCharging) {
       return "yellow";
@@ -56,58 +60,18 @@ class batteryModule extends externalModule {
     }
   }
 
-  updateIcon() {
-    // Get the correct icon for the current status
-    var icon = this.getIcon()
-
-    // Check if the icon has changed (and therefore needs a redraw)
-    if ($("#battery-icon").html() != icon) {
-      // ... redraw the icon
-      $("#battery-icon").html(`<i class="fa ${ icon }"></i>`)
-      return true
-    } else {
-      return false
-    }
-  }
-
-  updateColor() {
-    // Get the correct color for the current status
-    var color = this.getColor()
-
-    // Check if the color has changed (and therefore needs a redraw)
-    if (!$("#battery-icon").hasClass(color)) {
-      ["red","yellow","green"].forEach(c => {
-        $("#battery-icon").removeClass(c)
-      })
-      $("#battery-icon").addClass(color)
-    }
-  }
-
-  updateOutput() {
-    var level = this.level
-
-    // Check if the level has changed (and therefore needs a redraw)
-    if ($("#battery-output").html() != level) {
-      $("#battery-output").html(level)
-    }
-  }
-
   updateStatus() {
-    this.isCharging = execSync("sh ./app/sh/ischarging.sh").includes("true")
-  }
-
-  updateLevel() {
-    this.level = execSync("sh ./app/sh/getcharge.sh").toString();
+    this.isCharging = execSync(`sh ${this.scriptIsCharging}`).includes("true")
+    this.level = execSync(`sh ${this.scriptGetCharge}`).toString();
   }
 
   update() {
     this.updateStatus();
-    this.updateLevel();
-    this.updateIcon()
-    this.updateColor()
-    this.updateOutput()
-  }
 
+    this.updateElementProperty($("#battery"), this.color, ["red","yellow","green"])
+    this.updateContent($("#battery-icon"), this.icon)
+    this.updateContent($("#battery-output"), this.level)
+  }
 }
 
 exports.module = batteryModule;

@@ -15,9 +15,27 @@ class externalModule extends EventEmitter {
     this.node.innerHTML = this.HTMLContent;
   }
 
+  /*
   updateContent(elementId, content) {
     if (document.getElementById(elementId).innerHTML != content) {
       document.getElementById(elementId).innerHTML = content;
+    }
+  } */
+
+  updateContent(element, content) {
+    if (element.html() != content) {
+      element.html(content)
+    }
+  }
+
+  updateElementProperty(element, property, propertyList) {
+    if (!element.hasClass(property)) {
+      propertyList.forEach(p => {
+        element.removeClass(p)
+      })
+      if (property) {
+        element.addClass(property)
+      }
     }
   }
 

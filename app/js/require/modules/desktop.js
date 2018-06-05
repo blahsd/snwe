@@ -4,31 +4,34 @@ class desktopModule extends externalModule {
   constructor(filePath,document) {
     super(filePath,document);
     this.container = 'left';
+    this.refreshRate = 4000;
+    this.script = path.join(__dirname, "../../../sh/getdesktop.sh");
+  }
+
+  updateOutput() {
+    var desktop = this.desktop
+
+    // Check if the desktop has changed (and therefore needs a redraw)
+    if ($("#desktop-output").text() != desktop) {
+      $("#desktop-output").text(desktop)
+    }
+  }
+
+
+  updateDesktop() {
+
+    this.desktop = execSync(`sh ${this.script}`) // or fab fa-apple
   }
 
   update() {
-    var dir = exec("echo $(/usr/local/bin/chunkc tiling::query -d id)", function(err, stdout, stderr) {
-      document.getElementById("desktop-output").classList.remove("fab");
-      document.getElementById("desktop-output").classList.remove("fa-apple");
-
-      if (stderr) {
-        document.getElementById("desktop-output").classList.add("fab");
-        document.getElementById("desktop-output").classList.add("fa-apple");
-        document.getElementById("desktop-output").innerHTML = "";
-      } else {
-        if (document.getElementById("desktop-output").innerHTML == stdout) {
-          return;
-        }
-        
-        document.getElementById("desktop-output").innerHTML = stdout;
-      }
-    });
+    this.updateDesktop()
+    this.updateOutput()
   }
 
   get HTMLContent() {
     var moduleName = this.fileName;
     return  `<div class="widg pinned green" id="${moduleName}">
-        <span class="output" id="${moduleName}-output"> ... </span>
+        <span class="output" id="${moduleName}-output"> ? </span>
         </div>
       </div>`
   }

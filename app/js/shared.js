@@ -18,6 +18,7 @@ const path = require('path');
 const Store = require('electron-store');
   const store = new Store();
 const wifi = require('node-wifi');
+var MPC = require('mpc-js').MPC;
 
 
 const externalModule = require('./js/require/externalModule.js').externalModule;
@@ -95,7 +96,7 @@ function initializeSettings() {
 
   store.set("theme", path.join(__dirname, "css/mono.css"));
   store.set("colorscheme", path.join(__dirname, "css/colors.css"));
-  store.set("player", path.join(__dirname, "js/require/itunes.js"));
+  store.set("player", path.join(__dirname, "js/require/mpd.js"));
 
   store.set("modules",
   [

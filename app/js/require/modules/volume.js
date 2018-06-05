@@ -5,54 +5,32 @@ class volumeModule extends externalModule {
     super(filePath,document);
     this.container = 'right';
     this.refreshRate = 1000;
+    this.scriptGetVolume = path.join(__dirname, "../../../sh/getvolume.sh");
+    this.scriptIsMuted = path.join(__dirname, "../../../sh/ismuted.sh");
   }
 
-  getIcon() {
+  get icon() {
     // Get correct icon based on muted status and current volume level
+    var fa
+
     if (this.isMuted) {
-      return "fa-volume-off";
+      fa = "fa fa-volume-off";
     } else {
       if (this.level <= 50) {
-        return "fa-volume-down";
+        fa = "fa fa-volume-down";
       } else {
-        return "fa-volume-up";
+        fa = "fa fa-volume-up";
       }
     }
+    return `<i class="${ fa }"></i>`
   }
 
-  getColor() {
+  get color() {
     // Get correct color based on muted status
     if (this.isMuted) {
       return "dark";
     } else {
       return false;
-    }
-  }
-
-  updateIcon() {
-    // Get the correct icon for the current status
-    var icon = this.getIcon()
-
-    // Check if the icon has changed (and therefore needs a redraw)
-    if ($("#volume-icon").html() != icon) {
-      // ... redraw the icon
-      $("#volume-icon").html(`<i class="fa ${ icon }"></i>`)
-      return true
-    } else {
-      return false
-    }
-  }
-
-  updateColor() {
-    // Get the correct color for the current status
-    var color = this.getColor()
-
-    // Check if the color has changed (and therefore needs a redraw)
-    if (!$("#volume").hasClass(color)) {
-      ["dark"].forEach(c => {
-        $("#volume").removeClass(c)
-      })
-      $("#volume").addClass(color)
     }
   }
 
@@ -66,19 +44,22 @@ class volumeModule extends externalModule {
   }
 
   updateStatus() {
-    this.isMuted = execSync("sh ./app/sh/ismuted.sh").includes("true")
-  }
+    this.isMuted = execSync(`sh ${this.scriptIsMuted}`).includes("true")
 
-  updateLevel() {
-    this.level = execSync("sh ./app/sh/getvolume.sh").toString();
+    if (this.isMuted) {
+      this.level = "Muted"
+    } else {
+      this.level = execSync(`sh ${this.scriptGetVolume}`).toString();
+    }
   }
 
   update() {
     this.updateStatus()
-    this.updateLevel()
-    this.updateIcon()
-    this.updateColor()
-    this.updateOutput()
+
+    this.updateElementProperty($("#volume"), this.color, ["dark"])
+    this.updateContent($("#volume-icon"), this.icon)
+    this.updateContent($("#volume-output"), this.level)
+
   }
 }
 

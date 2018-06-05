@@ -4,30 +4,39 @@ class playerModule extends externalModule {
   constructor(filePath,document,option=false) {
     super(filePath,document);
     this.container = 'left';
+    this.refreshRate = 1000;
 
-    try {
-      var musicPlayerInterface = require(store.get('player')).musicPlayerInterface;
-    } catch (e) {
-      // Missing preference
-      initializeSettings();
-      var musicPlayerInterface = require(store.get('player')).musicPlayerInterface; 
-    }
-    this.mpi = new musicPlayerInterface();
-
+    // Initializes this.mpi as the musicPlayerInterface that is selected in the settings
+    const MPI = require(store.get('player'))
+    this.mpi = new MPI.musicPlayerInterface();
   }
+
+  get isPlaying() {
+    return this.mpi.isPlaying
+  }
+
+  get trackInfo() {
+    return this.mpi.trackInfo
+  }
+
+  get icon() {
+    // Get correct icon based on playing status
+    var fa
+    if (this.isPlaying) {
+      fa = "fas fa-pause";
+    } else {
+      fa = "fas fa-play"
+    }
+    return `<i class="${ fa }"></i>`
+  }
+
 
   update() {
-    document.getElementById("player-output").innerHTML = this.mpi.track;
+    this.mpi.update()
 
-    if (this.mpi.playStatus) {
-      document.getElementById("player-play-icon").classList.remove("fa-play");
-      document.getElementById("player-play-icon").classList.add("fa-pause");
-    } else {
-      document.getElementById("player-play-icon").classList.remove("fa-pause");
-      document.getElementById("player-play-icon").classList.add("fa-play");
-    }
+    this.updateContent($("#player-output"), this.trackInfo)
+    this.updateContent($("#player-play-icon"), this.icon)
   }
-
 
   get HTMLContent() {
     var moduleName = this.fileName;
@@ -35,7 +44,7 @@ class playerModule extends externalModule {
     return  `
     <div class="widg" id="${moduleName}">
       <div class="button" id="${moduleName}-play-button">
-        <i  class="fas fa-play" id="${moduleName}-play-icon"></i>
+        <i id="${moduleName}-play-icon"></i>
       </div>
       <div class="button" id="${moduleName}-next-button">
         <i  class="fas fa-step-forward" id="${moduleName}-next-icon"></i>
@@ -46,11 +55,11 @@ class playerModule extends externalModule {
   }
 
   start () {
-    document.getElementById("player-play-button").addEventListener("click", (e) => this.mpi.playpause());
-    document.getElementById("player-next-button").addEventListener("click", (e) => this.mpi.next());
+    $("#player-play-button").on("click", this.mpi.playpause);
+    $("#player-next-button").on("click", this.mpi.next);
 
     var _this = this;
-    setInterval(() => { _this.update()}, 1000)
+    setInterval(() => { _this.update()}, this.refreshRate)
   }
 
 }

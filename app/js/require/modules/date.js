@@ -9,16 +9,10 @@ class dateModule extends externalModule {
 
   update() {
     var now = new Date();
-    document.getElementById("date-output").innerHTML = dateFormat(now, "ddd d mmm");
+    var date = dateFormat(now, "ddd d mmm")
+    this.updateContent($("#date-output"), date)
   }
 
-  get HTMLContent() {
-    var moduleName = this.fileName;
-    return  `<div class="widg" id="${moduleName}">
-        <span class="output" id="${moduleName}-output"> ... </span>
-        </div>
-      </div>`
-  }
 }
 
 exports.module = dateModule;

@@ -44,6 +44,7 @@
     "electron-json-config": "^1.5.1",
     "electron-store": "^1.3.0",
     "is-charging": "^1.2.0",
+    "jquery": "^3.3.1",
     "loudness": "^0.2.2",
     "mpc-js": "^1.2.1",
     "node-mpd": "0.0.2",
@@ -54,6 +55,6 @@
     "electron": "latest",
     "electron-builder": "latest",
     "electron-prebuilt": "^1.4.13",
-    "jquery": "^3.3.1"
+    "mpd": "^1.3.0"
   }
 }
