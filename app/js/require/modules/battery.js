@@ -93,21 +93,19 @@ class batteryModule extends externalModule {
   }
 
   updateStatus() {
-    this.updateIcon()
-    this.updateColor()
     this.isCharging = execSync("sh ./app/sh/ischarging.sh").includes("true")
   }
 
   updateLevel() {
-    this.updateIcon()
-    this.updateColor()
-    this.updateOutput()
     this.level = execSync("sh ./app/sh/getcharge.sh").toString();
   }
 
   update() {
     this.updateStatus();
     this.updateLevel();
+    this.updateIcon()
+    this.updateColor()
+    this.updateOutput()
   }
 
 }
