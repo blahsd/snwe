@@ -1,14 +1,14 @@
-'use strict'; // try extending the refresh Rate when it's not playing. 
+'use strict'; // try extending the refresh Rate when it's not playing.
 
 class playerModule extends externalModule {
   constructor(filePath,document,option=false) {
     super(filePath,document);
     this.container = 'left';
-    this.refreshRate = 1000;
+    this.refreshRate = 10000;
 
     // Initializes this.mpi as the musicPlayerInterface that is selected in the settings
     const MPI = require(store.get('player'))
-    this.mpi = new MPI.musicPlayerInterface();
+    this.mpi = new MPI.musicPlayerInterface(this);
   }
 
   get isPlaying() {
@@ -55,10 +55,19 @@ class playerModule extends externalModule {
   }
 
   start () {
-    $("#player-play-button").on("click", this.mpi.playpause);
-    $("#player-next-button").on("click", this.mpi.next);
-
+    this.update()
     var _this = this;
+
+    $("#player-play-button").on("click", function() {
+      _this.mpi.playpause();
+      _this.update()
+    })
+
+    $("#player-next-button").on("click", function() {
+      _this.mpi.next()
+      _this.update()
+    })
+
     setInterval(() => { _this.update()}, this.refreshRate)
   }
 

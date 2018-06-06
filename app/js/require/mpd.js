@@ -1,11 +1,12 @@
 'use strict';
 
 class mpdMusicPlayerInterface extends EventEmitter {
-  constructor () {
+  constructor (player) {
     super();
 
+    this.player = player
     this.isPlaying = false
-    this.trackInfo = 'asddad'
+    this.trackInfo = 'Loading'
   }
 
   update() {
@@ -17,15 +18,14 @@ class mpdMusicPlayerInterface extends EventEmitter {
       this.trackInfo = ''
     }
 
-
   }
 
   playpause() {
-    execSync('mpc toggle');
+    exec('mpc toggle')
   }
 
   next() {
-    execSync('mpc next');
+    exec('mpc next');
   }
 
 }

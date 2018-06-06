@@ -9,15 +9,20 @@ class launcherItem {
 
   get node() {
     var n = document.createElement("div")
+    n.innerHTML = this.HTMLContent
+
     var _this = this
-    n.setAttribute("class", "launcherItem")
     n.onclick = function() {
       execSync(_this.command)
-      console.log(_this.command)
     }
-    n.innerHTML = `${this.display}`
 
     return n
+  }
+
+  get HTMLContent() {
+    return `<div class="button" id="${this.display}">
+    ${this.display}
+      </div>`
   }
 
   makeCommandLauncher(command) {

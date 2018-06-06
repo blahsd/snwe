@@ -38,4 +38,5 @@ app.on('ready', function() {
   }
   win.setPosition(-4,0);
   win.setSize(width+8,64,true);
+
 })

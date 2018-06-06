@@ -12,18 +12,20 @@ class batteryModule extends externalModule {
   get icon() {
     // Get correct icon based on charging status and current charge level
     var fa
+    var le = this.level.replace( /%/g, "" )
+
     if (this.isCharging) {
       fa = "fa fa-bolt";
     } else {
-      if (this.level <= 10) {
+      if (le <= 10) {
         fa = "fa fa-battery-empty";
-      } else if (this.level <= 25) {
+      } else if (le <= 25) {
         fa = "fa fa-battery-quarter";
-      } else if (this.level <= 50) {
+      } else if (le <= 50) {
         fa = "fa fa-battery-half";
-      } else if (this.level <= 75) {
+      } else if (le <= 75) {
         fa = "fa fa-battery-three-quarters";
-      } else {
+      } else if (le > 75){
         fa = "fa fa-battery-full";
       }
     }
