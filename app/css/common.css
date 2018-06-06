@@ -22,12 +22,8 @@ i {
   padding: 0px 8px;
 }
 
-.button:first-child {
-  padding-left: 16px;
-}
-
-.button:last-child {
-  padding-right: 16px;
+.button {
+  width: var(--line-size)
 }
 
 .bar {
@@ -41,7 +37,7 @@ i {
 .container {
   width     : 33%;
   height    : var(--line-size);
-  flex-grow : 1;
+  flex-grow: 1;
 }
 
 #left {
@@ -63,22 +59,14 @@ i {
 
 .output {
   padding-left: 4px;
-  padding-right: 8px;
-}
-
-.output:only-child {
-  padding-right : 16px;
-  padding-left  : 16px;
-}
-
-.output:last-child {
-  padding-right : 16px;
-}
-
-.output {
+  padding-right: 4px;
     position: relative;
     display: inline-block;
     color: var(--foreground) !important;
+}
+.output:only-child {
+  margin-left: 8px;
+  margin-right: 8px;
 }
 .pinned .output  {
   color: var(--background) !important;
@@ -86,14 +74,16 @@ i {
 
 .popup {
     display: none;
-
     line-height: calc( var(--line-size) / 2) ;
     z-index: 1;
-    width: 128px;
     height: auto;
     opacity: 1 !important;
     background-color: var(--background);
     color: var(--foreground)
+}
+
+.launcherItem {
+  margin-right:8px;
 }
 
 

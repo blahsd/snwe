@@ -1,6 +1,6 @@
 'use strict';
 
-const VERSION = 'v0.1.0-rc.2.0.2'
+const VERSION = 'v0.1.0-rc.2.0.3'
 
 // npm modules
 const batteryLevel = require('battery-level');
@@ -117,8 +117,12 @@ function initializeSettings() {
       "enabled": true
     },
     {
-      "filename": "taskbar",
+      "filename": "launcher",
       "enabled": true
+    },
+    {
+      "filename": "taskbar",
+      "enabled": false
     },
     {
       "filename": "volume",

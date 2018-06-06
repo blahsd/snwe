@@ -1,4 +1,4 @@
-'use strict';
+'use strict'; // try extending the refresh Rate when it's not playing. 
 
 class playerModule extends externalModule {
   constructor(filePath,document,option=false) {

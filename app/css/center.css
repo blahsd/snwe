@@ -1,12 +1,13 @@
 :root {
   --global_margin    : 8px;
-  --left-margin      : 420px;
-  --right-margin     : 420px;
+  --left-margin      : 300px;
+  --right-margin     : 300px;
   --line-size        : 42px;
   --overflow-correct : 4px;
 }
-
+/*
 .bar {
   overflow: hidden;
   border-radius: 1px;
 }
+*/

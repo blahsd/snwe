@@ -13,6 +13,13 @@ class dateModule extends externalModule {
     this.updateContent($("#date-output"), date)
   }
 
+  get HTMLContent() {
+     var moduleName = this.fileName;
+     return  `<div class="widg" id="${moduleName}">
+         <span class="output" id="${moduleName}-output"> ... </span>
+         </div>
+       </div>`
+   }
 }
 
 exports.module = dateModule;
