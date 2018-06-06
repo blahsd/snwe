@@ -13,9 +13,14 @@ class launcherItem {
 
     var _this = this
     n.onclick = function() {
-      execSync(_this.command)
+      cp = exec(_this.command, (err, stdout, stderr) => {
+        if (err) {
+          console.error(`exec error: ${err}`);
+          return;
+        }
+        console.log(`${stdout}`)
+        })
     }
-
     return n
   }
 

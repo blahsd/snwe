@@ -20,6 +20,7 @@ class settingsModule extends externalModule {
     <div class="widg" id="${moduleName}">
       <div class="button" id="${moduleName}-button" onclick="createSettingsWindow();">
         <i class="fas fa-cog" id="settings-icon"></i>
+        <span id="settings-output"></span>
       </div>
     </div>`
   }

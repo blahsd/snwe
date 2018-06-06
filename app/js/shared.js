@@ -176,6 +176,29 @@ function createSettingsWindow() {
   return childWindow;
 }
 
+function adaptToContent() {
+  var topMargin = parseInt($("body").css('--top-margin'))
+  var leftMargin = parseInt($("body").css('--left-margin'))
+  var rightMargin = parseInt($("body").css('--right-margin'))
+  var lineSize = parseInt($("body").css('--line-size'))
+
+  //This gives the bar square corners. The window, which the system always draws with round corners, is actually a bit bigger than the bar – the bar doesn't fill it ocmpletely, so it can have WHATEVER FUCKING CORNERS IT WANTS
+
+  var overflowCorrect = parseInt($("body").css('--overflow-correct'))
+
+  var totalMargin = (leftMargin + rightMargin) - overflowCorrect*2
+
+  // Since we'll be applying some of these to the window itself, we reset them in the .css
+
+  var {width, height} = electron.screen.getPrimaryDisplay().workAreaSize
+
+  var barWidth = width - totalMargin
+  var barHeight = lineSize
+
+
+  ipcRenderer.send('resize', leftMargin-overflowCorrect, topMargin, barWidth, barHeight);
+}
+
 function loadSettings(settings = ["theme","colorscheme","player"]) {
   console.log("Loading preferences...");
 
@@ -201,6 +224,8 @@ function loadSettings(settings = ["theme","colorscheme","player"]) {
     loadSettings();
     }
   }
+
+  setTimeout( adaptToContent, 1000)
 }
 
 function loadModules() {

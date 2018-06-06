@@ -4,7 +4,7 @@ class volumeModule extends externalModule {
   constructor(filePath,document) {
     super(filePath,document);
     this.container = 'right';
-    this.refreshRate = 1000;
+    this.refreshRate = 2000;
     this.scriptGetVolume = path.join(__dirname, "../../../sh/getvolume.sh");
     this.scriptIsMuted = path.join(__dirname, "../../../sh/ismuted.sh");
   }
@@ -34,6 +34,26 @@ class volumeModule extends externalModule {
     }
   }
 
+  mute() {
+    execSync("osascript -e 'set volume output muted true'")
+    this.isMuted = true
+    this.update()
+    }
+
+  unmute() {
+    execSync("osascript -e 'set volume output muted false'")
+    this.isMuted = false
+    this.update()
+  }
+
+  toggle() {
+    if (this.isMuted) {
+      this.unmute()
+    } else {
+      this.mute()
+    }
+  }
+
   updateOutput() {
     var level = this.level
 
@@ -60,6 +80,14 @@ class volumeModule extends externalModule {
     this.updateContent($("#volume-icon"), this.icon)
     this.updateContent($("#volume-output"), this.level)
 
+  }
+
+  start() {
+    this.update()
+    $("#volume-button").on("click", this.toggle.bind(this))
+
+    var _this = this;
+    setInterval(() => { _this.update()}, this.refreshRate)
   }
 }
 

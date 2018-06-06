@@ -5,24 +5,29 @@ const {app, BrowserWindow} = electron
 const Store = require('electron-store');
   const store = new Store();
 
+const {ipcMain} = require('electron')
+
+ipcMain.on('resize', (event, left, top, w, h) => {
+   win.setPosition(left, top) //left, top
+  win.setSize(w, h) //w, h
+})
+
 var win = null;
 
 function createWindow() {
-
-
   let win = new BrowserWindow({
 
     frame:      false,
-    transparent:true,
+//    transparent:true,
 //	focusable:  false,
 //  type:       'desktop',
-    hasShadow: false,
+    hasShadow: true,
   });
 
   win.loadURL('file://' + __dirname + '/app/index.html');
   //win.setAlwaysOnTop(true, 'torn-off-menu');
   win.setVisibleOnAllWorkspaces(true);
-  //win.webContents.openDevTools();
+    win.webContents.openDevTools();
 
   return win;
 }
@@ -38,5 +43,4 @@ app.on('ready', function() {
   }
   win.setPosition(-4,0);
   win.setSize(width+8,64,true);
-
 })

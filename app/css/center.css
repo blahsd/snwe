@@ -1,9 +1,13 @@
 :root {
-  --global_margin    : 8px;
+  --top-margin    : 8px;
   --left-margin      : 300px;
   --right-margin     : 300px;
   --line-size        : 42px;
   --overflow-correct : 4px;
+}
+
+:root {
+  --diocane   : 1;
 }
 /*
 .bar {

@@ -19,6 +19,16 @@ class playerModule extends externalModule {
     return this.mpi.trackInfo
   }
 
+  playpause() {
+    this.mpi.playpause()
+    this.update()
+  }
+
+  next() {
+    this.mpi.next()
+    this.update()
+  }
+
   get icon() {
     // Get correct icon based on playing status
     var fa
@@ -29,7 +39,6 @@ class playerModule extends externalModule {
     }
     return `<i class="${ fa }"></i>`
   }
-
 
   update() {
     this.mpi.update()
@@ -58,15 +67,8 @@ class playerModule extends externalModule {
     this.update()
     var _this = this;
 
-    $("#player-play-button").on("click", function() {
-      _this.mpi.playpause();
-      _this.update()
-    })
-
-    $("#player-next-button").on("click", function() {
-      _this.mpi.next()
-      _this.update()
-    })
+    $("#player-play-button").on("click", this.playpause.bind(this))
+    $("#player-next-button").on("click", this.next.bind(this))
 
     setInterval(() => { _this.update()}, this.refreshRate)
   }
