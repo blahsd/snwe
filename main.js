@@ -23,7 +23,7 @@ function createWindow() {
     transparent:true,
 //	focusable:  false,
 //  type:       'desktop',
-    hasShadow: true,
+    hasShadow: false,
   });
 
   win.loadURL('file://' + __dirname + '/app/index.html');

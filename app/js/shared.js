@@ -1,6 +1,6 @@
 'use strict';
 
-const VERSION = 'v0.1.0-rc.2.0.3'
+const VERSION = 'v0.1.0-rc.2.0.4'
 
 // npm modules
 const batteryLevel = require('battery-level');
@@ -185,6 +185,7 @@ function adaptToContent() {
   //This gives the bar square corners. The window, which the system always draws with round corners, is actually a bit bigger than the bar – the bar doesn't fill it ocmpletely, so it can have WHATEVER FUCKING CORNERS IT WANTS
 
   var overflowCorrect = parseInt($("body").css('--overflow-correct'))
+  var shadowCorrect = parseInt($("body").css('--shadow-correct'))
 
   var totalMargin = (leftMargin + rightMargin) - overflowCorrect*2
 
@@ -196,7 +197,7 @@ function adaptToContent() {
   var barHeight = lineSize
 
 
-  ipcRenderer.send('resize', leftMargin-overflowCorrect, topMargin, barWidth, barHeight);
+  ipcRenderer.send('resize', leftMargin-overflowCorrect, topMargin, barWidth, barHeight+shadowCorrect );
 }
 
 function loadSettings(settings = ["theme","colorscheme","player"]) {
