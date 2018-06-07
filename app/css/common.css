@@ -12,8 +12,9 @@ body {
   font-size      : 10px;
   font-smooth : always;
   line-height    : var(--line-size);
-  user-select: none;
   cursor: default;
+  -webkit-app-region: drag;
+  -webkit-user-select: none;
 }
 
 div {
@@ -57,6 +58,7 @@ i {
 .widg {
   min-width  : var(--line-size);
   text-align : center;
+  -webkit-app-region: no-drag;
 }
 
 .output {
