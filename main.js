@@ -5,10 +5,12 @@ const {app, BrowserWindow} = electron
 const Store = require('electron-store');
   const store = new Store();
 
-const {ipcMain} = require('electron')
+const { globalShortcut } = require('electron');
+let isShown = false;
 
+const {ipcMain} = require('electron')
 ipcMain.on('resize', (event, left, top, w, h) => {
-   win.setPosition(left, top) //left, top
+  win.setPosition(left, top) //left, top
   win.setSize(w, h) //w, h
 })
 
@@ -38,9 +40,13 @@ app.on('ready', function() {
 
   if (store.get("hideIcon") == "hideIcon") {
     //Yeah I know, I could have used a boolean, right? But now, I use strings. Why? Just compatibility with the settings panel. If you can figure out a way to makes this pretty, lemme know.
-
     app.dock.hide();
   }
-  win.setPosition(-4,0);
-  win.setSize(width+8,64,true);
+
+  globalShortcut.register('Alt+i', () => {
+    // TODO: transition
+    // TODO: show window only after loadResources() is complete
+    isShown ? win.show() : win.hide()
+    isShown = !isShown
+  });
 })
