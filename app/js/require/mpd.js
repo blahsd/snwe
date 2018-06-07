@@ -8,7 +8,7 @@ class mpdMusicPlayerInterface extends EventEmitter {
 
     this.player = player
     this.isPlaying = false
-    this.trackInfo = 'Loading track...'
+    this.trackInfo = '...'
   }
 
   update() {

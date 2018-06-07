@@ -85,6 +85,7 @@ class externalModule extends EventEmitter {
   }
 
   loadIn() {
+    console.log(`Loading module '${this.fileNameAndExtension}'`)
     document.head.appendChild(this.fileRef);
     this.isLoaded = true;
   }

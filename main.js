@@ -29,7 +29,7 @@ function createWindow() {
   win.loadURL('file://' + __dirname + '/app/index.html');
   //win.setAlwaysOnTop(true, 'torn-off-menu');
   win.setVisibleOnAllWorkspaces(true);
-  //win.webContents.openDevTools();
+  win.webContents.openDevTools();
 
   return win;
 }
