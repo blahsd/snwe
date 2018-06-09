@@ -1,29 +1,35 @@
 'use strict';
 
+const {spawn } = require('child_process')
 
-class iTunesMusicPlayerInterface extends EventEmitter {
-  constructor () {
+class spotifyMusicPlayerInterface extends EventEmitter {
+  constructor (player) {
     super();
+
+    this.player = player
+    this.isPlaying = false
+    this.trackInfo = '...'
+  }
+
+  update() {
+    try {
+      this.isPlaying = execSync("/usr/bin/osascript -e 'tell application \"iTunes\" to player state as string'").includes('playing')
+      var artist = execSync("/usr/bin/osascript -e 'tell application \"iTunes\" to artist of current track as string'")
+      var track = execSync("/usr/bin/osascript -e 'tell application \"iTunes\" to name of current track as string'")
+      this.trackInfo = artist + " - " + track
+    } catch (e) {
+      this.isPlaying = false
+      this.trackInfo = ''
+    }
   }
 
   playpause() {
-    exec("osascript -e 'tell application \"iTunes\" to playpause'", function(err, stdout, stderr) {
-    });
+    execSync("/usr/bin/osascript -e 'tell application \"iTunes\" to playpause'")
   }
 
   next() {
-    exec("osascript -e 'tell application \"iTunes\" to next track'", function(err, stdout, stderr) {
-    });
-  }
-
-  get track() {
-    return execSync("osascript -e 'if application \"iTunes\" is running then tell application \"iTunes\" to if player state is playing then artist of current track & \" - \" & name of current track'");
-  }
-
-  get playStatus() {
-    return execSync("osascript -e 'if application \"iTunes\" is running then tell application \"iTunes\" to if player state is playing then return true'").includes("true");
+    execSync("/usr/bin/osascript -e 'tell application \"iTunes\" to next track'")
   }
 
 }
-
-exports.musicPlayerInterface = iTunesMusicPlayerInterface;
+exports.musicPlayerInterface = spotifyMusicPlayerInterface;

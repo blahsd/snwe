@@ -19,7 +19,6 @@ class mpdMusicPlayerInterface extends EventEmitter {
       this.isPlaying = false
       this.trackInfo = ''
     }
-
   }
 
   playpause() {
