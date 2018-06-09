@@ -14,9 +14,7 @@ class spotifyMusicPlayerInterface extends EventEmitter {
   update() {
     try {
       this.isPlaying = execSync("/usr/bin/osascript -e 'tell application \"Spotify\" to player state as string'").includes('playing')
-      var artist = execSync("/usr/bin/osascript -e 'tell application \"Spotify\" to artist of current track as string'")
-      var track = execSync("/usr/bin/osascript -e 'tell application \"Spotify\" to name of current track as string'")
-      this.trackInfo = artist + " - " + track;
+      this.trackInfo = execSync("/usr/bin/osascript -e 'tell application \"Spotify\" to artist of current track & \" - \" name of current track as string'")
     } catch (e) {
       this.isPlaying = false
       this.trackInfo = ''
