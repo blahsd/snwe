@@ -6,7 +6,6 @@ const Store = require('electron-store');
   const store = new Store();
 
 const { globalShortcut } = require('electron');
-let isShown = false;
 
 const {ipcMain} = require('electron')
 ipcMain.on('resize', (event, left, top, w, h) => {
@@ -43,10 +42,13 @@ app.on('ready', function() {
     app.dock.hide();
   }
 
-  globalShortcut.register('Alt+i', () => {
+  globalShortcut.register('Alt+o', () => {
     // TODO: transition
     // TODO: show window only after loadResources() is complete
-    isShown ? win.show() : win.hide()
-    isShown = !isShown
+    win.isVisible() ? win.hide() : win.show()
+  });
+
+  globalShortcut.register('Alt+i', () => {
+    win.focus()
   });
 })
