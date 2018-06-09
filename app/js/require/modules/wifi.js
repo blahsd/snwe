@@ -1,6 +1,6 @@
 'use strict';
 
-class wifiModule extends externalModule {
+class wifiModule extends ExternalModule {
   constructor(filePath, document) {
     super(filePath, document);
     this.container = 'right'

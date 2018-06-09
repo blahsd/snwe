@@ -1,6 +1,6 @@
 'use strict';
 
-class settingsModule extends externalModule {
+class settingsModule extends ExternalModule {
   constructor(filePath,document) {
     super(filePath,document);
     this.container = 'right';

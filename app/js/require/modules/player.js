@@ -1,6 +1,9 @@
 'use strict'; // try extending the refresh Rate when it's not playing.
 
-class playerModule extends externalModule {
+const Store = require('electron-store')
+const store = new Store()
+
+class playerModule extends ExternalModule {
   constructor(filePath,document,option=false) {
     super(filePath,document);
     this.container = 'left';

@@ -1,9 +1,8 @@
 'use strict';
 
-const appProcess = require('./appProcess.js').appProcess;
 const EventEmitter = require('events').EventEmitter;
 
-class taskMonitor extends EventEmitter {
+class TaskMonitor extends EventEmitter {
   constructor(refreshRate) {
     super();
     this.refreshRate = refreshRate;
@@ -73,4 +72,4 @@ class taskMonitor extends EventEmitter {
   }
 }
 
-exports.taskMonitor = taskMonitor;
+exports.TaskMonitor = TaskMonitor;

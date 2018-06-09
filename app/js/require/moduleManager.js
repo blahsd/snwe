@@ -1,6 +1,9 @@
 'use strict';
 
-class moduleManager {
+const path = require('path');
+const fs = require('fs');
+
+class ModuleManager {
   constructor () {
     this.loadedModulesList = new Array();
     this.initializedModulesList = new Array();
@@ -8,7 +11,6 @@ class moduleManager {
   }
 
   initializeModules() {
-    const fs = require('fs');
     const moduleFolderRelativePath = '/modules';
     const moduleFolderAbsolutePath = path.join(__dirname, moduleFolderRelativePath);
     var modulesFilename = fs.readdirSync(moduleFolderAbsolutePath);
@@ -22,7 +24,6 @@ class moduleManager {
 
       this.initializedModulesList.push(m);
     });
-
   }
 
   get availableModulesNames() {
@@ -35,7 +36,6 @@ class moduleManager {
 
   get fetchAvailableModulesFiles() {
     // Get a list of the files in ./modules
-    const fs = require('fs');
     const moduleFolderRelativePath = '/modules';
     const moduleFolderAbsolutePath = path.join(__dirname, moduleFolderRelativePath);
     var modulesFilename = fs.readdirSync(moduleFolderAbsolutePath);
@@ -46,7 +46,6 @@ class moduleManager {
   }
 
   fetchAvailableModulesNames() {
-    const fs = require('fs');
     const moduleFolderRelativePath = '/modules';
     const moduleFolderAbsolutePath = path.join(__dirname, moduleFolderRelativePath);
     var modulesFilename = fs.readdirSync(moduleFolderAbsolutePath);
@@ -67,7 +66,6 @@ class moduleManager {
       }
     })
   }
-
 }
 
-exports.moduleManager = moduleManager;
+exports.ModuleManager = ModuleManager;

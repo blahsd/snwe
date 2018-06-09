@@ -1,8 +1,9 @@
 'use strict';
 
 const EventEmitter = require('events').EventEmitter;
+const appProcess = require('./appProcess.js').appProcess;
 
-class externalModule extends EventEmitter {
+class ExternalModule extends EventEmitter {
   constructor(filePath,unID=false) {
     super();
     this.filePath = filePath;
@@ -116,4 +117,4 @@ class externalModule extends EventEmitter {
 
 }
 
-exports.externalModule = externalModule;
+exports.ExternalModule = ExternalModule;

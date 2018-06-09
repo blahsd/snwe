@@ -112,7 +112,7 @@ Thanks to its modular structure it's trivial to modify and add indicators, theme
 ## Indicators
 Reside in `./app/js/require/modules/`.
 
-Check out any of them to get a feel for how they work. The Date and Time indicators are the simplest, so they are a good place to start looking. All indicators must extend the `ExternalModule` class, which you can find in `./app/js/require/externalModule.js`.
+Check out any of them to get a feel for how they work. The Date and Time indicators are the simplest, so they are a good place to start looking. All indicators must extend the `ExternalModule` class, which you can find in `./app/js/require/ExternalModule.js`.
 
 ## Themes and Colorschemes
 Reside in `./app/css/`.

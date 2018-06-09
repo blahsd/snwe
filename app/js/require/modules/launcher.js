@@ -1,5 +1,7 @@
 'use strict';
 
+const path = require('path');
+
 class launcherItem {
   constructor(display, command) {
     this.display = display
@@ -36,7 +38,7 @@ class launcherItem {
   }
 }
 
-class launcherModule extends externalModule {
+class launcherModule extends ExternalModule {
   constructor(filePath, document) {
     super(filePath, document);
     this.container = 'left';

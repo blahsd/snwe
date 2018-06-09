@@ -1,11 +1,7 @@
 'use strict';
 
-const {spawn } = require('child_process')
-
-class mpdMusicPlayerInterface extends EventEmitter {
+class mpdMusicPlayerInterface {
   constructor (player) {
-    super();
-
     this.player = player
     this.isPlaying = false
     this.trackInfo = '...'

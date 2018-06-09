@@ -1,11 +1,7 @@
 'use strict';
 
-const {spawn } = require('child_process')
-
-class spotifyMusicPlayerInterface extends EventEmitter {
-  constructor (player) {
-    super();
-
+class iTunesMusicPlayerInterface {
+  constructor(player) {
     this.player = player
     this.isPlaying = false
     this.trackInfo = '...'
@@ -30,6 +26,6 @@ class spotifyMusicPlayerInterface extends EventEmitter {
   next() {
     execSync("/usr/bin/osascript -e 'tell application \"iTunes\" to next track'")
   }
-
 }
-exports.musicPlayerInterface = spotifyMusicPlayerInterface;
+
+exports.musicPlayerInterface = iTunesMusicPlayerInterface;

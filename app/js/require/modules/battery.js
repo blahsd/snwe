@@ -1,6 +1,8 @@
 'use strict';
 
-class batteryModule extends externalModule {
+const path = require('path')
+
+class batteryModule extends ExternalModule {
   constructor(filePath,document) {
     super(filePath,document);
     this.container = 'right';

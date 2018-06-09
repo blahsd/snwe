@@ -1,6 +1,8 @@
 'use strict';
 
-class desktopModule extends externalModule {
+const path = require('path');
+
+class desktopModule extends ExternalModule {
   constructor(filePath,document) {
     super(filePath,document);
     this.container = 'left';

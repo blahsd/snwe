@@ -1,6 +1,6 @@
 'use strict';
 
-class dateModule extends externalModule {
+class dateModule extends ExternalModule {
   constructor(filePath,document) {
     super(filePath,document);
     this.container = 'middle';

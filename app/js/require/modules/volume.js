@@ -1,6 +1,8 @@
 'use strict';
 
-class volumeModule extends externalModule {
+const path = require('path');
+
+class volumeModule extends ExternalModule {
   constructor(filePath,document) {
     super(filePath,document);
     this.container = 'right';

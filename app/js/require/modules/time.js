@@ -1,6 +1,6 @@
 'use strict';
 
-class timeModule extends externalModule {
+class timeModule extends ExternalModule {
   constructor(filePath,document) {
     super(filePath,document)
     this.container = 'right'

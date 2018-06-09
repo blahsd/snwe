@@ -1,11 +1,11 @@
 'use strict';
 
-class taskbarModule extends externalModule {
+class taskbarModule extends ExternalModule {
   constructor(filePath,document) {
     super(filePath,document);
     this.container = 'left';
 
-    this.tm = new taskMonitor(1000);
+    this.tm = new TaskMonitor(1000);
   }
 
   get HTMLContent() {
