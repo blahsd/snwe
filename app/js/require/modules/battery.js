@@ -1,7 +1,5 @@
 'use strict';
 
-const path = require('path')
-
 class batteryModule extends ExternalModule {
   constructor(filePath,document) {
     super(filePath,document);

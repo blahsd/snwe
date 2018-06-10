@@ -1,7 +1,5 @@
 'use strict';
 
-const path = require('path');
-
 class launcherItem {
   constructor(display, command) {
     this.display = display

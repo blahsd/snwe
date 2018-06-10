@@ -1,7 +1,6 @@
 'use strict'; // try extending the refresh Rate when it's not playing.
 
-const Store = require('electron-store')
-const store = new Store()
+
 
 class playerModule extends ExternalModule {
   constructor(filePath,document,option=false) {
@@ -10,6 +9,7 @@ class playerModule extends ExternalModule {
     this.refreshRate = 10000;
 
     // Initializes this.mpi as the musicPlayerInterface that is selected in the settings
+    
     const MPI = require(store.get('player'))
     this.mpi = new MPI.musicPlayerInterface(this);
   }

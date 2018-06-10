@@ -1,6 +1,7 @@
 'use strict';
 
-const path = require('path');
+/* global __dirname */
+/* global ExternalModule */
 
 class volumeModule extends ExternalModule {
   constructor(filePath,document) {
@@ -13,7 +14,7 @@ class volumeModule extends ExternalModule {
 
   get icon() {
     // Get correct icon based on muted status and current volume level
-    var fa
+    var fa;
 
     if (this.isMuted) {
       fa = "fa fa-volume-off";
@@ -24,7 +25,7 @@ class volumeModule extends ExternalModule {
         fa = "fa fa-volume-up";
       }
     }
-    return `<i class="${ fa }"></i>`
+    return `<i class="${ fa }"></i>`;
   }
 
   get color() {

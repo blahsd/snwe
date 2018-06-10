@@ -21,7 +21,6 @@ body {
   cursor: default;
   -webkit-app-region: drag;
   -webkit-user-select: none;
-  animation: fadein 0.420s;
 }
 
 div {
