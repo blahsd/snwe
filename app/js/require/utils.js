@@ -4,10 +4,6 @@
 
 'use strict';
 
-var window;
-var document;
-var openWindows = {};
-
 // global variables
 const VERSION = 'v0.1.0-rc.2.0.4';
 
@@ -18,27 +14,28 @@ const { BrowserWindow } = remote;
 
 // npm
 const batteryLevel = require('battery-level');
-const dateFormat = require('dateformat');
+
 const isCharging = require('is-charging');
 const loudness = require('loudness');
 const osxBattery = require('osx-battery');
-const wifi = require('node-wifi');
+
 const Store = require('electron-store');
 const { spawn, exec, execSync } = require('child_process');
 const path = require('path');
 
-// global objects
-const store = new Store();
-const console = remote.getGlobal('console');
+var store = new Store();
 
 // my own shit
-const ExternalModule = require('./js/require/ExternalModule.js').ExternalModule;
-const TaskMonitor = require('./js/require/TaskMonitor.js').TaskMonitor;
-const ModuleManager = require('./js/require/ModuleManager.js').ModuleManager;
-const moduleManager = new ModuleManager();
+const ExternalModule = require( path.resolve('./app/js/require/ExternalModule.js')).ExternalModule;
+const TaskMonitor = require(path.resolve('./app/js/require/TaskMonitor.js')).TaskMonitor;
+const ModuleManager = require(path.resolve('./app/js/require/ModuleManager.js')).ModuleManager;
+
+const console = remote.getGlobal('console');
 
 module.exports = {
-  // extra functions
+  moduleManager: new ModuleManager(),
+  store: new Store(),
+
   openApp: function (appName) {
     var command = "open -a " + appName;
     execSync(command);
@@ -224,20 +221,6 @@ module.exports = {
         module.exports.loadSettings();
       }
     }
-    setTimeout(module.export.adaptToContent, 1000);
+    setTimeout(module.exports.adaptToContent, 1000);
   },
-
-  loadModules:function() {
-    store.get("modules").forEach(module => {
-      if (module.enabled) {
-        moduleManager.initializedModulesList.forEach(initializedModule => {
-          if (module.filename == initializedModule.fileName) {
-            initializedModule.loadIn();
-            initializedModule.injectHTMLIn();
-            initializedModule.start();
-          }
-        });
-      }
-    });
-  }
 };

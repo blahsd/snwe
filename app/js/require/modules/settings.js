@@ -1,5 +1,11 @@
 'use strict';
 
+/* global
+require, exports, __dirname */
+
+const path = require('path');
+const ExternalModule = require( path.resolve('./app/js/require/ExternalModule.js')).ExternalModule;
+
 class settingsModule extends ExternalModule {
   constructor(filePath,document) {
     super(filePath,document);

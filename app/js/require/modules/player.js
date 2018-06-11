@@ -1,53 +1,58 @@
-'use strict'; // try extending the refresh Rate when it's not playing.
+'use strict';
 
+/* global
+$, require, exports, __dirname */
 
+const path = require('path');
+const ExternalModule = require( path.resolve('./app/js/require/ExternalModule.js')).ExternalModule;
 
 class playerModule extends ExternalModule {
   constructor(filePath,document,option=false) {
     super(filePath,document);
     this.container = 'left';
     this.refreshRate = 10000;
+    this.initInterface();
+  }
 
-    // Initializes this.mpi as the musicPlayerInterface that is selected in the settings
-    
-    const MPI = require(store.get('player'))
+  initInterface() {
+    const MPI = require(utils.store.get('player'));
     this.mpi = new MPI.musicPlayerInterface(this);
   }
 
   get isPlaying() {
-    return this.mpi.isPlaying
+    return this.mpi.isPlaying;
   }
 
   get trackInfo() {
-    return this.mpi.trackInfo
+    return this.mpi.trackInfo;
   }
 
   playpause() {
-    this.mpi.playpause()
-    this.update()
+    this.mpi.playpause();
+    this.update();
   }
 
   next() {
-    this.mpi.next()
-    this.update()
+    this.mpi.next();
+    this.update();
   }
 
   get icon() {
     // Get correct icon based on playing status
-    var fa
+    var fa;
     if (this.isPlaying) {
       fa = "fas fa-pause";
     } else {
-      fa = "fas fa-play"
+      fa = "fas fa-play";
     }
-    return `<i class="${ fa }"></i>`
+    return `<i class="${ fa }"></i>`;
   }
 
   update() {
-    this.mpi.update()
+    this.mpi.update();
 
-    this.updateContent($("#player-output"), this.trackInfo)
-    this.updateContent($("#player-play-icon"), this.icon)
+    this.updateContent($("#player-output"), this.trackInfo);
+    this.updateContent($("#player-play-icon"), this.icon);
   }
 
   get HTMLContent() {

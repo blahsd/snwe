@@ -1,14 +1,22 @@
 'use strict';
 
+/* global
+$, require, exports, __dirname, setInterval */
+
+const path = require('path');
+const wifi = require('node-wifi');
+const exec = require('child_process');
+const ExternalModule = require( path.resolve('./app/js/require/ExternalModule.js')).ExternalModule;
+
 class wifiModule extends ExternalModule {
   constructor(filePath, document) {
     super(filePath, document);
-    this.container = 'right'
+    this.container = 'right';
 
-    this.isOn = false
-    this.isConnected = false
-    this.isConnecting = true
-    this.network = false
+    this.isOn = false;
+    this.isConnected = false;
+    this.isConnecting = true;
+    this.network = false;
 
     wifi.init({
       iface: null // network interface, choose a random wifi interface if set to null
@@ -17,28 +25,28 @@ class wifiModule extends ExternalModule {
   }
 
   get icon() {
-    var fa
+    var fa;
     // Get correct icon based on charging status and current charge level
     if (this.isConnected || this.isConnecting) {
       fa = "fa fa-wifi";
     } else {
-      fa = "fa fa-wifi" // this should be a different icon
+      fa = "fa fa-wifi"; // this should be a different icon
     }
 
-    return `<i class="${ fa }"></i>`
+    return `<i class="${ fa }"></i>`;
   }
 
   get color() {
     // Get correct color based on connected status
     if (!this.isConnected && !this.isConnecting) {
-      return "dark"
+      return "dark";
     }
   }
 
   get animation() {
     // Get correct animation based on connecting status
     if (this.isConnecting) {
-      return "blinking"
+      return "blinking";
     }
   }
 
@@ -47,33 +55,33 @@ class wifiModule extends ExternalModule {
       try {
         if (currentConnections[0].ssid.length <= 1) {
           // Is connecting
-          this.isOn = false
-          this.isConnected = false
-          this.isConnecting = true
-          this.network = "Connecting..."
+          this.isOn = false;
+          this.isConnected = false;
+          this.isConnecting = true;
+          this.network = "Connecting...";
         } else {
-          this.isOn = true
-          this.isConnected = true
-          this.isConnecting = false
-          this.network = currentConnections[0].ssid
+          this.isOn = true;
+          this.isConnected = true;
+          this.isConnecting = false;
+          this.network = currentConnections[0].ssid;
         }
-      } catch (err) {
+      } catch (e) {
         // If no currentConnections are returned, it must mean we're disconnected and not in the process of connecting to anything
-        this.isOn = false
-        this.isConnected = false
-        this.isConnecting = false
-        this.network = "Wifi Off"
+        this.isOn = false;
+        this.isConnected = false;
+        this.isConnecting = false;
+        this.network = "Wifi Off";
       }
-    })
+    });
   }
 
   update() {
-    this.updateStatus()
+    this.updateStatus();
 
-    this.updateElementProperty($("#wifi"), this.color, ["dark"])
-    this.updateContent($("#wifi-icon"), this.icon)
-    this.updateElementProperty($("#wifi-icon"), this.animation, ["blinking"])
-    this.updateContent($("#wifi-output"), this.network)
+    this.updateElementProperty($("#wifi"), this.color, ["dark"]);
+    this.updateContent($("#wifi-icon"), this.icon);
+    this.updateElementProperty($("#wifi-icon"), this.animation, ["blinking"]);
+    this.updateContent($("#wifi-output"), this.network);
   }
 
   get HTMLContent() {
@@ -116,8 +124,8 @@ class wifiModule extends ExternalModule {
   }
 
   toggleWifiPopup() {
-    $("#wifi-popup").toggleClass("open")
-    this.updateToggleButtonContent()
+    $("#wifi-popup").toggleClass("open");
+    this.updateToggleButtonContent();
   }
 
   toggleWifi() {
@@ -136,7 +144,7 @@ class wifiModule extends ExternalModule {
     var _this = this;
     this.update();
     this.intervalID = setInterval(() => {
-      _this.update()
+      _this.update();
     }, this.refreshRate);
   }
 }

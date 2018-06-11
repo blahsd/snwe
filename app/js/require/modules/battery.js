@@ -1,5 +1,12 @@
 'use strict';
 
+/* global
+$, require, exports, __dirname */
+
+const path = require('path');
+const {execSync} = require('child_process');
+const ExternalModule = require( path.resolve('./app/js/require/ExternalModule.js')).ExternalModule;
+
 class batteryModule extends ExternalModule {
   constructor(filePath,document) {
     super(filePath,document);
@@ -11,8 +18,8 @@ class batteryModule extends ExternalModule {
 
   get icon() {
     // Get correct icon based on charging status and current charge level
-    var fa
-    var le = this.level.replace( /%/g, "" )
+    var fa;
+    var le = this.level.replace( /%/g, "" );
 
     if (this.isCharging) {
       fa = "fa fa-bolt";
@@ -29,7 +36,7 @@ class batteryModule extends ExternalModule {
         fa = "fa fa-battery-full";
       }
     }
-    return `<i class="${ fa }"></i>`
+    return `<i class="${ fa }"></i>`;
   }
 
   get color() {
@@ -51,28 +58,25 @@ class batteryModule extends ExternalModule {
       switch (true) {
         case (this.level <= 10):
           return "red";
-          break;
         case (this.level <= 30):
           return "yellow";
-          break;
         case (this.level <= 100):
           return "green";
-          break;
       }
     }
   }
 
   updateStatus() {
-    this.isCharging = execSync(`sh ${this.scriptIsCharging}`).includes("true")
+    this.isCharging = execSync(`sh ${this.scriptIsCharging}`).includes("true");
     this.level = execSync(`sh ${this.scriptGetCharge}`).toString();
   }
 
   update() {
     this.updateStatus();
 
-    this.updateElementProperty($("#battery"), this.color, ["red","yellow","green"])
-    this.updateContent($("#battery-icon"), this.icon)
-    this.updateContent($("#battery-output"), this.level)
+    this.updateElementProperty($("#battery"), this.color, ["red","yellow","green"]);
+    this.updateContent($("#battery-icon"), this.icon);
+    this.updateContent($("#battery-output"), this.level);
   }
 }
 

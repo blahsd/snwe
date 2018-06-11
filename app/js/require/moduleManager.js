@@ -1,22 +1,21 @@
+/* global
+require, exports, __dirname */
 'use strict';
 
 const path = require('path');
 const fs = require('fs');
 
+var document;
+
 class ModuleManager {
-  constructor () {
+  initializeModules() {
     this.loadedModulesList = new Array();
     this.initializedModulesList = new Array();
-    this.initializeModules();
-  }
-
-  initializeModules() {
     const moduleFolderRelativePath = '/modules';
     const moduleFolderAbsolutePath = path.join(__dirname, moduleFolderRelativePath);
     var modulesFilename = fs.readdirSync(moduleFolderAbsolutePath);
-    var modulesRelativePath = modulesFilename.map(x => '/modules/'+x)
-    var modulesAbsolutePath = modulesRelativePath.map(x => path.join(__dirname, x))
-
+    var modulesRelativePath = modulesFilename.map(x => '/modules/'+x);
+    var modulesAbsolutePath = modulesRelativePath.map(x => path.join(__dirname, x));
     var modules = [];
     modulesAbsolutePath.forEach(moduleAbsolutePath => {
       var module = require(moduleAbsolutePath).module;
@@ -39,8 +38,8 @@ class ModuleManager {
     const moduleFolderRelativePath = '/modules';
     const moduleFolderAbsolutePath = path.join(__dirname, moduleFolderRelativePath);
     var modulesFilename = fs.readdirSync(moduleFolderAbsolutePath);
-    var modulesRelativePath = modulesFilename.map(x => '/modules/'+x)
-    var modulesAbsolutePath = modulesRelativePath.map(x => path.join(__dirname, x))
+    var modulesRelativePath = modulesFilename.map(x => '/modules/'+x);
+    var modulesAbsolutePath = modulesRelativePath.map(x => path.join(__dirname, x));
 
     return modulesAbsolutePath;
   }
@@ -64,8 +63,23 @@ class ModuleManager {
           module.unload();
         }
       }
-    })
+    });
   }
+
+  loadModules(modulesToLoad) {
+    modulesToLoad.forEach(module => {
+      if (module.enabled) {
+        this.initializedModulesList.forEach(initializedModule => {
+          if (module.filename == initializedModule.fileName) {
+            initializedModule.loadIn();
+            initializedModule.injectHTMLIn();
+            initializedModule.start();
+          }
+        });
+      }
+    });
+  }
+
 }
 
 exports.ModuleManager = ModuleManager;

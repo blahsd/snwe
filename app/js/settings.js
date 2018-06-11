@@ -1,4 +1,5 @@
 'use strict'
+const utils = require('./js/require/utils.js');
 
 var window;
 var document;
