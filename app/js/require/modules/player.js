@@ -1,7 +1,8 @@
+/* jshint node: true */
 'use strict';
 
 /* global
-$, require, exports, __dirname */
+$, utils, require, exports, __dirname */
 
 const path = require('path');
 const ExternalModule = require( path.resolve('./app/js/require/ExternalModule.js')).ExternalModule;

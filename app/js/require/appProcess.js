@@ -1,3 +1,4 @@
+/* jshint node: true */
 'use strict';
 
 class appProcess {
@@ -12,7 +13,7 @@ class appProcess {
   get html() {
     return `<div class="button" id="taskbar-${this.name}-button">
     <i id="taskbar-${this.name}-icon" onclick="openApp('${this.name}')" class="${this.icon}"></i>
-  </div>`
+  </div>`;
   }
 
   getIcon() {
@@ -74,7 +75,7 @@ class appProcess {
         icon = "far fa-envelope";
         break;
       case (this.name == "Spark"):
-        icon = "far fa-envelope"
+        icon = "far fa-envelope";
       }
     return icon;
   }

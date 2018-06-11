@@ -1,16 +1,16 @@
-/* global
-require, exports, __dirname */
+/* jshint node: true */
 'use strict';
+
+/* global
+$, document, require, exports, __dirname */
 
 const path = require('path');
 const fs = require('fs');
 
-var document;
-
 class ModuleManager {
   initializeModules() {
-    this.loadedModulesList = new Array();
-    this.initializedModulesList = new Array();
+    this.loadedModulesList = [];
+    this.initializedModulesList = [];
     const moduleFolderRelativePath = '/modules';
     const moduleFolderAbsolutePath = path.join(__dirname, moduleFolderRelativePath);
     var modulesFilename = fs.readdirSync(moduleFolderAbsolutePath);

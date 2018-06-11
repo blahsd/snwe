@@ -1,3 +1,4 @@
+/* jshint node: true */
 'use strict';
 
 /* global
@@ -97,7 +98,7 @@ class wifiModule extends ExternalModule {
       <div class="popup" id="${moduleName}-popup">
         <div class="button" id="wifi-toggle-button"></div>
       </div>
-    </div>`
+    </div>`;
   }
 
 // TOGGLE BUTTON FUNCTIONS

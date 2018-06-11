@@ -1,4 +1,7 @@
+/* jshint node: true */
 'use strict';
+/* global
+  document */
 
 const EventEmitter = require('events').EventEmitter;
 const appProcess = require('./appProcess.js').appProcess;
@@ -16,26 +19,19 @@ class ExternalModule extends EventEmitter {
     this.node.innerHTML = this.HTMLContent;
   }
 
-  /*
-  updateContent(elementId, content) {
-    if (document.getElementById(elementId).innerHTML != content) {
-      document.getElementById(elementId).innerHTML = content;
-    }
-  } */
-
   updateContent(element, content) {
     if (element.html() != content) {
-      element.html(content)
+      element.html(content);
     }
   }
 
   updateElementProperty(element, property, propertyList) {
     if (!element.hasClass(property)) {
       propertyList.forEach(p => {
-        element.removeClass(p)
-      })
+        element.removeClass(p);
+      });
       if (property) {
-        element.addClass(property)
+        element.addClass(property);
       }
     }
   }
@@ -57,18 +53,19 @@ class ExternalModule extends EventEmitter {
   }
 
   get fileRef() {
+    var fileRef;
     if (this.fileType == "js"){ //if filename is a external JavaScript file
-      var fileRef = document.createElement('script');
+      fileRef = document.createElement('script');
       fileRef.setAttribute("type","text/javascript");
       fileRef.setAttribute("src", this.filePath);
     }
     else if (this.fileType == "css"){ //if filename is an external CSS file
-      var fileRef = document.createElement("link");
+      fileRef = document.createElement("link");
       fileRef.setAttribute("rel", "stylesheet");
       fileRef.setAttribute("type", "text/css");
       fileRef.setAttribute("href", this.filePath);
     }
-    fileRef.setAttribute("id",this.unID)
+    fileRef.setAttribute("id",this.unID);
 
     return fileRef;
   }
@@ -82,11 +79,11 @@ class ExternalModule extends EventEmitter {
         <span class="output" id="${moduleName}-output"> ... </span>
         <div class="popup" id="${moduleName}-popup">
         </div>
-      </div>`
+      </div>`;
   }
 
   loadIn() {
-    console.log(`Loading module '${this.fileNameAndExtension}'`)
+    console.log(`Loading module '${this.fileNameAndExtension}'`);
     document.head.appendChild(this.fileRef);
     this.isLoaded = true;
   }
@@ -102,7 +99,7 @@ class ExternalModule extends EventEmitter {
   start() {
     var _this = this;
     this.update();
-    this.intervalID = setInterval(() => { _this.update()}, this.refreshRate);
+    this.intervalID = setInterval(() => { _this.update(); }, this.refreshRate);
   }
 
   stop() {

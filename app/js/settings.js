@@ -1,15 +1,13 @@
-'use strict'
-const utils = require('./js/require/utils.js');
+/* jshint node: true */
+'use strict';
 
-var window;
-var document;
-/* global store */
-var require;
 /* global
-  remote, ExternalModule, moduleManager, path, loadSettings*/
+  $, require, window, document, exports, __dirname */
 
-/* global __dirname */
-/* global console */
+const utils = require('./js/require/utils.js');
+const {remote} = require ('electron');
+const path = require('path');
+const ExternalModule = require( path.resolve('./app/js/require/ExternalModule.js')).ExternalModule;
 
 function getRadioVal(form, name) {
     var val;
@@ -31,7 +29,7 @@ function setSettingButtonValue(option) {
 
   // Create array of ExternalModule objects
   for (var i = 0; i < settings.length; i++) {
-    let externalModule = new ExternalModule(store.get(settings[i]));
+    let externalModule = new ExternalModule(utils.store.get(settings[i]));
     document.getElementById(externalModule.fileNameAndExtension).checked = true;
   }
 }
@@ -41,7 +39,7 @@ function capitalizeString(string) {
 }
 
 function setModuleButtons() {
-  store.get("modules").forEach(module => {
+  utils.store.get("modules").forEach(module => {
     var filename = module.filename;
     var moduleButtonHTML = `
     <label class="container"> ${capitalizeString(filename)}
@@ -52,7 +50,7 @@ function setModuleButtons() {
 }
 
 function setModuleButtonsValue() {
-  store.get("modules").forEach(module => {
+  utils.store.get("modules").forEach(module => {
     document.getElementById(module.filename).checked = module.enabled;
   });
 }
@@ -77,14 +75,14 @@ function saveSettingsButtonValue(option) {
 
   var value = getPathOfButtonSetting(option);
 
-  store.set(option, value);
+  utils.store.set(option, value);
 }
 
 function saveModuleButtonValue(button) {
   let buttonName = button.getAttribute("id");
   let buttonValue = button.checked;
 
-  let moduleSettingValue = store.get("modules");
+  let moduleSettingValue = utils.store.get("modules");
 
   moduleSettingValue.forEach(module => {
     if (module.filename == buttonName) {
@@ -92,13 +90,13 @@ function saveModuleButtonValue(button) {
     }
   });
 
-  store.set("modules", moduleSettingValue);
+  utils.store.set("modules", moduleSettingValue);
 
-  moduleManager.updateChangedModule(buttonName, buttonValue);
+  utils.moduleManager.updateChangedModule(buttonName, buttonValue);
 }
 
 function setModuleButtonsListener() {
-  store.get("modules").forEach(module => {
+  utils.store.get("modules").forEach(module => {
     var button = document.getElementById(module.filename);
 
     button.addEventListener("click", function(e) {
@@ -114,7 +112,6 @@ function setSettingButtonListener() {
     document.getElementById(`${button}-form`).addEventListener("click", function(e) {
       saveSettingsButtonValue(`${button}`);
       remote.getCurrentWebContents().emit("changeSettingEvent");
-      loadSettings();
     });
   });
 }
@@ -142,12 +139,18 @@ function displayPanel(evt, panel) {
 }
 
 window.onload=function() {
+  console.log("Loading settings window...")
   window.$ = window.jQuery = require('jquery');
 
-  loadSettings(["theme","colorscheme"]);
+  utils.loadSettings(["theme","colorscheme"]);
+  console.log("Setting buttons")
   setModuleButtons();
+    console.log("button value")
   setModuleButtonsValue();
+    console.log("listeners")
   setModuleButtonsListener();
+    console.log("set settings vlaue")
   setSettingButtonValue();
+    console.log("settings listeners")
   setSettingButtonListener();
 };

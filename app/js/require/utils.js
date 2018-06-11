@@ -1,11 +1,11 @@
 /* jshint node:true */
 /* global
-    $, require, __dirname */
+    $, document, require, __dirname */
 
 'use strict';
 
 // global variables
-const VERSION = 'v0.1.0-rc.2.0.4';
+const VERSION = 'v0.1.0-rc.2.0.5.2';
 
 // pieces of electron
 const electron = require('electron');
@@ -75,7 +75,7 @@ module.exports = {
   },
 
   initializePywalLink: function (fileref) {
-    var filepath = path.join(__dirname, "css/colors-wal.css");
+    var filepath = path.resolve("./app/css/colors-wal.css");
 
     try {
       execSync("ln -s $HOME/.cache/wal/colors.css " + filepath);
@@ -92,9 +92,9 @@ module.exports = {
 
     store.set("hideIcon", "showIcon");
 
-    store.set("theme", path.join(__dirname, "css/mono.css"));
-    store.set("colorscheme", path.join(__dirname, "css/colors.css"));
-    store.set("player", path.join(__dirname, "js/require/mpd.js"));
+    store.set("theme", path.resolve("./app/css/mono.css"));
+    store.set("colorscheme", path.resolve("./app/css/colors.css"));
+    store.set("player", path.resolve("./app/js/require/mpd.js"));
 
     store.set("modules", [{
         "filename": "desktop",
@@ -137,36 +137,6 @@ module.exports = {
         "enabled": true
       },
     ]);
-  },
-
-  createSettingsWindow: function () {
-    var windowpath = 'settings.html';
-    var windowparent = remote.getCurrentWindow();
-
-    if (openWindows[windowpath] != null) {
-      openWindows[windowpath].close();
-      return;
-    }
-
-    let childWindow = new BrowserWindow({
-      frame: false,
-      transparent: true,
-      parent: windowparent,
-    });
-
-    childWindow.loadURL('file://' + __dirname + '/' + windowpath);
-    openWindows[windowpath] = childWindow;
-    //childWindow.webContents.openDevTools();
-
-    childWindow.webContents.on("changeSettingEvent", function(e) {
-      module.exports.loadSettings();
-    });
-
-    childWindow.webContents.on("close", function(e) {
-      openWindows[windowpath] = null;
-    });
-
-    return childWindow;
   },
 
   adaptToContent:function () {

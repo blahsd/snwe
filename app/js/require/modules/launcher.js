@@ -1,3 +1,4 @@
+/* jshint node: true */
 'use strict';
 
 /* global
@@ -38,8 +39,8 @@ class launcherItem {
   }
 
   makeCommandLauncher(command) {
-    var scriptMakeCommand = path.join(__dirname, "../../../sh/launcher/makeCommand.sh");
-    exec(`sh ${scriptMakeCommand} ${ command }`);
+    var scriptMakeCommandPath = path.resolve("./app/sh/makeCommand.sh");
+    exec(`sh ${scriptMakeCommandPath} ${ command }`);
   }
 }
 

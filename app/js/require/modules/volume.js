@@ -1,7 +1,8 @@
+/* jshint node: true */
 'use strict';
 
 /* global
-require, exports, __dirname */
+  $, require, exports, __dirname */
 
 const path = require('path');
 const {execSync} = require('child_process');
@@ -42,59 +43,59 @@ class volumeModule extends ExternalModule {
   }
 
   mute() {
-    execSync("osascript -e 'set volume output muted true'")
-    this.isMuted = true
-    this.update()
+    execSync("osascript -e 'set volume output muted true'");
+    this.isMuted = true;
+    this.update();
     }
 
   unmute() {
-    execSync("osascript -e 'set volume output muted false'")
-    this.isMuted = false
-    this.update()
+    execSync("osascript -e 'set volume output muted false'");
+    this.isMuted = false;
+    this.update();
   }
 
   toggle() {
     if (this.isMuted) {
-      this.unmute()
+      this.unmute();
     } else {
-      this.mute()
+      this.mute();
     }
   }
 
   updateOutput() {
-    var level = this.level
+    var level = this.level;
 
     // Check if the level has changed (and therefore needs a redraw)
     if ($("#volume-output").html() != level) {
-      $("#volume-output").html(level)
+      $("#volume-output").html(level);
     }
   }
 
   updateStatus() {
-    this.isMuted = execSync(`sh ${this.scriptIsMuted}`).includes("true")
+    this.isMuted = execSync(`sh ${this.scriptIsMuted}`).includes("true");
 
     if (this.isMuted) {
-      this.level = "Muted"
+      this.level = "Muted";
     } else {
       this.level = execSync(`sh ${this.scriptGetVolume}`).toString();
     }
   }
 
   update() {
-    this.updateStatus()
+    this.updateStatus();
 
-    this.updateElementProperty($("#volume"), this.color, ["dark"])
-    this.updateContent($("#volume-icon"), this.icon)
-    this.updateContent($("#volume-output"), this.level)
+    this.updateElementProperty($("#volume"), this.color, ["dark"]);
+    this.updateContent($("#volume-icon"), this.icon);
+    this.updateContent($("#volume-output"), this.level);
 
   }
 
   start() {
-    this.update()
-    $("#volume-button").on("click", this.toggle.bind(this))
+    this.update();
+    $("#volume-button").on("click", this.toggle.bind(this));
 
     var _this = this;
-    setInterval(() => { _this.update()}, this.refreshRate)
+    setInterval(() => { _this.update(); }, this.refreshRate);
   }
 }
 
