@@ -29,7 +29,7 @@ class settingsModule extends ExternalModule {
     });
 
     childWindow.loadURL('file://' + path.resolve('./app/settings.html'));
-    childWindow.webContents.openDevTools();
+    //childWindow.webContents.openDevTools();
 
     childWindow.webContents.on("changeSettingEvent", function(e) {
       utils.loadSettings();

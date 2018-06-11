@@ -2,7 +2,7 @@
 'use strict';
 
 /* global
-$, require, exports, __dirname */
+  $, require, exports, __dirname */
 
 const path = require('path');
 const dateFormat = require('dateformat');

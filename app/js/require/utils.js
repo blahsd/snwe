@@ -147,8 +147,8 @@ module.exports = {
 
     //This gives the bar square corners. The window, which the system always draws with round corners, is actually a bit bigger than the bar – the bar doesn't fill it ocmpletely, so it can have WHATEVER FUCKING CORNERS IT WANTS
 
-    var overflowCorrect = parseInt($("body").css('--overflow-correct'));
-    var shadowCorrect = parseInt($("body").css('--shadow-correct'));
+    var overflowCorrect = parseInt($("body").css('--overflow-correct') || 0);
+    var shadowCorrect = parseInt($("body").css('--shadow-correct') || 0);
 
     var totalMargin = (leftMargin + rightMargin) - overflowCorrect * 2;
 
@@ -162,11 +162,10 @@ module.exports = {
     var barWidth = width - totalMargin;
     var barHeight = lineSize;
 
-
     ipcRenderer.send('resize', leftMargin - overflowCorrect, topMargin, barWidth, barHeight + shadowCorrect);
   },
 
-  loadSettings:function (settings = ["theme", "colorscheme", "player"]) {
+  loadSettings:function (element, settings = ["theme", "colorscheme", "player"]) {
     console.log("Loading preferences...");
 
     // Check if settings have been updated since last version
@@ -177,16 +176,15 @@ module.exports = {
 
     for (var i = 0; i < settings.length; i++) {
       var node = document.getElementById(settings[i]);
-      if (node) {
-        node.parentNode.removeChild(node);
-      }
+        if (node) {
+          node.parentNode.removeChild(node);
+        }
 
       try {
         let externalModule = new ExternalModule(store.get(settings[i]), settings[i]);
-        let settingName = externalModule.fileName;
-        externalModule.loadIn(document);
+        externalModule.loadIn(element);
       } catch (e) {
-        // Settings have not been initialised
+        // Settings have not been ini tialised
         module.exports.initializeSettings();
         module.exports.loadSettings();
       }

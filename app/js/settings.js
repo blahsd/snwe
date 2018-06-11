@@ -2,10 +2,11 @@
 'use strict';
 
 /* global
-  $, require, window, document, exports, __dirname */
+  window, document */
 
-const utils = require('./js/require/utils.js');
-const {remote} = require ('electron');
+var utils = require('./js/require/utils.js');
+
+const {remote, globalShortcut} = require ('electron');
 const path = require('path');
 const ExternalModule = require( path.resolve('./app/js/require/ExternalModule.js')).ExternalModule;
 
@@ -141,16 +142,13 @@ function displayPanel(evt, panel) {
 window.onload=function() {
   console.log("Loading settings window...")
   window.$ = window.jQuery = require('jquery');
-
-  utils.loadSettings(["theme","colorscheme"]);
-  console.log("Setting buttons")
+  
+  utils.loadSettings(document, ["theme","colorscheme"]);
   setModuleButtons();
-    console.log("button value")
   setModuleButtonsValue();
-    console.log("listeners")
   setModuleButtonsListener();
-    console.log("set settings vlaue")
   setSettingButtonValue();
-    console.log("settings listeners")
   setSettingButtonListener();
+
+
 };
