@@ -8,7 +8,8 @@ var utils = require('./js/require/utils.js');
 
 const {remote, globalShortcut} = require ('electron');
 const path = require('path');
-const ExternalModule = require( path.resolve('./app/js/require/ExternalModule.js')).ExternalModule;
+const ExternalModule = require( const ExternalModule = require( path.resolve(__dirname, 'js/require/ExternalModule.js')).ExternalModule;
+
 
 function getRadioVal(form, name) {
     var val;
@@ -142,7 +143,7 @@ function displayPanel(evt, panel) {
 window.onload=function() {
   console.log("Loading settings window...")
   window.$ = window.jQuery = require('jquery');
-  
+
   utils.loadSettings(document, ["theme","colorscheme"]);
   setModuleButtons();
   setModuleButtonsValue();

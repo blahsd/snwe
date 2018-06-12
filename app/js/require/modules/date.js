@@ -6,7 +6,8 @@
 
 const path = require('path');
 const dateFormat = require('dateformat');
-const ExternalModule = require( path.resolve('./app/js/require/ExternalModule.js')).ExternalModule;
+const ExternalModule = require( path.resolve(__dirname, '../ExternalModule.js')).ExternalModule;
+
 
 class dateModule extends ExternalModule {
   constructor(filePath,document) {

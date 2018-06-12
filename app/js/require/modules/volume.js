@@ -6,7 +6,8 @@
 
 const path = require('path');
 const {execSync} = require('child_process');
-const ExternalModule = require( path.resolve('./app/js/require/ExternalModule.js')).ExternalModule;
+const ExternalModule = require( path.resolve(__dirname, '../ExternalModule.js')).ExternalModule;
+
 
 class volumeModule extends ExternalModule {
   constructor(filePath,document) {

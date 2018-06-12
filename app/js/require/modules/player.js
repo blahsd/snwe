@@ -5,7 +5,8 @@
 $, utils, require, exports, __dirname */
 
 const path = require('path');
-const ExternalModule = require( path.resolve('./app/js/require/ExternalModule.js')).ExternalModule;
+const ExternalModule = require( path.resolve(__dirname, '../ExternalModule.js')).ExternalModule;
+
 
 class playerModule extends ExternalModule {
   constructor(filePath,document,option=false) {

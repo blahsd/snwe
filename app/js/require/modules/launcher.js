@@ -6,7 +6,8 @@ $, document, require, exports, console, __dirname */
 
 const {exec} = require('child_process');
 const path = require('path');
-const ExternalModule = require( path.resolve('./app/js/require/ExternalModule.js')).ExternalModule;
+const ExternalModule = require( path.resolve(__dirname, '../ExternalModule.js')).ExternalModule;
+
 
 class launcherItem {
   constructor(display, command) {

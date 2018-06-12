@@ -26,9 +26,9 @@ const path = require('path');
 var store = new Store();
 
 // my own shit
-const ExternalModule = require( path.resolve('./app/js/require/ExternalModule.js')).ExternalModule;
-const TaskMonitor = require(path.resolve('./app/js/require/TaskMonitor.js')).TaskMonitor;
-const ModuleManager = require(path.resolve('./app/js/require/ModuleManager.js')).ModuleManager;
+const ExternalModule = require( path.resolve(__dirname, 'ExternalModule.js')).ExternalModule;
+const TaskMonitor = require(path.resolve(__dirname, 'TaskMonitor.js')).TaskMonitor;
+const ModuleManager = require(path.resolve(__dirname, 'ModuleManager.js')).ModuleManager;
 
 const console = remote.getGlobal('console');
 

@@ -1,6 +1,12 @@
 /* jshint node:true */
 'use strict';
-var utils = require('./js/require/utils.js');
+
+/* global
+  window, document, __dirname*/
+
+const path = require('path');
+
+var utils = require( path.resolve( __dirname, 'js/require/utils.js'));
 
 window.onload=function() {
 

@@ -7,7 +7,8 @@
 const {remote} = require('electron');
 const {BrowserWindow} = remote;
 const path = require('path');
-const ExternalModule = require( path.resolve('./app/js/require/ExternalModule.js')).ExternalModule;
+const ExternalModule = require( path.resolve(__dirname, '../ExternalModule.js')).ExternalModule;
+
 
 class settingsModule extends ExternalModule {
   constructor(filePath,document) {
