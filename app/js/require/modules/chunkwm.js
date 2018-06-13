@@ -1,15 +1,60 @@
+/* jshint node: true */
+'use strict';
+
+/* global
+  $, require, exports, __dirname, setInterval */
+
+const path = require('path');
+const {exec} = require('child_process');
+const ExternalModule = require( path.resolve(__dirname, '../ExternalModule.js')).ExternalModule;
+
 class chunkwmModule extends ExternalModule {
   constructor(filePath,document) {
     super(filePath,document);
     this.container = 'right';
-
-    this.scriptGetCharge = path.join(__dirname, "../../../sh/getcharge.sh");
-    this.scriptIsCharging = path.join(__dirname, "../../../sh/ischarging.sh");
   }
 
+  setChunkwmMode(mode) {
+    let command = `chunkc tiling::desktop --layout ${mode}`;
+    console.log(`Running command: '${command}'`);
+    exec(command);
+  }
+
+  get HTMLContent() {
+    return  `
+    <div class="widg" id="${this.fileName}">
+      <div class="button" id="${this.fileName}-button">
+        <i class="far fa-window-restore" id="${this.fileName}-icon"></i>
+        <span id="${this.fileName}-output"></span>
+      </div>
+
+      <div class="popup" id="${this.fileName}-popup">
+        <div class="button" id="bsp-chunkwm-button">
+          bsp
+        </div>
+        <div class="button" id="monocle-chunkwm-button">
+          mono
+        </div>
+        <div class="button" id="float-chunkwm-button">
+          float
+        </div>
+      </div>
+    </div>`;
+  }
 
   start() {
-    this.update();
+    $(`#${this.fileName}-button`).on("click", () => {
+      $(`#${this.fileName}-popup`).toggleClass("open");
+    });
+    $(`#bsp-${this.fileName}-button`).on("click", () => {
+      this.setChunkwmMode('bsp');
+    });
+    $(`#monocle-${this.fileName}-button`).on("click", () => {
+      this.setChunkwmMode('monocle');
+    });
+    $(`#float-${this.fileName}-button`).on("click", () => {
+      this.setChunkwmMode('float');
+    });
   }
 }
 

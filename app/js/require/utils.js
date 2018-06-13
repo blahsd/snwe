@@ -5,7 +5,7 @@
 'use strict';
 
 // global variables
-const VERSION = 'v0.1.0-rc.2.0.6.3';
+const VERSION = 'v0.1.0-rc.2.0.7.1';
 
 // pieces of electron
 const electron = require('electron');
@@ -106,10 +106,6 @@ module.exports = {
         "enabled": true
       },
       {
-        "filename": "battery",
-        "enabled": true
-      },
-      {
         "filename": "date",
         "enabled": true
       },
@@ -124,6 +120,14 @@ module.exports = {
       {
         "filename": "taskbar",
         "enabled": false
+      },
+      {
+        "filename": "chunkwm",
+        "enabled": true
+      },
+      {
+        "filename": "battery",
+        "enabled": true
       },
       {
         "filename": "volume",
