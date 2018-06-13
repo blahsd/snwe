@@ -2,7 +2,7 @@
 'use strict';
 
 /* global
-require, exports, __dirname */
+  require, document, __dirname */
 
 const path = require('path');
 const ExternalModule = require( path.resolve(__dirname, '../ExternalModule.js')).ExternalModule;
@@ -21,7 +21,7 @@ class taskbarModule extends ExternalModule {
     return  `<div class="widg" id="${moduleName}">
         <span class="output" id="${moduleName}-output"></span>
         </div>
-      </div>`
+      </div>`;
   }
 
   start() {

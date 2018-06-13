@@ -5,10 +5,9 @@
   $, require, exports, __dirname, utils */
 
 const {remote} = require('electron');
-const {BrowserWindow} = remote;
+const {app, BrowserWindow} = remote;
 const path = require('path');
 const ExternalModule = require( path.resolve(__dirname, '../ExternalModule.js')).ExternalModule;
-
 
 class settingsModule extends ExternalModule {
   constructor(filePath,document) {
@@ -29,7 +28,7 @@ class settingsModule extends ExternalModule {
       transparent: true,
     });
 
-    childWindow.loadURL('file://' + path.resolve('./app/settings.html'));
+    childWindow.loadURL('file://' + path.join(__dirname, '/../../../settings.html'));
     //childWindow.webContents.openDevTools();
 
     childWindow.webContents.on("changeSettingEvent", function(e) {

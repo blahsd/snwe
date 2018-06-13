@@ -8,7 +8,7 @@ var utils = require('./js/require/utils.js');
 
 const {remote, globalShortcut} = require ('electron');
 const path = require('path');
-const ExternalModule = require( const ExternalModule = require( path.resolve(__dirname, 'js/require/ExternalModule.js')).ExternalModule;
+const ExternalModule = require( path.resolve(__dirname, 'js/require/ExternalModule.js')).ExternalModule;
 
 
 function getRadioVal(form, name) {

@@ -9,7 +9,6 @@ const path = require('path');
 var utils = require( path.resolve( __dirname, 'js/require/utils.js'));
 
 window.onload=function() {
-
   window.$ = window.jQuery = require('jquery');
   utils.loadSettings(document, ["theme", "colorscheme","player"]);
   utils.moduleManager.initializeModules();
