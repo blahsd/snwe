@@ -5,7 +5,7 @@
 'use strict';
 
 // global variables
-const VERSION = 'v0.1.0-rc.2.0.6.3';
+const VERSION = 'v0.1.0-rc.2.0.9';
 
 // pieces of electron
 const electron = require('electron');
@@ -92,9 +92,9 @@ module.exports = {
 
     store.set("hideIcon", "showIcon");
 
-    store.set("theme", path.resolve("./app/css/mono.css"));
-    store.set("colorscheme", path.resolve("./app/css/colors.css"));
-    store.set("player", path.resolve("./app/js/require/mpd.js"));
+    store.set("theme", path.resolve("app/css/mono.css"));
+    store.set("colorscheme", path.resolve("app/css/colors.css"));
+    store.set("player", path.resolve("app/js/require/mpd.js"));
 
     store.set("commands", {
       "ssh":"ssh",
@@ -103,10 +103,6 @@ module.exports = {
 
     store.set("modules", [{
         "filename": "desktop",
-        "enabled": true
-      },
-      {
-        "filename": "battery",
         "enabled": true
       },
       {
@@ -124,6 +120,14 @@ module.exports = {
       {
         "filename": "taskbar",
         "enabled": false
+      },
+      {
+        "filename": "chunkwm",
+        "enabled": true
+      },
+      {
+        "filename": "battery",
+        "enabled": true
       },
       {
         "filename": "volume",
