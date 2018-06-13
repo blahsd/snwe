@@ -2,7 +2,7 @@
 'use strict';
 
 /* global
-$, document, require, exports, console, __dirname */
+  utils, $, document, console, __dirname */
 
 const {exec} = require('child_process');
 const path = require('path');
@@ -10,10 +10,13 @@ const ExternalModule = require( path.resolve(__dirname, '../ExternalModule.js'))
 
 
 class launcherItem {
-  constructor(display, command) {
-    this.display = display;
-    this.command = `open $HOME/Library/"Application\ Support"/snwe/command-wrappers/${command}.command`;
-    this.makeCommandLauncher(command);
+  constructor(commandName, commandContent) {
+    this.commandName = commandName;
+    this.commandContent = commandContent;
+
+    this.command = `open $HOME/Library/"Application\ Support"/snwe/command-wrappers/${commandName}.command`;
+
+    this.makeCommandLauncher(commandName, commandContent);
   }
 
   get node() {
@@ -34,14 +37,15 @@ class launcherItem {
   }
 
   get HTMLContent() {
-    return `<div class="button" id="${this.display}">
-    ${this.display}
+    return `<div class="button" id="${this.commandName}">
+    ${this.commandName}
       </div>`;
   }
 
-  makeCommandLauncher(command) {
+  makeCommandLauncher(commandName,commandContent) {
     var scriptMakeCommandPath = path.resolve("./app/sh/makeCommand.sh");
-    exec(`sh ${scriptMakeCommandPath} ${ command }`);
+    console.log(commandContent)
+    exec(`sh ${scriptMakeCommandPath} ${commandName} '${commandContent}'`);
   }
 }
 
@@ -49,10 +53,10 @@ class launcherModule extends ExternalModule {
   constructor(filePath, document) {
     super(filePath, document);
     this.container = 'left';
-    this.commands = {
-      'rng': 'ranger',
-      'htop': 'htop'
-    };
+  }
+  get commands() {
+    return utils.store.get("commands");
+    //return {'bsd':"jsadiasjdi bs", "daosjd":"ashdasd"}
   }
 
   get HTMLContent() {

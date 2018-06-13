@@ -5,7 +5,7 @@
 'use strict';
 
 // global variables
-const VERSION = 'v0.1.0-rc.2.0.6';
+const VERSION = 'v0.1.0-rc.2.0.6.3';
 
 // pieces of electron
 const electron = require('electron');
@@ -95,6 +95,11 @@ module.exports = {
     store.set("theme", path.resolve("./app/css/mono.css"));
     store.set("colorscheme", path.resolve("./app/css/colors.css"));
     store.set("player", path.resolve("./app/js/require/mpd.js"));
+
+    store.set("commands", {
+      "ssh":"ssh",
+      "top":"top"
+    });
 
     store.set("modules", [{
         "filename": "desktop",
