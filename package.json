@@ -1,9 +1,22 @@
 {
   "name": "snwe",
-  "version": "1.0.0-rc.1",
+  "version": "0.1.0-rc.2",
   "license": "MIT",
-  "description": "Cool system monitor",
-  "author": "blahsd <blahsd101@gmail.com>",
+  "description": "Extensible, customisable, menubar replacement for macOS/UNIX.",
+  "keywords": "electron menubar",
+  "author": {
+    "name": "blahsd",
+    "email": "blahsd101@gmail.com"
+  },
+  "homepage": "https://github.com/blahsd/snwe",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/blahsd/snwe.git"
+  },
+  "bugs": {
+    "url": "https://github.com/blahsd/snwe/issues",
+    "email": "blahsd101@gmail.com"
+  },
   "main": "./main.js",
   "scripts": {
     "postinstall": "install-app-deps",
@@ -12,9 +25,10 @@
     "dist": "electron-packager . --derefSymlinks=false --overwrite --out='./dist'"
   },
   "build": {
-    "appId": "snwe",
+    "appId": "com.blahsd.snwe",
     "dmg": {
-      "contents": [{
+      "contents": [
+        {
           "x": 110,
           "y": 150
         },
@@ -53,7 +67,6 @@
   },
   "devDependencies": {
     "electron": "latest",
-    "electron-builder": "latest",
     "electron-prebuilt": "^1.4.13",
     "mocha": "^5.2.0",
     "mpd": "^1.3.0"
