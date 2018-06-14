@@ -15,39 +15,53 @@ class settingsModule extends ExternalModule {
     this.container = 'right';
   }
 
-  toggleWindow() {
-    var windowpath = 'settings.html';
+  get icon() {
+    return "fas fa-cog";
+  }
 
-    if (this.childWindow) {
+  destroyWindow() {
+    try {
       this.childWindow.close();
-      return;
+    } catch(e) {
+      console.log("Settings Window has closed unexpectedly");
     }
+    this.childWindow = null;
+  }
 
-    let childWindow = new BrowserWindow({
+  createWindow() {
+    this.childWindow = new BrowserWindow({
       frame: false,
       transparent: true,
     });
 
-    childWindow.loadURL('file://' + path.join(__dirname, '/../../../settings.html'));
+    this.childWindow.loadURL('file://' + path.join(__dirname, '/../../../settings.html'));
     //childWindow.webContents.openDevTools();
 
-    childWindow.webContents.on("changeSettingEvent", function(e) {
+    this.childWindow.webContents.on("changeSettingEvent", function(e) {
       utils.loadSettings();
     });
 
-    childWindow.webContents.on("close", function(e) {
-      this.childWindow = null;
-    });
+    try {
+      this.childWindow.webContents.on("close", this.destroyWindow.bind(this));
+    } catch (e) {
+      console.log(e);
+    }
+  }
 
-    this.childWindow = childWindow;
+  toggleWindow() {
+    if (this.childWindow) {
+      this.destroyWindow();
+    } else {
+      this.createWindow();
+    }
   }
 
   get HTMLContent() {
     return  `
     <div class="widg" id="${this.fileName}">
       <div class="button" id="${this.fileName}-button" >
-        <i class="fas fa-cog" id="settings-icon"></i>
-        <span id="settings-output"></span>
+        <i class="${this.icon}" id="${this.fileName}-icon"></i>
+        <span id="${this.fileName}-output"></span>
       </div>
     </div>`;
   }
