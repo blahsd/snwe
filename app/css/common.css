@@ -32,7 +32,7 @@ i {
 }
 
 .button {
-  width: var(--line-size)
+  width: var(--line-size);
 }
 
 .bar {
@@ -81,6 +81,7 @@ i {
 .pinned .output  {
   color: var(--background) !important;
 }
+
 
 .popup {
     display: none;
@@ -137,9 +138,10 @@ li {
 
 /* BEHAVIOR */
 
-.button:hover {
+.button:hover:not(.pinned) {
   color            : var(--background);
   background-color : var(--foreground);
+  animation: fadein 0.2s linear
 }
 
 /* APPLY COLORS */
@@ -178,6 +180,11 @@ li {
 
 .black {
   color : var(--background);
+}
+
+.pinned {
+  background-color: var(--foreground);
+  color: var(--background);
 }
 
 .pinned.red {

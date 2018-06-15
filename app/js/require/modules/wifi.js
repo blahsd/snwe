@@ -20,6 +20,11 @@ class wifiModule extends ExternalModule {
     this.isConnecting = true;
     this.network = false;
 
+    this.colors = ['dark'];
+    this.animation = ['blinking'];
+
+    this.command = 'networksetup -setairportpower en1';
+
     wifi.init({
       iface: null // network interface, choose a random wifi interface if set to null
     });
@@ -80,10 +85,10 @@ class wifiModule extends ExternalModule {
   update() {
     this.updateStatus();
 
-    this.updateElementProperty($("#wifi"), this.color, ["dark"]);
-    this.updateContent($("#wifi-icon"), this.icon);
-    this.updateElementProperty($("#wifi-icon"), this.animation, ["blinking"]);
-    this.updateContent($("#wifi-output"), this.network);
+    this.updateElementProperty($(`#${this.fileName}`), this.color, this.colors);
+    this.updateContent($(`#${this.fileName}-icon`), this.icon);
+    this.updateElementProperty($(`#${this.fileName}-icon`), this.animation, this.animations);
+    this.updateContent($(`#${this.fileName}-output`), this.network);
   }
 
   get HTMLContent() {
@@ -97,10 +102,10 @@ class wifiModule extends ExternalModule {
       <span class="output" id="${moduleName}-output"> ... </span>
 
       <div class="popup" id="${this.fileName}-popup">
-        <div class="button wifi-button" value="on" id="on-wifi-button">
+        <div class="button ${this.fileName}-button" value="on" id="on-${this.fileName}-button">
           on
         </div>|
-        <div class="button wifi-button" value="off" id="off-wifi-button">
+        <div class="button ${this.fileName}-button" value="off" id="off-${this.fileName}-button">
           off
         </div>
       </div>
@@ -110,14 +115,7 @@ class wifiModule extends ExternalModule {
   start() {
     var _this = this;
 
-    $(`#${this.fileName}-button`).on("click", () => {
-      $(`#${this.fileName}-popup`).toggleClass("open");
-    });
-
-    $(`.${this.fileName}-button`).on("click", function() {
-      exec(`networksetup -setairportpower en1 ${ this.getAttribute('value') }`);
-    });
-
+    this.setPopupListeners();
     this.update();
     this.intervalID = setInterval(() => {
       _this.update();
