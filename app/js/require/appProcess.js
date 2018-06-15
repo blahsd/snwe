@@ -1,7 +1,10 @@
 /* jshint node: true */
 'use strict';
 
-class appProcess {
+const {exec} = require('child_process');
+const path = require('path');
+
+class AppProcess{
   constructor(name) {
     this.name = name.trim().replace(/ /g,'');
   }
@@ -12,8 +15,13 @@ class appProcess {
 
   get html() {
     return `<div class="button" id="taskbar-${this.name}-button">
-    <i id="taskbar-${this.name}-icon" onclick="openApp('${this.name}')" class="${this.icon}"></i>
+    <i id="taskbar-${this.name}-icon" class="${this.icon}"></i>
   </div>`;
+  }
+
+  makeIcon() {
+    var scriptMakeIconPath = path.resolve("./app/sh/makeIcon.sh");
+    exec(`sh ${scriptMakeIconPath} '${this.fileName}'`);
   }
 
   getIcon() {
@@ -83,4 +91,4 @@ class appProcess {
 
 }
 
-exports.appProcess = appProcess;
+exports.AppProcess = AppProcess;

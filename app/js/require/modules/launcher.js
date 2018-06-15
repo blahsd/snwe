@@ -44,7 +44,6 @@ class launcherItem {
 
   makeCommandLauncher(commandName,commandContent) {
     var scriptMakeCommandPath = path.resolve("./app/sh/makeCommand.sh");
-    console.log(commandContent)
     exec(`sh ${scriptMakeCommandPath} ${commandName} '${commandContent}'`);
   }
 }

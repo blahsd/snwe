@@ -4,7 +4,7 @@
   $, document */
 
 const EventEmitter = require('events').EventEmitter;
-const appProcess = require('./appProcess.js').appProcess;
+const AppProcess= require('./appProcess.js').appProcess;
 const {exec} = require('child_process');
 
 class ExternalModule extends EventEmitter {

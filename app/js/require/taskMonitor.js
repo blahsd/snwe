@@ -1,6 +1,12 @@
+/* jshint node: true */
 'use strict';
+/* global
+  $, document */
 
 const EventEmitter = require('events').EventEmitter;
+const {execSync} = require('child_process');
+const path = require('path');
+const AppProcess = require(path.resolve(__dirname, 'AppProcess.js')).AppProcess;
 
 class TaskMonitor extends EventEmitter {
   constructor(refreshRate) {
@@ -18,9 +24,9 @@ class TaskMonitor extends EventEmitter {
     var runningApps = [];
 
     execSync(command).toString().split(", ").forEach(app => {
-      const ap = new appProcess(app);
-      runningApps.push(ap);
-    })
+      const appProcess = new AppProcess(app);
+      runningApps.push(appProcess);
+    });
     return runningApps;
   }
 
@@ -36,7 +42,7 @@ class TaskMonitor extends EventEmitter {
       var isAlreadyRunning;
       var previouslyRunningAppsMatch = pRA.map(prevApp => {
         return (app.name == prevApp.name);
-      })
+      });
 
       //  Check for new apps
       if (previouslyRunningAppsMatch.includes(true)) {
@@ -45,13 +51,13 @@ class TaskMonitor extends EventEmitter {
         this.emit("appEvent", app, true);
         this.previouslyRunningApps.push(app);
       }
-    })
+    });
 
     pRA.forEach(app => {
       var isStillRunning;
       var runningAppsMatch = rA.map(prevApp => {
         return (app.name == prevApp.name);
-      })
+      });
 
       //  Check for closed apps
       if (runningAppsMatch.includes(true)) {
@@ -60,7 +66,7 @@ class TaskMonitor extends EventEmitter {
         this.emit("appEvent", app, false);
         this.previouslyRunningApps.splice(this.previouslyRunningApps.indexOf(app),1);
       }
-    })
+    });
 
   }
 
