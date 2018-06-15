@@ -96,8 +96,13 @@ class wifiModule extends ExternalModule {
 
       <span class="output" id="${moduleName}-output"> ... </span>
 
-      <div class="popup" id="${moduleName}-popup">
-        <div class="button" id="wifi-toggle-button"></div>
+      <div class="popup" id="${this.fileName}-popup">
+        <div class="button" id="on-wifi-button">
+          on
+        </div>
+        <div class="button" id="off-button">
+          off
+        </div>
       </div>
     </div>`;
   }
