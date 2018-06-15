@@ -29,13 +29,13 @@ class chunkwmModule extends ExternalModule {
       </div>
 
       <div class="popup" id="${this.fileName}-popup">
-        <div class="button" id="bsp-chunkwm-button">
+        <div class="button mode-button" value="bsp" id="bsp-chunkwm-button">
           bsp
-        </div>
-        <div class="button" id="monocle-chunkwm-button">
+        </div>|
+        <div class="button mode-button" value="monocle" id="monocle-chunkwm-button">
           mono
-        </div>
-        <div class="button" id="float-chunkwm-button">
+        </div>|
+        <div class="button mode-button" value="float" id="float-chunkwm-button">
           float
         </div>
       </div>
@@ -46,14 +46,9 @@ class chunkwmModule extends ExternalModule {
     $(`#${this.fileName}-button`).on("click", () => {
       $(`#${this.fileName}-popup`).toggleClass("open");
     });
-    $(`#bsp-${this.fileName}-button`).on("click", () => {
-      this.setChunkwmMode('bsp');
-    });
-    $(`#monocle-${this.fileName}-button`).on("click", () => {
-      this.setChunkwmMode('monocle');
-    });
-    $(`#float-${this.fileName}-button`).on("click", () => {
-      this.setChunkwmMode('float');
+
+    $(".mode-button").on("click", function() {
+       exec(`chunkc tiling::desktop --layout ${ this.getAttribute("value") }`);
     });
   }
 }

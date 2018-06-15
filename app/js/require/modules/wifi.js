@@ -6,7 +6,7 @@ $, require, exports, __dirname, setInterval */
 
 const path = require('path');
 const wifi = require('node-wifi');
-const exec = require('child_process');
+const {exec} = require('child_process');
 const ExternalModule = require( path.resolve(__dirname, '../ExternalModule.js')).ExternalModule;
 
 
@@ -96,54 +96,29 @@ class wifiModule extends ExternalModule {
 
       <span class="output" id="${moduleName}-output"> ... </span>
 
-      <div class="popup" id="${moduleName}-popup">
-        <div class="button" id="wifi-toggle-button"></div>
+      <div class="popup" id="${this.fileName}-popup">
+        <div class="button wifi-button" value="on" id="on-wifi-button">
+          on
+        </div>|
+        <div class="button wifi-button" value="off" id="off-wifi-button">
+          off
+        </div>
       </div>
     </div>`;
   }
 
-// TOGGLE BUTTON FUNCTIONS
-
-
-  turnWifiOff() {
-    exec("networksetup -setairportpower en1 off", function(err, stdout, stderr) {
-      // Error handling should go here
-    });
-  }
-
-  turnWifiOn() {
-    exec("networksetup -setairportpower en1 on", function(err, stdout, stderr) {
-      // Error handling should go here
-    });
-  }
-
-  updateToggleButtonContent() {
-    if (this.isOn == true) {
-      $("#wifi-toggle-button").html = "Turn WiFi Off";
-    } else {
-      $("#wifi-toggle-button").html = "Turn WiFi On";
-    }
-  }
-
-  toggleWifiPopup() {
-    $("#wifi-popup").toggleClass("open");
-    this.updateToggleButtonContent();
-  }
-
-  toggleWifi() {
-    if (this.isOn) {
-      this.turnWifiOff();
-    } else {
-      this.turnWifiOn();
-    }
-    this.updateToggleButtonContent();
-    this.toggleWifiPopup();
-  }
-
   start() {
-    $("#wifi-toggle-button").on("click", this.toggleWifiPopup);
-
     var _this = this;
+
+    $(`#${this.fileName}-button`).on("click", () => {
+      $(`#${this.fileName}-popup`).toggleClass("open");
+      //this.updateElementProperty($('.wifi-button'), "selected", ["selected"]);
+    });
+
+    $(`.${this.fileName}-button`).on("click", function() {
+      exec(`networksetup -setairportpower en1 ${ this.getAttribute('value') }`);
+    });
+
     this.update();
     this.intervalID = setInterval(() => {
       _this.update();
