@@ -23,7 +23,6 @@ class taskbarModule extends ExternalModule {
         </div>
       </div>`;
   }
-
   start() {
     this.tm.start(1000);
 

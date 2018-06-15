@@ -3,6 +3,7 @@
 
 const {exec} = require('child_process');
 const path = require('path');
+const homedir = require('os').homedir();
 
 class AppProcess{
   constructor(name) {
@@ -14,17 +15,26 @@ class AppProcess{
   }
 
   get html() {
-    return `<div class="button" id="taskbar-${this.name}-button">
+    /*return `<div class="button" id="taskbar-${this.name}-button">
     <i id="taskbar-${this.name}-icon" class="${this.icon}"></i>
+  </div>`;*/
+    this.makeIcon();
+    return `<div class="button" id="taskbar-${this.name}-button">
+    <i id="taskbar-${this.name}-icon"><img src="${this.iconPath}"></i>
   </div>`;
+  }
+
+  get iconPath() {
+    return `file:/${homedir}/Library/Application Support/snwe/app-icons/${this.name}.png`;
   }
 
   makeIcon() {
     var scriptMakeIconPath = path.resolve("./app/sh/makeIcon.sh");
-    exec(`sh ${scriptMakeIconPath} '${this.fileName}'`);
+    console.log(`sh ${scriptMakeIconPath} ${this.name}`);
+    exec(`sh ${scriptMakeIconPath} ${this.name}`);
   }
 
-  getIcon() {
+  getIcon2() {
     var icon = "far fa-window-maximize";
     switch (true) {
       case (this.name == "Finder"):
