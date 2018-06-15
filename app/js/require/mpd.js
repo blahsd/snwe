@@ -25,7 +25,7 @@ class mpdMusicPlayerInterface {
   }
 
   next() {
-    execSync('/usr/local/bin/mpc toggle');
+    execSync('/usr/local/bin/mpc next');
   }
 
 }
