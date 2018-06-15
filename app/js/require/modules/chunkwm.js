@@ -12,12 +12,7 @@ class chunkwmModule extends ExternalModule {
   constructor(filePath,document) {
     super(filePath,document);
     this.container = 'right';
-  }
-
-  setChunkwmMode(mode) {
-    let command = `chunkc tiling::desktop --layout ${mode}`;
-    console.log(`Running command: '${command}'`);
-    exec(command);
+    this.command = 'chunkc tiling::desktop --layout';
   }
 
   get HTMLContent() {
@@ -29,13 +24,13 @@ class chunkwmModule extends ExternalModule {
       </div>
 
       <div class="popup" id="${this.fileName}-popup">
-        <div class="button mode-button" value="bsp" id="bsp-chunkwm-button">
+        <div class="button ${this.fileName}-button" value="bsp" id="bsp-${this.fileName}-button">
           bsp
         </div>|
-        <div class="button mode-button" value="monocle" id="monocle-chunkwm-button">
+        <div class="button ${this.fileName}-button" value="monocle" id="monocle-${this.fileName}-button">
           mono
         </div>|
-        <div class="button mode-button" value="float" id="float-chunkwm-button">
+        <div class="button ${this.fileName}-button" value="float" id="float-${this.fileName}-button">
           float
         </div>
       </div>
@@ -43,13 +38,7 @@ class chunkwmModule extends ExternalModule {
   }
 
   start() {
-    $(`#${this.fileName}-button`).on("click", () => {
-      $(`#${this.fileName}-popup`).toggleClass("open");
-    });
-
-    $(".mode-button").on("click", function() {
-       exec(`chunkc tiling::desktop --layout ${ this.getAttribute("value") }`);
-    });
+    this.setPopupListeners();
   }
 }
 
