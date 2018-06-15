@@ -1,10 +1,11 @@
 /* jshint node: true */
 'use strict';
 /* global
-  document */
+  $, document */
 
 const EventEmitter = require('events').EventEmitter;
 const appProcess = require('./appProcess.js').appProcess;
+const {exec} = require('child_process');
 
 class ExternalModule extends EventEmitter {
   constructor(filePath,unID=false) {
@@ -17,6 +18,7 @@ class ExternalModule extends EventEmitter {
     this.isLoaded = false;
     this.node = document.createElement("div");
     this.node.innerHTML = this.HTMLContent;
+    this.command = '';
   }
 
   updateContent(element, content) {
@@ -100,6 +102,25 @@ class ExternalModule extends EventEmitter {
     var _this = this;
     this.update();
     this.intervalID = setInterval(() => { _this.update(); }, this.refreshRate);
+  }
+
+  execPopupCommand(button) {
+    exec(`${ this.command } ${ button.getAttribute('value') }`);
+  }
+
+  setPopupListeners() {
+    var _this = this;
+
+    $(`#${this.fileName}-button`).on("click", () => {
+      $(`#${this.fileName}-popup`).toggleClass("open");
+      $(`#${this.fileName}-button`).toggleClass("pinned");
+    });
+
+    $(`.${this.fileName}-button`).on("click", function() {
+      _this.execPopupCommand(this);
+      $(`#${this.fileName}-popup`).toggleClass("open");
+      $(`#${this.fileName}-button`).toggleClass("pinned");
+    });
   }
 
   stop() {
