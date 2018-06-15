@@ -5,7 +5,7 @@
 'use strict';
 
 // global variables
-const VERSION = 'v0.1.0-rc.2.0.9';
+const VERSION = 'v0.1.0-rc.2.0.10';
 
 // pieces of electron
 const electron = require('electron');
