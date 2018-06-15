@@ -31,10 +31,10 @@ class chunkwmModule extends ExternalModule {
       <div class="popup" id="${this.fileName}-popup">
         <div class="button mode-button" value="bsp" id="bsp-chunkwm-button">
           bsp
-        </div>
+        </div>|
         <div class="button mode-button" value="monocle" id="monocle-chunkwm-button">
           mono
-        </div>
+        </div>|
         <div class="button mode-button" value="float" id="float-chunkwm-button">
           float
         </div>
