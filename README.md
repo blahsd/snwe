@@ -2,7 +2,7 @@
  </p>
 <hr/>
 
-![demo](./demo/full.png)
+![demo](./demo/justthebar.png)
 
 
 This widget puts everything you might want to know at a glance in one place. From system monitoring, to currently playing music, the bar gives you an overview of what you need to know.
