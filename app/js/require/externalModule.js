@@ -112,15 +112,18 @@ class ExternalModule extends EventEmitter {
     var _this = this;
 
     $(`#${this.fileName}-button`).on("click", () => {
-      $(`#${this.fileName}-popup`).toggleClass("open");
-      $(`#${this.fileName}-button`).toggleClass("pinned");
+      _this.togglePopupStatus();
     });
 
     $(`.${this.fileName}-button`).on("click", function() {
       _this.execPopupCommand(this);
-      $(`#${this.fileName}-popup`).toggleClass("open");
-      $(`#${this.fileName}-button`).toggleClass("pinned");
+      _this.togglePopupStatus();
     });
+  }
+
+  togglePopupStatus() {
+    $(`#${this.fileName}-popup`).toggleClass("open");
+    $(`#${this.fileName}-button`).toggleClass("pinned");
   }
 
   stop() {
