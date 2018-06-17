@@ -41,6 +41,7 @@ i {
   background-color : var(--background);
   white-space      : nowrap;
    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+  overflow: hidden;
 }
 
 .container {
@@ -94,6 +95,7 @@ i {
 }
 .popup  .open {
   display: block;
+  animation:
 }
 
 .launcherItem {
@@ -117,6 +119,7 @@ li {
 
 .popup.open {
   display:inline-block;
+  animation : slideout 0.05s;
 }
 
 /* ANIMATION */
@@ -134,6 +137,17 @@ li {
 @keyframes fadein {
     from { opacity: 0; }
     to { opacity: 1; }
+  }
+
+
+  @keyframes slideout {
+    from {
+      width : 1px;
+    }
+
+    to {
+      width : 24px;
+    }
   }
 
 /* BEHAVIOR */
