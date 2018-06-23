@@ -19,7 +19,6 @@
   },
   "main": "./main.js",
   "scripts": {
-    "postinstall": "install-app-deps",
     "start": "electron .",
     "test": "mocha",
     "dist": "electron-packager . --derefSymlinks=false --overwrite --out='./dist'"
