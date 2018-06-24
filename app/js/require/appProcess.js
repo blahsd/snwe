@@ -5,6 +5,12 @@ const {exec} = require('child_process');
 const path = require('path');
 const homedir = require('os').homedir();
 
+const {writeFileSync} = require('fs');
+const {
+  getIconForPath,
+  ICON_SIZE_MEDIUM
+} = require('system-icon');
+
 class AppProcess{
   constructor(name) {
     this.name = name.trim().replace(/ /g,'');
@@ -29,9 +35,15 @@ class AppProcess{
   }
 
   makeIcon() {
-    var scriptMakeIconPath = path.resolve("./app/sh/makeIcon.sh");
-    console.log(`sh ${scriptMakeIconPath} ${this.name}`);
-    exec(`sh ${scriptMakeIconPath} ${this.name}`);
+
+    getIconForPath("/path/to/file_or_folder", ICON_SIZE_MEDIUM, (err, result) => {
+      if (err) {
+        console.error(err);
+      } else {
+        writeFileSync("icon.png", result);
+      }
+    });
+
   }
 
   getIcon2() {
