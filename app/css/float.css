@@ -12,10 +12,21 @@
 }
 
 .container {
-  background-color: var(--background);
   box-shadow       : 0px 4px 5px -5px rgba(0,0,0,0.4);
   border-radius: 2px;
   margin: -2px;
+}
+
+.widg {
+  background-color: var(--background);
+}
+
+.widg:first-of-type {
+  padding-left: 8px;
+}
+
+.widg:last-of-type {
+  padding-right: 8px;
 }
 
 .widg.pinned {
