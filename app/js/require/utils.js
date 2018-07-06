@@ -200,7 +200,7 @@ module.exports = {
         let externalModule = new ExternalModule(store.get(settings[i]), settings[i]);
         externalModule.loadIn(element);
       } catch (e) {
-        // Settings have not been ini tialised
+        // Settings have not been initialised
         module.exports.initializeSettings();
         module.exports.loadSettings();
       }
