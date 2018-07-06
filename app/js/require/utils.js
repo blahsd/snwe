@@ -5,7 +5,8 @@
 'use strict';
 
 // global variables
-const VERSION = 'v0.1.0-rc.2.0.10';
+const VERSION = 'v0.1.0-rc.2.0.25';
+
 
 // pieces of electron
 const electron = require('electron');
@@ -31,6 +32,7 @@ const TaskMonitor = require(path.resolve(__dirname, 'TaskMonitor.js')).TaskMonit
 const ModuleManager = require(path.resolve(__dirname, 'ModuleManager.js')).ModuleManager;
 
 const console = remote.getGlobal('console');
+
 
 module.exports = {
   moduleManager: new ModuleManager(),
@@ -84,6 +86,11 @@ module.exports = {
     }
   },
 
+  makePathFromRoot: function (relativePath) {
+    var projectRoot = path.dirname(require.main.filename);
+    return (path.join(projectRoot,relativePath));
+  },
+
   initializeSettings: function () {
     console.log("Initialising preferences...");
     module.exports.initializePywalLink();
@@ -92,9 +99,9 @@ module.exports = {
 
     store.set("hideIcon", "showIcon");
 
-    store.set("theme", path.resolve("app/css/mono.css"));
-    store.set("colorscheme", path.resolve("app/css/colors.css"));
-    store.set("player", path.resolve("app/js/require/mpd.js"));
+    store.set("theme", module.exports.makePathFromRoot("/css/mono.css"));
+    store.set("colorscheme", module.exports.makePathFromRoot("/css/colors.css"));
+    store.set("player", module.exports.makePathFromRoot("/js/require/mpd.js"));
 
     store.set("commands", {
       "ssh":"ssh",
