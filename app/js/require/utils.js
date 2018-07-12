@@ -196,6 +196,10 @@ module.exports = {
           node.parentNode.removeChild(node);
         }
 
+      if (!module.exports.fileExists(store.get(settings[i]))) {
+        module.exports.initializeSettings();
+      }
+
       try {
         let externalModule = new ExternalModule(store.get(settings[i]), settings[i]);
         externalModule.loadIn(element);
