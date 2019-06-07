@@ -60,7 +60,7 @@ brew install npm
 3. Clone this repo (copy the files on your machine). Run:
 
 ```
-git clone https://github.com/blahsd/snwe
+git clone https://github.com/blahsd/snwe.git
 ```
 
 4. Navigate to wherever you cloned the repo and:
@@ -82,7 +82,7 @@ These are the homebrew commands to install chunkwm:
 
 ```
 # clone tap
-brew tap crisidev/homebrew-chunkwm
+brew tap koekeishiya/formulae
 
 # install latest stable version
 brew install chunkwm
