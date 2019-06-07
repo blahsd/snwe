@@ -82,7 +82,7 @@ These are the homebrew commands to install chunkwm:
 
 ```
 # clone tap
-brew tap crisidev/homebrew-chunkwm
+brew tap koekeishiya/formulae
 
 # install latest stable version
 brew install chunkwm
